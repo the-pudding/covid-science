@@ -1,0 +1,28 @@
+$body-color: red;
+$bg-color: #333;
+
+* {
+  border: 1px solid red !important; // <- DEBUG, show all divs
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  background-color: $bg-color;
+  color: $body-color;
+}
+
+section {
+  min-height: 120vh;
+  width: 90vw;
+  padding: 10px 10px;
+  margin: 100px auto;
+}
+
+.World {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  z-index: -1;
+}

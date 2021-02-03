@@ -1,0 +1,19 @@
+.content {
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+  margin: auto;
+}
+
+.text {
+  width: 200px;
+}
+
+.test-box {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background-color: tomato;
+}
