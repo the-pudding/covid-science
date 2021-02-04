@@ -4,6 +4,8 @@ import World from './components/World';
 import SectionHero from './components/SectionHero';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
+import Section3 from './components/Section3';
+import SectionMethods from './components/SectionMethods';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,7 +15,10 @@ import './style.scss';
 
 // default scroll trigger
 ScrollTrigger.defaults({
-  markers: true
+  markers: {
+    startColor: 'white',
+    endColor: 'black'
+  }
 });
 
 class App extends Component {
@@ -21,7 +26,13 @@ class App extends Component {
     super(props);
     this.state = {
       currentSection: 'section-hero',
-      sections: ['section-hero', 'section-1', 'section-2']
+      sections: [
+        'section-hero',
+        'section-1',
+        'section-2',
+        'section-3',
+        'section-methods'
+      ]
     };
   }
 
@@ -31,16 +42,14 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // add a scroll trigger for each section
     const { sections } = this.state;
     sections.map((section, idx) => {
       ScrollTrigger.create({
         trigger: `.${section}`, // trigger on class named `section`
         start: 'top 66%',
         onEnter: () => this.handleSectionUpdate(idx),
-        onLeaveBack: () => this.handleSectionUpdate(idx - 1),
-        //onUpdate: (self) => console.log(section, self.progress.toFixed(3)),
-        //id: section,
-        toggleClass: 'active'
+        onLeaveBack: () => this.handleSectionUpdate(idx - 1)
       });
     });
   }
@@ -60,6 +69,14 @@ class App extends Component {
           />
           <Section2
             rootClassName="section-2"
+            onSectionUpdate={this.handleSectionUpdate}
+          />
+          <Section3
+            rootClassName="section-3"
+            onSectionUpdate={this.handleSectionUpdate}
+          />
+          <SectionMethods
+            rootClassName="section-methods"
             onSectionUpdate={this.handleSectionUpdate}
           />
         </div>

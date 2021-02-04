@@ -1,5 +1,24 @@
-$body-color: red;
-$bg-color: #333;
+// --- Fonts
+@font-face {
+  font-family: 'Musee-Bold';
+  font-weight: 700;
+  font-style: bold;
+  src: url('./fonts/Musee-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Theinhardt-Med';
+  src: url('./fonts/TheinhardtMed.otf') format('opentype');
+}
+
+// --- Colors
+$ltGray: rgb(189, 204, 212);
+$warmGray: rgb(161, 163, 154);
+$dkBlue: rgb(0, 91, 141);
+$turquoise: rgb(10, 145, 151);
+
+$text-color: white;
+$headline-color: $dkBlue;
+$bg-color: $warmGray;
 
 * {
   border: 1px solid red !important; // <- DEBUG, show all divs
@@ -9,7 +28,14 @@ $bg-color: #333;
 body {
   margin: 0px;
   background-color: $bg-color;
-  color: $body-color;
+  color: $text-color;
+  font-family: 'Theinhardt-Med';
+}
+
+h1 {
+  font-family: 'Musee-Bold';
+  font-size: 42px;
+  color: $dkBlue;
 }
 
 section {

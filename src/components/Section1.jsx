@@ -13,23 +13,16 @@ const Section1 = (props) => {
   };
 
   useEffect(() => {
-    // console.log('effected');
-    // ScrollTrigger.create({
-    //   trigger: 'section-1',
-    //   onEnter: () => props.onSectionUpdate('section-1'),
-    //   onEnterBack: () => props.onSectionUpdate('section-1')
-    // });
-    // gsap.to('.test-box', {
-    //   scrollTrigger: {
-    //     trigger: '.test-box',
-    //     start: 'top center',
-    //     markers: true,
-    //     scrub: 1,
-    //     toggleActions: 'restart pause reverse reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
-    //   },
-    //   top: 400,
-    //   duration: 3
-    // });
+    gsap.to('.test-box', {
+      scrollTrigger: {
+        trigger: '.text',
+        start: 'top center',
+        scrub: 1,
+        toggleActions: 'restart pause reverse reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
+      },
+      left: 400,
+      duration: 3
+    });
   });
 
   return (

@@ -8,7 +8,8 @@ import {
   MeshBasicMaterial,
   PerspectiveCamera,
   Scene,
-  WebGLRenderer
+  WebGLRenderer,
+  Color
 } from 'three';
 
 import Hero from '../js/THREEscenes/Hero.js';
@@ -46,7 +47,7 @@ export default class World extends Component {
     const ground = new Mesh(
       new PlaneGeometry(150, 150, 40, 40),
       new MeshBasicMaterial({
-        color: 0x838cb4,
+        color: new Color('#666'),
         wireframe: true
       })
     );
@@ -66,7 +67,10 @@ export default class World extends Component {
     // create a mapping between section names and scenes
     this.sceneMapping = {
       'section-hero': this.sceneHero,
-      'section-1': this.scene1
+      'section-1': this.scene1,
+      'section-2': this.scene1,
+      'section-3': this.scene1,
+      'section-methods': this.scene1
     };
 
     // set the current scene
@@ -118,9 +122,10 @@ export default class World extends Component {
       console.log('new section:', currentSection);
 
       const nextScene = this.sceneMapping[currentSection];
-
-      gsap.to(this.currentScene.obj.position, { duration: 2, x: -20 });
-      gsap.to(nextScene.obj.position, { duration: 2, y: 0, x: 0, z: 0 });
+      if (nextScene !== this.currentScene) {
+        gsap.to(this.currentScene.obj.position, { duration: 2, x: -20 });
+        gsap.to(nextScene.obj.position, { duration: 2, y: 0, x: 0, z: 0 });
+      }
 
       this.currentScene = nextScene;
     }
