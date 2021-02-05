@@ -1,11 +1,11 @@
 import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import World from './components/World';
-import SectionHero from './components/SectionHero';
-import Section1 from './components/Section1';
-import Section2 from './components/Section2';
-import Section3 from './components/Section3';
-import SectionMethods from './components/SectionMethods';
+import SectionHero from './components/SectionHero/SectionHero';
+import Section1 from './components/Section1/Section1';
+import Section2 from './components/Section2/Section2';
+import Section3 from './components/Section3/Section3';
+import SectionMethods from './components/SectionMethods/SectionMethods';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

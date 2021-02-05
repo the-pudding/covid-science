@@ -4,13 +4,12 @@ import * as THREEConst from 'three/src/constants';
 export default class Hero {
   constructor() {
     // build scene elements
-    this.obj = this.initScene();
+    this.group = new Group();
+    this.initScene();
   }
 
   initScene() {
     // --- build scene elements
-    let sceneGroup = new Group();
-
     // cubes
     this.spheres = [];
     for (let c = 0; c < 3; c++) {
@@ -20,11 +19,8 @@ export default class Hero {
       const xPos = c * 2 - 2;
       sphere.position.set(xPos, 0, 0);
       this.spheres.push(sphere);
-      sceneGroup.add(sphere);
+      this.group.add(sphere);
     }
-
-    // return group mesh
-    return sceneGroup;
   }
 
   update(time) {

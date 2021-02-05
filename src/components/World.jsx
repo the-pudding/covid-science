@@ -12,8 +12,8 @@ import {
   Color
 } from 'three';
 
-import Hero from '../js/THREEscenes/Hero.js';
-import Scene1 from '../js/THREEscenes/Scene1.js';
+import Hero from './SectionHero/Hero.js';
+import Scene1 from './Section1/Scene1.js';
 
 export default class World extends Component {
   constructor(props) {
@@ -57,12 +57,12 @@ export default class World extends Component {
 
     // Add all sub-scenes
     this.sceneHero = new Hero();
-    this.sceneHero.obj.position.set(0, 0, 0);
-    this.scene.add(this.sceneHero.obj);
+    this.sceneHero.group.position.set(0, 0, 0);
+    this.scene.add(this.sceneHero.group);
 
     this.scene1 = new Scene1();
-    this.scene1.obj.position.set(0, 20, 0);
-    this.scene.add(this.scene1.obj);
+    this.scene1.group.position.set(0, 20, 0);
+    this.scene.add(this.scene1.group);
 
     // create a mapping between section names and scenes
     this.sceneMapping = {
@@ -123,8 +123,8 @@ export default class World extends Component {
 
       const nextScene = this.sceneMapping[currentSection];
       if (nextScene !== this.currentScene) {
-        gsap.to(this.currentScene.obj.position, { duration: 2, x: -20 });
-        gsap.to(nextScene.obj.position, { duration: 2, y: 0, x: 0, z: 0 });
+        gsap.to(this.currentScene.group.position, { duration: 2, x: -30 });
+        gsap.to(nextScene.group.position, { duration: 2, y: 0, x: 0, z: 0 });
       }
 
       this.currentScene = nextScene;
