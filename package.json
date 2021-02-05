@@ -25,11 +25,13 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^7.0.0",
     "gsap": "^3.6.0",
     "lodash": "^4.17.20",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-hot-loader": "^4.13.0",
-    "three": "^0.125.1"
+    "three": "^0.125.1",
+    "three-mesh-ui": "^4.4.9"
   }
 }

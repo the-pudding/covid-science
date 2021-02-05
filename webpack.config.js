@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -41,7 +42,7 @@ module.exports = (env, opts) => {
       filename: 'bundle.js'
     },
     devServer: {
-      contentBase: './dist',
+      contentBase: './static',
       port: 8080,
       watchContentBase: true,
       hot: true // toggle between live reload or hot module reloading
@@ -50,6 +51,9 @@ module.exports = (env, opts) => {
     plugins: [
       new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new webpack.HotModuleReplacementPlugin(),
+      new CopyWebpackPlugin({
+        patterns: [{ from: './static' }]
+      }),
       new HtmlWebpackPlugin({
         template: './src/index.html',
         title: 'Covid Science Tmp'

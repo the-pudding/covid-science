@@ -4,12 +4,25 @@ import {
   Group,
   Mesh,
   MeshBasicMaterial,
-  Vector3
+  Vector3,
+  FontLoader,
+  TextGeometry
 } from 'three';
+import ThreeMeshUI from 'three-mesh-ui';
 import * as THREEConst from 'three/src/constants';
+
+import heroDataCSV from '../../data/heroData.csv';
 
 export default class Hero {
   constructor() {
+    // parse heroData csv
+    this.articles = heroDataCSV.slice(1).map((d) => {
+      return {
+        title: d[0],
+        journal: d[1]
+      };
+    });
+
     // build scene elements
     this.obj = this.initScene();
   }
@@ -18,17 +31,21 @@ export default class Hero {
     // --- build scene elements
     let sceneGroup = new Group();
 
-    // cubes
-    this.cubes = [];
-    for (let c = 0; c < 3; c++) {
-      const geo = new BoxGeometry(1, 1, 1);
-      const mat = new MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new Mesh(geo, mat);
-      const xPos = c * 2 - 2;
-      cube.position.set(xPos, 0, 0);
-      this.cubes.push(cube);
-      sceneGroup.add(cube);
-    }
+    // -- Text
+    const fontLoader = new FontLoader();
+    const font = fontLoader.load('/fonts/Georgia_Regular.json', (font) => {
+      const textGeo = new TextGeometry('This is only a test', {
+        font: font,
+        size: 0.4,
+        height: 0,
+        curveSegments: 12,
+        bevelEnabled: false
+      });
+      textGeo.center();
+      const textMat = new MeshBasicMaterial({ color: 0xff0000 });
+      const text = new Mesh(textGeo, textMat);
+      sceneGroup.add(text);
+    });
 
     // return group mesh
     return sceneGroup;
@@ -36,9 +53,9 @@ export default class Hero {
 
   update(time) {
     // update this scene
-    this.cubes.forEach((cube, i) => {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.005;
-    });
+    // this.cubes.forEach((cube, i) => {
+    //   cube.rotation.x += 0.01;
+    //   cube.rotation.y += 0.005;
+    // });
   }
 }
