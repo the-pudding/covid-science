@@ -30,13 +30,23 @@ module.exports = (env, opts) => {
         {
           test: /\.(csv|tsv)$/i,
           use: ['csv-loader']
+        },
+        {
+          test: /\.(glsl|vs|fs|vert|frag)$/,
+          exclude: /node_modules/,
+          use: ['raw-loader']
         }
       ]
     },
     optimization: {
       usedExports: true
     },
-    resolve: { extensions: ['*', '.js', '.jsx'] },
+    resolve: {
+      extensions: ['*', '.js', '.jsx'],
+      alias: {
+        '@bmfonts': path.resolve(__dirname, 'static/bmfonts')
+      }
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js'
@@ -57,6 +67,9 @@ module.exports = (env, opts) => {
       new HtmlWebpackPlugin({
         template: './src/index.html',
         title: 'Covid Science Tmp'
+      }),
+      new webpack.ProvidePlugin({
+        THREE: 'three'
       })
     ]
   };

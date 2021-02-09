@@ -8,7 +8,7 @@ import {
   MeshBasicMaterial,
   PerspectiveCamera,
   Scene,
-  WebGLRenderer,
+  WebGL1Renderer,
   Color
 } from 'three';
 
@@ -56,9 +56,9 @@ export default class World extends Component {
     this.scene.add(ground);
 
     // Add all sub-scenes
-    this.sceneHero = new Hero();
-    this.sceneHero.group.position.set(0, 0, 0);
-    this.scene.add(this.sceneHero.group);
+    this.sceneHero = new Hero({ camera: this.camera });
+    this.sceneHero.obj.position.set(0, 0, 0);
+    this.scene.add(this.sceneHero.obj);
 
     this.scene1 = new Scene1();
     this.scene1.group.position.set(0, 20, 0);
@@ -77,7 +77,7 @@ export default class World extends Component {
     this.currentScene = this.sceneHero;
 
     // create the renderer
-    this.renderer = new WebGLRenderer({
+    this.renderer = new WebGL1Renderer({
       canvas: this.canvasRef.current,
       antialias: true,
       alpha: true
@@ -92,6 +92,9 @@ export default class World extends Component {
   handleResize = () => {
     this.winSize.w = window.innerWidth;
     this.winSize.h = window.innerHeight;
+
+    // update scenes
+    this.sceneHero.resize();
 
     // update camera and renderer
     this.camera.aspect = this.winSize.w / this.winSize.h;

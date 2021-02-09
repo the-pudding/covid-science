@@ -1,0 +1,21 @@
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  margin: auto;
+  flex-direction: column;
+  margin-top: 20%;
+}
+
+.title {
+  width: 50%;
+  text-align: center;
+  display: block;
+  font-size: 72px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 24px;
+}
