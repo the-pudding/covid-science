@@ -48,7 +48,7 @@ export default class Hero {
     this.rowSpeeds = {};
     this.titleScale = 0.005;
     this.padding = {
-      x: 0.25,
+      x: 0.5,
       y: 0.01
     };
 

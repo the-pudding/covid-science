@@ -14,12 +14,12 @@ gsap.registerPlugin(ScrollTrigger);
 import './style.scss';
 
 // default scroll trigger
-ScrollTrigger.defaults({
-  markers: {
-    startColor: 'white',
-    endColor: 'black'
-  }
-});
+// ScrollTrigger.defaults({
+//   markers: {
+//     startColor: 'white',
+//     endColor: 'black'
+//   }
+// });
 
 class App extends Component {
   constructor(props) {

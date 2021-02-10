@@ -1,19 +1,25 @@
-.content {
-  display: flex;
-  justify-content: center;
-  width: 80vw;
+.section-content {
+  width: 100%;
+  height: 100vh;
   margin: auto;
 }
 
-.text {
-  width: 200px;
+.text-container {
+  position: sticky;
+  top: 200px;
+  width: 80%;
+  margin: auto;
 }
 
-.test-box {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-  background-color: tomato;
+#revealed-text {
+  margin-top: 20px;
+  height: 50px;
+  font-size: 32px;
+}
+
+.plot-container {
+  position: sticky;
+  top: 200px;
+  height: 500px;
+  width: 100%;
 }

@@ -34,7 +34,7 @@ export default class World extends Component {
       75,
       this.winSize.w / this.winSize.h,
       0.1,
-      1000
+      50
     );
   }
 
@@ -61,8 +61,8 @@ export default class World extends Component {
     this.scene.add(this.sceneHero.obj);
 
     this.scene1 = new Scene1();
-    this.scene1.group.position.set(0, 20, 0);
-    this.scene.add(this.scene1.group);
+    this.scene1.obj.position.set(0, 20, 0);
+    this.scene.add(this.scene1.obj);
 
     // create a mapping between section names and scenes
     this.sceneMapping = {
@@ -126,8 +126,8 @@ export default class World extends Component {
 
       const nextScene = this.sceneMapping[currentSection];
       if (nextScene !== this.currentScene) {
-        gsap.to(this.currentScene.group.position, { duration: 2, x: -30 });
-        gsap.to(nextScene.group.position, { duration: 2, y: 0, x: 0, z: 0 });
+        gsap.to(this.currentScene.obj.position, { duration: 3, x: -30 });
+        gsap.to(nextScene.obj.position, { duration: 3, y: 0, x: 0, z: 0 });
       }
 
       this.currentScene = nextScene;

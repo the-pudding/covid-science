@@ -4,7 +4,7 @@ import * as THREEConst from 'three/src/constants';
 export default class Hero {
   constructor() {
     // build scene elements
-    this.group = new Group();
+    this.obj = new Group();
     this.initScene();
   }
 
@@ -19,7 +19,7 @@ export default class Hero {
       const xPos = c * 2 - 2;
       sphere.position.set(xPos, 0, 0);
       this.spheres.push(sphere);
-      this.group.add(sphere);
+      this.obj.add(sphere);
     }
   }
 
