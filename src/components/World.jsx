@@ -43,7 +43,6 @@ export default class World extends Component {
     this.camera.position.z = 5;
 
     // add the helper axes and ground reference
-    this.scene.add(new AxesHelper(3));
     const ground = new Mesh(
       new PlaneGeometry(150, 150, 40, 40),
       new MeshBasicMaterial({
@@ -53,7 +52,8 @@ export default class World extends Component {
     );
     ground.rotateX(Math.PI * 0.5);
     ground.position.y = -6;
-    this.scene.add(ground);
+    // this.scene.add(ground);
+    // this.scene.add(new AxesHelper(3));
 
     // Add all sub-scenes
     this.sceneHero = new Hero({ camera: this.camera });

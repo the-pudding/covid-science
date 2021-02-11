@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-// import Plot from './Plot';
+import React, { useState, useEffect, Component } from 'react';
 import PapersPerYear from './PapersPerYear.js';
 
 import { gsap } from 'gsap';
@@ -11,57 +10,81 @@ gsap.registerPlugin(TextPlugin);
 
 import './Section1.scss';
 
-const Section1 = (props) => {
-  const containerRef = React.useRef(null);
+export default class Section1 extends Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const plot = new PapersPerYear(containerRef.current);
+    this.containerRef = React.createRef();
+
+    this.state = {
+      plot: null,
+      showing2020: false
+    };
+  }
+
+  handleScrollTrigger = () => {
+    let { plot, showing2020 } = this.state;
+
+    const shouldShow2020 = !showing2020;
+    if (plot) {
+      plot.updatePlot(shouldShow2020);
     }
-  }, []);
+    this.setState({ showing2020: shouldShow2020 });
+  };
 
-  useEffect(() => {
+  componentDidMount() {
     gsap.to('#revealed-text', {
       scrollTrigger: {
-        trigger: '.section-content',
+        trigger: '.scroll-container',
         name: 'revealed-text',
-        start: '60% center',
-        onToggle: () => {
-          console.log('toggled');
-        },
-        markers: {
-          startColor: 'white',
-          endColor: 'black'
-        },
+        start: '10% top',
+        onToggle: this.handleScrollTrigger,
+        // markers: {
+        //   startColor: 'white',
+        //   endColor: 'black'
+        // },
         toggleActions: 'play reset reset reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
       },
       duration: 1,
       text: 'then 2020 came...'
     });
-  }, []);
+  }
 
-  return (
-    <section className={props.rootClassName}>
-      <h1>Section I</h1>
-      <div className="section-content">
-        <div className="text-container">
-          <div className="centered-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-            sequi et, similique molestias placeat officia harum blanditiis in
-            numquam nemo natus perferendis minima dicta incidunt impedit
-            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Doloribus sequi et, similique
-            molestias placeat officia harum blanditiis in numquam nemo natus
-            perferendis minima dicta incidunt impedit voluptates assumenda cum.
-            Magni?
+  componentDidUpdate() {
+    let { plot, showing2020 } = this.state;
+    if (this.containerRef.current && !plot) {
+      this.setState({
+        plot: new PapersPerYear(this.containerRef.current, showing2020)
+      });
+    }
+  }
+
+  render() {
+    return (
+      <section className={this.props.rootClassName}>
+        <h1>Section I</h1>
+        <div className="scroll-container">
+          <div className="content-container">
+            <div className="plot-container" ref={this.containerRef}>
+              {' '}
+            </div>
+
+            <div className="text-overlay-container">
+              <div className="centered-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Doloribus sequi et, similique molestias placeat officia harum
+                blanditiis in numquam nemo natus perferendis minima dicta
+                incidunt impedit voluptates assumenda cum. Magni? Lorem ipsum
+                dolor sit amet, consectetur adipisicing elit. Doloribus sequi
+                et, similique molestias placeat officia harum blanditiis in
+                numquam nemo natus perferendis minima dicta incidunt impedit
+                voluptates assumenda cum. Magni?
+              </div>
+              <div id="revealed-text" className="centered-text"></div>
+            </div>
           </div>
-          <div id="revealed-text" className="centered-text"></div>
         </div>
-
-        <div className="plot-container" />
-      </div>
-    </section>
-  );
-};
-
-export default Section1;
+      </section>
+    );
+  }
+}
