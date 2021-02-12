@@ -1,4 +1,11 @@
-import { SphereGeometry, Group, Mesh, MeshBasicMaterial } from 'three';
+import {
+  PlaneGeometry,
+  Color,
+  SphereGeometry,
+  Group,
+  Mesh,
+  MeshBasicMaterial
+} from 'three';
 import * as THREEConst from 'three/src/constants';
 
 export default class Hero {
@@ -11,23 +18,23 @@ export default class Hero {
   initScene() {
     // --- build scene elements
     // cubes
-    this.spheres = [];
-    for (let c = 0; c < 3; c++) {
-      const geo = new SphereGeometry(1, 5, 5);
-      const mat = new MeshBasicMaterial({ color: 0xf4fa4e });
-      const sphere = new Mesh(geo, mat);
-      const xPos = c * 2 - 2;
-      sphere.position.set(xPos, 0, 0);
-      this.spheres.push(sphere);
-      this.obj.add(sphere);
-    }
+    const ground = new Mesh(
+      new PlaneGeometry(5, 5, 10, 10),
+      new MeshBasicMaterial({
+        color: new Color('#666'),
+        wireframe: true
+      })
+    );
+    ground.rotateX(Math.PI * 0.5);
+    ground.position.y = -2;
+    this.obj.add(ground);
   }
 
   update(time) {
     // update this scene
-    this.spheres.forEach((sphere, i) => {
-      sphere.rotation.x += 0.01;
-      sphere.rotation.y += 0.005;
-    });
+    // this.spheres.forEach((sphere, i) => {
+    //   sphere.rotation.x += 0.01;
+    //   sphere.rotation.y += 0.005;
+    // });
   }
 }

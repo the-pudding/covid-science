@@ -46,7 +46,7 @@ export default class Section1 extends Component {
         toggleActions: 'play reset reset reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
       },
       duration: 1,
-      text: 'then 2020 came...'
+      text: 'then 2020 happened...'
     });
   }
 

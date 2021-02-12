@@ -9,7 +9,8 @@ import {
   PerspectiveCamera,
   Scene,
   WebGL1Renderer,
-  Color
+  Color,
+  Fog
 } from 'three';
 
 import Hero from './SectionHero/Hero.js';
@@ -55,13 +56,16 @@ export default class World extends Component {
     // this.scene.add(ground);
     // this.scene.add(new AxesHelper(3));
 
+    // add fog
+    this.scene.fog = new Fog(0xffffff, 0, 3);
+
     // Add all sub-scenes
     this.sceneHero = new Hero({ camera: this.camera });
     this.sceneHero.obj.position.set(0, 0, 0);
     this.scene.add(this.sceneHero.obj);
 
     this.scene1 = new Scene1();
-    this.scene1.obj.position.set(0, 20, 0);
+    this.scene1.obj.position.set(0, -50, 0);
     this.scene.add(this.scene1.obj);
 
     // create a mapping between section names and scenes

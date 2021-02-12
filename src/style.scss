@@ -6,6 +6,10 @@
   src: url('./fonts/Musee-Bold.otf') format('opentype');
 }
 @font-face {
+  font-family: 'Musee-Regular';
+  src: url('./fonts/Musee-Regular.otf') format('opentype');
+}
+@font-face {
   font-family: 'Theinhardt-Med';
   src: url('./fonts/TheinhardtMed.otf') format('opentype');
 }
@@ -17,8 +21,8 @@ $dkBlue: rgb(0, 91, 141);
 $turquoise: rgb(10, 145, 151);
 
 $text-color: white;
-$headline-color: $dkBlue;
-$bg-color: $warmGray;
+$headline-color: tomato;
+$bg-color: #1e1f1c;
 
 * {
   // border: 1px solid red !important; // <- DEBUG, show all divs
@@ -28,14 +32,17 @@ $bg-color: $warmGray;
 body {
   margin: 0px;
   background-color: $bg-color;
+  //background-image: linear-gradient($bg-color, #e3e0e0);
   color: $text-color;
-  font-family: 'Theinhardt-Med';
+  font-family: 'Musee-Regular';
+  line-height: 1.33;
 }
 
 h1 {
   font-family: 'Musee-Bold';
   font-size: 42px;
-  color: $dkBlue;
+  color: $headline-color;
+  line-height: 1.1;
 }
 
 section {

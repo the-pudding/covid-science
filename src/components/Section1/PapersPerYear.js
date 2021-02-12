@@ -26,7 +26,7 @@ export default class PapersPerYearPlot {
     this.containerRect = container.getBoundingClientRect();
     this.height = this.containerRect.height;
     this.width = this.containerRect.width;
-    this.color = 'steelblue';
+    this.color = 'tomato';
 
     this.setupPlot();
   }

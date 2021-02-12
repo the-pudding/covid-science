@@ -11,6 +11,7 @@ attribute vec2 uv;
 attribute vec3 position;
 
 varying vec2 vUv;
+varying float depth;
 
 void main() {
   vUv = uv; // update vUv for frag
