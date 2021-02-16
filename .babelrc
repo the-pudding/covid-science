@@ -1,4 +1,8 @@
 {
   "presets": ["@babel/env", "@babel/preset-react"],
-  "plugins": ["react-hot-loader/babel", "transform-class-properties"]
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-class-properties",
+    "babel-plugin-react-scoped-css"
+  ]
 }

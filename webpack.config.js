@@ -21,6 +21,9 @@ module.exports = (env, opts) => {
             'style-loader',
             'css-loader',
             {
+              loader: 'scoped-css-loader'
+            },
+            {
               loader: 'sass-loader',
               options: {
                 additionalData: `@import "${path.resolve(

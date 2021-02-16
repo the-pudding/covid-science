@@ -5,7 +5,7 @@ import { scaleTime } from 'd3-scale';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import './Section2.scss';
+import './Section2.scoped.scss';
 import TimelineScrubber from './TimelineScrubber';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -77,11 +77,6 @@ export default class Section2 extends Component {
         endColor: 'black'
       },
       onUpdate: (self) => {
-        // console.log(
-        //   'progress',
-        //   self.progress,
-        //   this.tlScale.invert(self.progress)
-        // );
         this.handleScrollTrigger(self.progress);
       }
     });

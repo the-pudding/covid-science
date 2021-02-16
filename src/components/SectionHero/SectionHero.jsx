@@ -1,5 +1,5 @@
 import React from 'react';
-import './SectionHero.scss';
+import './SectionHero.scoped.scss';
 
 const SectionHero = (props) => {
   return (

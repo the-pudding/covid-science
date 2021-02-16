@@ -8,7 +8,7 @@ import { TextPlugin } from 'gsap/TextPlugin';
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin);
 
-import './Section1.scss';
+import './Section1.scoped.scss';
 
 export default class Section1 extends Component {
   constructor(props) {
