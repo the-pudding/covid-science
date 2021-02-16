@@ -17,7 +17,19 @@ module.exports = (env, opts) => {
         },
         {
           test: /\.(scss|css)$/i,
-          use: ['style-loader', 'css-loader', 'sass-loader']
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                additionalData: `@import "${path.resolve(
+                  __dirname,
+                  'src/styles/colors.scss'
+                )}";`
+              }
+            }
+          ]
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -34,7 +46,7 @@ module.exports = (env, opts) => {
         {
           test: /\.(glsl|vs|fs|vert|frag)$/,
           exclude: /node_modules/,
-          use: ['raw-loader']
+          use: ['raw-loader', 'glslify-loader']
         }
       ]
     },

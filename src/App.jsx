@@ -11,7 +11,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-import './style.scss';
+import './styles/style.scss';
 
 // default scroll trigger
 // ScrollTrigger.defaults({

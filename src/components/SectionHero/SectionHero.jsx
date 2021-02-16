@@ -5,7 +5,11 @@ const SectionHero = (props) => {
   return (
     <section className={props.rootClassName}>
       <div className="title-container">
-        <h1 className="title">Section Hero</h1>
+        <h1 className="title">
+          Section
+          <br />
+          Hero
+        </h1>
         <div className="subtitle">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
           praesentium, deleniti voluptatum quis laborum ea enim assumenda error

@@ -43,6 +43,15 @@ export default class World extends Component {
     // configure and initialize the first draw
     this.camera.position.z = 5;
 
+    // create the renderer
+    this.renderer = new WebGL1Renderer({
+      canvas: this.canvasRef.current,
+      antialias: true,
+      alpha: true
+    });
+    this.renderer.setSize(this.winSize.w, this.winSize.h);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
     // add the helper axes and ground reference
     const ground = new Mesh(
       new PlaneGeometry(150, 150, 40, 40),
@@ -60,7 +69,7 @@ export default class World extends Component {
     this.scene.fog = new Fog(0xffffff, 0, 3);
 
     // Add all sub-scenes
-    this.sceneHero = new Hero({ camera: this.camera });
+    this.sceneHero = new Hero({ camera: this.camera, renderer: this.renderer });
     this.sceneHero.obj.position.set(0, 0, 0);
     this.scene.add(this.sceneHero.obj);
 
@@ -80,15 +89,6 @@ export default class World extends Component {
     // set the current scene
     this.currentScene = this.sceneHero;
 
-    // create the renderer
-    this.renderer = new WebGL1Renderer({
-      canvas: this.canvasRef.current,
-      antialias: true,
-      alpha: true
-    });
-    this.renderer.setSize(this.winSize.w, this.winSize.h);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
     // start animation
     this.tick();
   };
@@ -97,13 +97,13 @@ export default class World extends Component {
     this.winSize.w = window.innerWidth;
     this.winSize.h = window.innerHeight;
 
-    // update scenes
-    this.sceneHero.resize();
-
     // update camera and renderer
     this.camera.aspect = this.winSize.w / this.winSize.h;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.winSize.w, this.winSize.h);
+
+    // update scenes
+    this.sceneHero.resize();
   };
 
   tick = () => {

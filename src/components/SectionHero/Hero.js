@@ -7,6 +7,7 @@ import {
   Vector2,
   Box3,
   BoxGeometry,
+  PlaneGeometry,
   MeshBasicMaterial,
   Color
 } from 'three';
@@ -22,8 +23,10 @@ const MSDFShader = require('three-bmfont-text/shaders/msdf');
 
 import TitleFont from '@bmfonts/Georgia.json';
 import heroDataCSV from './assets/heroData.csv';
-import fragShader from './assets/frag.glsl';
-import vertShader from './assets/vert.glsl';
+import fragShader from './assets/shaders/frag.glsl';
+import vertShader from './assets/shaders/vert.glsl';
+import testFrag from './assets/shaders/testFrag.glsl';
+import testVert from './assets/shaders/testVert.glsl';
 
 export default class Hero {
   constructor(config) {
@@ -38,6 +41,9 @@ export default class Hero {
 
     // passed in config (optional)
     this.cam = config.camera || null;
+    this.renderer = config.renderer;
+
+    console.log(config);
 
     // internal vars
     this.titleTexture = null;
@@ -58,27 +64,69 @@ export default class Hero {
     // get visible edges
     this.vHeight = visibleHeightAtZDepth(0, this.cam);
     this.vWidth = visibleWidthAtZDepth(0, this.cam);
-    console.log(this.vHeight, this.vWidth);
+    this.bufferResolution = this.renderer.getDrawingBufferSize(new Vector2());
 
-    this.initScene();
+    // debug stuff
+    this.showDebugMoving = false;
+    this.showDebugStatic = false;
+
+    // this.showDebugMoving = true;
+    // this.addDebugMoving();
+
+    this.showDebugStatic = true;
+    this.addDebugStatic();
+
+    //this.initScene();
+  }
+
+  addDebugMoving() {
+    //const geo = new PlaneGeometry(9, 7, 10, 10);
+    const geo = new PlaneGeometry(2, 2, 10, 10);
+    const mat = new RawShaderMaterial({
+      vertexShader: testVert,
+      fragmentShader: testFrag,
+      transparent: true
+    });
+    mat.uniforms.u_time = { value: 0.0 };
+    mat.uniforms.u_resolution = {
+      value: this.bufferResolution.clone()
+    };
+
+    this.debugMoving = new Mesh(geo, mat);
+    this.debugMoving.position.set(-this.vWidth * 0.5, 1, 0);
+
+    this.obj.add(this.debugMoving);
+  }
+
+  addDebugStatic() {
+    // load textures
+    const textureLoader = new TextureLoader();
+    const overlayTexture = textureLoader.load('/textures/covid_outline.jpg');
+
+    const geo = new PlaneGeometry(9, 7, 10, 10);
+    const mat = new RawShaderMaterial({
+      vertexShader: testVert,
+      fragmentShader: testFrag,
+      transparent: true
+    });
+    mat.uniforms.u_time = { value: 0.0 };
+    mat.uniforms.u_resolution = {
+      value: this.bufferResolution.clone()
+    };
+    mat.uniforms.u_overlay = {
+      value: overlayTexture
+    };
+
+    this.debugStatic = new Mesh(geo, mat);
+
+    this.obj.add(this.debugStatic);
   }
 
   initScene() {
     // --- build scene elements
-
-    // debug - background
-    // const geo = new BoxGeometry(this.vWidth, this.vHeight);
-    // const mat = new MeshBasicMaterial({
-    //   color: new Color('rgba(255, 0, 0, 100)'),
-    //   transparent: true
-    // });
-    // const mesh = new Mesh(geo, mat);
-    // mesh.position.z = -1;
-    // this.obj.add(mesh);
-
     const textureLoader = new TextureLoader();
 
-    //
+    // textures
     const depthTexture = textureLoader.load('/textures/covid_depth.jpg');
     const testTexture = textureLoader.load('/textures/test.jpg');
 
@@ -101,7 +149,7 @@ export default class Hero {
       this.titleMat.uniforms.u_depth = { value: depthTexture };
       this.titleMat.uniforms.u_test = { value: testTexture };
       this.titleMat.uniforms.u_resolution = {
-        value: new Vector2(window.innerWidth, window.innerHeight)
+        value: this.bufferResolution.clone()
       };
 
       // Add the first set of active titles to fill the screen
@@ -181,6 +229,25 @@ export default class Hero {
   resize() {
     this.vHeight = visibleHeightAtZDepth(0, this.cam);
     this.vWidth = visibleWidthAtZDepth(0, this.cam);
+
+    // update canvas buffer resolution
+    this.bufferResolution = this.renderer.getDrawingBufferSize(new Vector2());
+
+    // update uniforms that depend on buffer res
+    this.activeTitles.forEach((title) => {
+      title.obj.material.uniforms.u_resolution.value = this.bufferResolution.clone();
+      title.obj.material.uniformsNeedUpdate = true;
+    });
+
+    // update debuggers
+    if (this.showDebugMoving) {
+      this.debugMoving.material.uniforms.u_resolution.value = this.bufferResolution.clone();
+      this.debugMoving.material.uniformsNeedUpdate = true;
+    }
+    if (this.showDebugStatic) {
+      this.debugStatic.material.uniforms.u_resolution.value = this.bufferResolution.clone();
+      this.debugStatic.material.uniformsNeedUpdate = true;
+    }
   }
 
   removeDeadTitles() {
@@ -201,6 +268,13 @@ export default class Hero {
 
   // --- Animation loop
   update(time) {
+    if (this.showDebugMoving) {
+      this.debugMoving.position.x += 0.05;
+      if (this.debugMoving.position.x > this.vWidth * 0.5) {
+        this.debugMoving.position.x = -this.vWidth * 0.5;
+      }
+    }
+
     let titlesToAdd = [];
 
     // update all titles

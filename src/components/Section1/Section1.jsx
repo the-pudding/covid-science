@@ -35,7 +35,7 @@ export default class Section1 extends Component {
   componentDidMount() {
     gsap.to('#revealed-text', {
       scrollTrigger: {
-        trigger: '.scroll-container',
+        trigger: '.section1-scroll-container',
         name: 'revealed-text',
         start: '10% top',
         onToggle: this.handleScrollTrigger,
@@ -63,7 +63,7 @@ export default class Section1 extends Component {
     return (
       <section className={this.props.rootClassName}>
         <h1>Section I</h1>
-        <div className="scroll-container">
+        <div className="section1-scroll-container">
           <div className="content-container">
             <div className="plot-container" ref={this.containerRef}>
               {' '}
