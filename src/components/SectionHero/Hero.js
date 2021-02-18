@@ -43,8 +43,6 @@ export default class Hero {
     this.cam = config.camera || null;
     this.renderer = config.renderer;
 
-    console.log(config);
-
     // internal vars
     this.titleTexture = null;
     this.titleMat = null;

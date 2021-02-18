@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -74,6 +75,7 @@ module.exports = (env, opts) => {
       //hotOnly: true,
     },
     plugins: [
+      new Dotenv(),
       new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new webpack.HotModuleReplacementPlugin(),
       new CopyWebpackPlugin({

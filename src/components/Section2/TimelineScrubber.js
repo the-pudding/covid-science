@@ -49,7 +49,7 @@ export default class TimelineScrubber {
     // correct position on scroll; current date always centered
     this.tlScale = new scaleTime()
       .domain([new Date('2019-01-01'), new Date('2022-01-01')])
-      .range([0, this.width * 4]);
+      .range([0, this.width * 20]);
 
     // add axes
     this.svg.append('g').call((g) => this.draw_tlAxis(g));
@@ -76,7 +76,6 @@ export default class TimelineScrubber {
       const bbox = nodes[i].getBoundingClientRect();
       const midpoint = bbox.x + bbox.width / 2;
       const distFromCenter = Math.abs(midpoint - window.innerWidth / 2);
-      const fontSize = this.fontSizeScale(distFromCenter);
       select(nodes[i])
         .select('text')
         .attr('font-size', `${this.fontSizeScale(distFromCenter)}px`)
