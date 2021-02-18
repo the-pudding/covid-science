@@ -1,8 +1,9 @@
 import React from 'react';
+import './BigNumber.scoped.scss';
 
 const BigNumber = (props) => {
   return (
-    <div>
+    <div className="container">
       <div className="value">{props.value}</div>
       <div className="units">{props.units}</div>
     </div>

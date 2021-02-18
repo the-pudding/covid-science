@@ -3,9 +3,9 @@
   padding: 0px;
   position: relative;
 
-  * {
-    border: 1px solid red !important; // <- DEBUG, show all divs
-  }
+  // * {
+  //   border: 1px solid red !important; // <- DEBUG, show all divs
+  // }
 }
 
 .map-container {
@@ -44,4 +44,11 @@
       rgba($bg-color, 1) 95% 100%
     );
   }
+}
+
+.big-number-container {
+  margin: 50px auto;
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
 }

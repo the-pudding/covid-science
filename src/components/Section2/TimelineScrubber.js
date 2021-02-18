@@ -2,6 +2,7 @@ import { select, thresholdSturges } from 'd3';
 import { axisBottom } from 'd3-axis';
 import { scaleLinear, scalePow, scaleTime } from 'd3-scale';
 import { timeFormat } from 'd3-time-format';
+import { timeWeek } from 'd3-time';
 
 export default class TimelineScrubber {
   constructor(container) {
@@ -86,6 +87,6 @@ export default class TimelineScrubber {
   draw_tlAxis(g) {
     g.attr('transform', `translate(0, ${this.height / 2})`)
       .attr('class', 'tl-axis')
-      .call(axisBottom(this.tlScale).ticks(36).tickFormat(timeFormat('%b')));
+      .call(axisBottom(this.tlScale).ticks(timeWeek.every(1)).tickFormat(timeFormat('%b-%d')));
   }
 }

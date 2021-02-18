@@ -25,15 +25,16 @@ import TitleFont from '@bmfonts/Georgia.json';
 import heroDataCSV from './assets/heroData.csv';
 import fragShader from './assets/shaders/frag.glsl';
 import vertShader from './assets/shaders/vert.glsl';
-import testFrag from './assets/shaders/testFrag.glsl';
-import testVert from './assets/shaders/testVert.glsl';
+import covidFrag from './assets/shaders/covidFrag.glsl';
+import covidVert from './assets/shaders/covidVert.glsl';
+import titleFrag from './assets/shaders/titleFrag.glsl';
 
 export default class Hero {
   constructor(config) {
     // parse heroData csv
     this.articles = heroDataCSV.slice(1).map((d) => {
       return {
-        title: d[0],
+        title: `${d[0]}`,
         journal: d[1]
       };
     });
@@ -52,9 +53,10 @@ export default class Hero {
     this.rowSpeeds = {};
     this.titleScale = 0.005;
     this.padding = {
-      x: 0.5,
+      x: 0.1,
       y: 0.01
     };
+    this.mouse = new Vector2(0, 0);
 
     // build scene elements
     this.obj = new Group();
@@ -65,29 +67,43 @@ export default class Hero {
     this.bufferResolution = this.renderer.getDrawingBufferSize(new Vector2());
 
     // debug stuff
-    this.showDebugMoving = false;
-    this.showDebugStatic = false;
+    //this.showDebugMoving = false;
+    //this.showDebugStatic = false;
 
-    // this.showDebugMoving = true;
-    // this.addDebugMoving();
+    //this.showDebugMoving = true;
+    //this.addDebugMoving();
 
-    this.showDebugStatic = true;
-    this.addDebugStatic();
+    //this.showDebugStatic = true;
+    //this.addDebugStatic();
 
-    //this.initScene();
+    window.addEventListener('mousemove', (e) => {
+      this.mouse = new Vector2(
+        e.clientX / window.innerWidth,
+        e.clientY / window.innerHeight
+      );
+    });
+
+    this.initScene();
   }
 
   addDebugMoving() {
+    // load textures
+    const textureLoader = new TextureLoader();
+    const overlayTexture = textureLoader.load('/textures/covid_outline.jpg');
+
     //const geo = new PlaneGeometry(9, 7, 10, 10);
     const geo = new PlaneGeometry(2, 2, 10, 10);
     const mat = new RawShaderMaterial({
-      vertexShader: testVert,
-      fragmentShader: testFrag,
+      vertexShader: covidVert,
+      fragmentShader: covidFrag,
       transparent: true
     });
     mat.uniforms.u_time = { value: 0.0 };
     mat.uniforms.u_resolution = {
       value: this.bufferResolution.clone()
+    };
+    mat.uniforms.u_overlay = {
+      value: overlayTexture
     };
 
     this.debugMoving = new Mesh(geo, mat);
@@ -103,8 +119,8 @@ export default class Hero {
 
     const geo = new PlaneGeometry(9, 7, 10, 10);
     const mat = new RawShaderMaterial({
-      vertexShader: testVert,
-      fragmentShader: testFrag,
+      vertexShader: covidVert,
+      fragmentShader: covidFrag,
       transparent: true
     });
     mat.uniforms.u_time = { value: 0.0 };
@@ -122,11 +138,10 @@ export default class Hero {
 
   initScene() {
     // --- build scene elements
-    const textureLoader = new TextureLoader();
 
     // textures
-    const depthTexture = textureLoader.load('/textures/covid_depth.jpg');
-    const testTexture = textureLoader.load('/textures/test.jpg');
+    const textureLoader = new TextureLoader();
+    const overlayTexture = textureLoader.load('/textures/covid_outline.jpg');
 
     // load the font texture and use it to instantiate the text objects
     textureLoader.load('/bmfonts/Georgia.png', (fontTex) => {
@@ -136,7 +151,7 @@ export default class Hero {
       this.titleMat = new RawShaderMaterial(
         MSDFShader({
           vertexShader: vertShader,
-          fragmentShader: fragShader,
+          fragmentShader: titleFrag,
           map: this.titleTexture,
           side: THREE.DoubleSide,
           transparent: false,
@@ -144,10 +159,14 @@ export default class Hero {
         })
       );
       this.titleMat.uniforms.u_time = { value: 0.0 };
-      this.titleMat.uniforms.u_depth = { value: depthTexture };
-      this.titleMat.uniforms.u_test = { value: testTexture };
       this.titleMat.uniforms.u_resolution = {
         value: this.bufferResolution.clone()
+      };
+      this.titleMat.uniforms.u_overlay = {
+        value: overlayTexture
+      };
+      this.titleMat.uniforms.u_mouse = {
+        value: this.mouse.clone()
       };
 
       // Add the first set of active titles to fill the screen
@@ -281,6 +300,7 @@ export default class Hero {
 
       // update shader uniforms
       title.obj.material.uniforms.u_time.value += time;
+      title.obj.material.uniforms.u_mouse.value = this.mouse.clone();
       title.obj.material.uniformsNeedUpdate = true;
 
       // check if any titles moved offscreen and should be flagged for removal

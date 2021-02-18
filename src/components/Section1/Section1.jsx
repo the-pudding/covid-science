@@ -62,7 +62,26 @@ export default class Section1 extends Component {
   render() {
     return (
       <section className={this.props.rootClassName}>
-        <h1>Section I</h1>
+        <div className="full-text">
+          <h1>Section I</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
+            sequi et, similique molestias placeat officia harum blanditiis in
+            numquam nemo natus perferendis minima dicta incidunt impedit
+            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Doloribus sequi et, similique
+            molestias placeat officia harum blanditiis in numquam nemo natus
+            perferendis minima dicta incidunt impedit voluptates assumenda cum.
+            Magni?
+          </p>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi
+            alias assumenda odio libero quia repudiandae debitis omnis labore
+            provident, similique enim, reiciendis voluptatem veniam ducimus
+            quod! Totam possimus rerum maiores.
+          </p>
+        </div>
         <div className="section1-scroll-container">
           <div className="content-container">
             <div className="plot-container" ref={this.containerRef}>
@@ -70,7 +89,7 @@ export default class Section1 extends Component {
             </div>
 
             <div className="text-overlay-container">
-              <div className="centered-text">
+              <div className="plot-text">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Doloribus sequi et, similique molestias placeat officia harum
                 blanditiis in numquam nemo natus perferendis minima dicta
@@ -79,10 +98,23 @@ export default class Section1 extends Component {
                 et, similique molestias placeat officia harum blanditiis in
                 numquam nemo natus perferendis minima dicta incidunt impedit
                 voluptates assumenda cum. Magni?
+                <div id="revealed-text" className="centered-text"></div>
               </div>
-              <div id="revealed-text" className="centered-text"></div>
             </div>
           </div>
+        </div>
+
+        <div className="full-text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
+            sequi et, similique molestias placeat officia harum blanditiis in
+            numquam nemo natus perferendis minima dicta incidunt impedit
+            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Doloribus sequi et, similique
+            molestias placeat officia harum blanditiis in numquam nemo natus
+            perferendis minima dicta incidunt impedit voluptates assumenda cum.
+            Magni?
+          </p>
         </div>
       </section>
     );

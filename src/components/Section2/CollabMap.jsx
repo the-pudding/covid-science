@@ -82,23 +82,27 @@ var triggerDragAndDrop = function (selectorDrag) {
   fireMouseEvent('mousedown', elemDrag, center1X, center1Y);
 
   // start dragging process over to drop target
-  fireMouseEvent('dragstart', elemDrag, center1X, center1Y);
-  fireMouseEvent('drag', elemDrag, center1X, center1Y);
+  // fireMouseEvent('dragstart', elemDrag, center1X, center1Y);
+  // fireMouseEvent('drag', elemDrag, center1X, center1Y);
   fireMouseEvent('mousemove', elemDrag, center1X, center1Y);
-  fireMouseEvent('drag', elemDrag, center2X, center2Y);
+  // fireMouseEvent('drag', elemDrag, center2X, center2Y);
 
   // release dragged element on top of drop target
-  fireMouseEvent('dragend', elemDrag, center2X, center2Y);
+  // fireMouseEvent('dragend', elemDrag, center2X, center2Y);
   fireMouseEvent('mouseup', elemDrag, center2X, center2Y);
 
-  console.log('dragged');
+  console.log('mock dragged');
 
   return true;
 };
 
-document.addEventListener('click', () => {
-  triggerDragAndDrop('#deckgl-wrapper');
-});
+// document.addEventListener(
+//   'click',
+//   (e) => {
+//     triggerDragAndDrop('#view-default-view');
+//   },
+//   true
+// );
 
 export default class CollabMap extends Component {
   constructor(props) {
@@ -213,6 +217,7 @@ export default class CollabMap extends Component {
         layers={this.renderLayers()}
         //useDevicePixels={false}
         style={{ zIndex: -10 }}
+        onDrag={() => console.log('dragged')}
       >
         <StaticMap
           mapboxApiAccessToken={process.env.MAPBOX_TOKEN}

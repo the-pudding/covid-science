@@ -20,7 +20,7 @@ void main() {
 
   float pct = 0.0;
   pct = distance(modelPosition.xy, vec2(0.0));
-  modelPosition.z += (pct * 1.0) - 5.0; // concave
+  modelPosition.z += (pct * 1.31) - 5.0; // concave
   // modelPosition.z += (pct * -1.0) + 4.0;  // convex
 
 

@@ -70,10 +70,10 @@ export default class Section2 extends Component {
       trigger: '.section2-scroll-container',
       start: 'top top',
       end: '+=800',
-      markers: {
-        startColor: 'white',
-        endColor: 'black'
-      },
+      // markers: {
+      //   startColor: 'white',
+      //   endColor: 'black'
+      // },
       onUpdate: (self) => {
         this.handleScrollTrigger(self.progress);
       }
@@ -105,7 +105,26 @@ export default class Section2 extends Component {
 
     return (
       <section className={this.props.rootClassName}>
-        <h1>Section II</h1>
+        <div className="full-text">
+          <h1>Section II</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
+            sequi et, similique molestias placeat officia harum blanditiis in
+            numquam nemo natus perferendis minima dicta incidunt impedit
+            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Doloribus sequi et, similique
+            molestias placeat officia harum blanditiis in numquam nemo natus
+            perferendis minima dicta incidunt impedit voluptates assumenda cum.
+            Magni?
+          </p>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi
+            alias assumenda odio libero quia repudiandae debitis omnis labore
+            provident, similique enim, reiciendis voluptatem veniam ducimus
+            quod! Totam possimus rerum maiores.
+          </p>
+        </div>
         <div className="section2-scroll-container">
           <div className="map-container">
             <div className="scrubber-container" ref={this.containerRef}>
