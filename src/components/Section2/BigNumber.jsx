@@ -3,7 +3,7 @@ import './BigNumber.scoped.scss';
 
 const BigNumber = (props) => {
   return (
-    <div className="container">
+    <div className={`container ${props.align}`}>
       <div className="value">{props.value}</div>
       <div className="units">{props.units}</div>
     </div>

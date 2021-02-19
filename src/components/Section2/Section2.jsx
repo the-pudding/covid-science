@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import TimelineScrubber from './TimelineScrubber';
 import CollabMap from './CollabMap';
+import TestMap from './TestMap';
 import BigNumber from './BigNumber';
 
 import statsByDayCSV from './assets/statsByDay.csv';
@@ -105,6 +106,8 @@ export default class Section2 extends Component {
 
     return (
       <section className={this.props.rootClassName}>
+        <TestMap />
+        {/* 
         <div className="full-text">
           <h1>Section II</h1>
           <p>
@@ -131,15 +134,23 @@ export default class Section2 extends Component {
               <div className="scrubber-overlay"></div>
             </div>
             <div className="big-number-container">
-              <BigNumber value={totalArticles} units="total articles" />
-              <BigNumber value={totalCollabs} units="total collaborations" />
+              <BigNumber
+                align="left"
+                value={totalArticles}
+                units="total articles"
+              />
+              <BigNumber
+                align="right"
+                value={totalCollabs}
+                units="total collaborations"
+              />
             </div>
 
             <CollabMap currentDate={currentDate} />
           </div>
 
           <div className="content-container"></div>
-        </div>
+        </div> */}
       </section>
     );
   }
