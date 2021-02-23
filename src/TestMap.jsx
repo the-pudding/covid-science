@@ -5,9 +5,9 @@ import { StaticMap } from 'react-map-gl';
 
 // --- Map settings
 const INITIAL_VIEW_STATE = {
-  longitude: 15.98,
+  longitude: 14,
   latitude: 0,
-  zoom: 0,
+  zoom: 1,
   pitch: 20
 };
 
@@ -24,7 +24,7 @@ const data = [
   }
 ];
 
-const TestMap = (props) => {
+const CollabMap = (props) => {
   const layers = [
     new ArcLayer({
       data,
@@ -48,4 +48,4 @@ const TestMap = (props) => {
   );
 };
 
-export default TestMap;
+export default CollabMap;

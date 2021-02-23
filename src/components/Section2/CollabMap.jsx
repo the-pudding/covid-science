@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import DeckGL from '@deck.gl/react';
-import { ArcLayer } from '@deck.gl/layers';
-import { MapView } from '@deck.gl/core';
+import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 import { DataFilterExtension } from '@deck.gl/extensions';
-import { StaticMap, ReactMapGL } from 'react-map-gl';
-import { isEqual } from 'lodash';
-import { timeParse } from 'd3-time-format';
-import * as Papa from 'papaparse';
+import { StaticMap } from 'react-map-gl';
+
 import dayjs from 'dayjs';
+import dayOfYear from 'dayjs/plugin/dayOfYear';
+dayjs.extend(dayOfYear);
+import { timeParse, timeFormat } from 'd3-time-format';
+import { groups } from 'd3-array';
 import { Utils } from '../../js/Utils.js';
+import * as Papa from 'papaparse';
 
 import geoIDsCSV from './assets/geoIDs.csv';
 
 // --- Map settings
-const INITIAL_VIEW_STATE = {
+const VIEW_STATE = {
   longitude: 15.98,
-  latitude: 44.9,
-  zoom: 0,
-  pitch: 30,
+  latitude: 0,
+  zoom: 1,
+  pitch: 20,
   bearing: 0
 };
 const MAP_CONTROLS = {
@@ -28,7 +30,7 @@ const MAP_CONTROLS = {
 };
 const MB_STYLE = 'mapbox://styles/jeffmacinnes/ckl8iul9a1e3q19o5iromwhzi';
 
-// --- Data
+// --- GEO IDs Data
 const geoIDs = geoIDsCSV.slice(1).map((d) => {
   return {
     idx: +d[0],
@@ -38,107 +40,46 @@ const geoIDs = geoIDsCSV.slice(1).map((d) => {
 });
 
 const parseDateStr = timeParse('%Y-%m-%d'); // fn for parsing datestring in collaborations data
+const formatDateStr = timeFormat('%Y-%m-%d');
 
-var triggerDragAndDrop = function (selectorDrag) {
-  // function for triggering mouse events
-  var fireMouseEvent = function (type, elem, centerX, centerY) {
-    var evt = document.createEvent('MouseEvents');
-    evt.initMouseEvent(
-      type,
-      true,
-      true,
-      window,
-      1,
-      1,
-      1,
-      centerX,
-      centerY,
-      false,
-      false,
-      false,
-      false,
-      0,
-      elem
-    );
-    elem.dispatchEvent(evt);
+const CollabMap = (props) => {
+  const [collabs, setCollabs] = useState([]);
+  const [geoIDsByDate, setGeoIDsByDate] = useState(null);
+
+  // define current date window
+  const currentDate = dayjs(props.currentDate);
+  const dateWindow = {
+    start: currentDate.subtract(5, 'days'),
+    end: currentDate.add(5, 'days')
   };
 
-  // fetch target elements
-  var elemDrag = document.querySelector(selectorDrag);
-
-  // calculate positions
-  var pos = elemDrag.getBoundingClientRect();
-  var center1X = Math.floor((pos.left + pos.right) / 2);
-  var center1Y = Math.floor((pos.top + pos.bottom) / 2);
-  var center2X = center1X - 10;
-  var center2Y = center1Y;
-
-  console.log(elemDrag);
-
-  // mouse over dragged element and mousedown
-  fireMouseEvent('mousemove', elemDrag, center1X, center1Y);
-  fireMouseEvent('mouseenter', elemDrag, center1X, center1Y);
-  fireMouseEvent('mouseover', elemDrag, center1X, center1Y);
-  fireMouseEvent('mousedown', elemDrag, center1X, center1Y);
-
-  // start dragging process over to drop target
-  // fireMouseEvent('dragstart', elemDrag, center1X, center1Y);
-  // fireMouseEvent('drag', elemDrag, center1X, center1Y);
-  fireMouseEvent('mousemove', elemDrag, center1X, center1Y);
-  // fireMouseEvent('drag', elemDrag, center2X, center2Y);
-
-  // release dragged element on top of drop target
-  // fireMouseEvent('dragend', elemDrag, center2X, center2Y);
-  fireMouseEvent('mouseup', elemDrag, center2X, center2Y);
-
-  console.log('mock dragged');
-
-  return true;
-};
-
-// document.addEventListener(
-//   'click',
-//   (e) => {
-//     triggerDragAndDrop('#view-default-view');
-//   },
-//   true
-// );
-
-export default class CollabMap extends Component {
-  constructor(props) {
-    super(props);
-    let currentDate = dayjs(new Date('01-01-2020'));
-    this.nDays = 5; // +/- days around current date to show
-    this.state = {
-      mapControls: MAP_CONTROLS,
-      viewState: {
-        longitude: -122,
-        latitude: 37.8,
-        zoom: 0
+  const layers = [
+    new ScatterplotLayer({
+      id: 'scatterplot-layer',
+      data: geoIDs,
+      // radiusScale: 10000,
+      getPosition: (d) => [d.lng, d.lat],
+      getRadius: 60000,
+      getFillColor: [255, 255, 255, 150],
+      getFilterValue: (d) => {
+        if (geoIDsByDate) {
+          return geoIDsByDate[d.idx][currentDate.dayOfYear() - 1] === 1
+            ? 1
+            : -999;
+        } else {
+          return -999;
+        }
       },
-      collabs: [{ pubDate: new Date('2020-01-05'), srcIdx: 10, dstIdx: 12 }],
-      currentDate: currentDate,
-      dateWindow: {
-        start: currentDate.subtract(this.nDays, 'days'),
-        end: currentDate.add(this.nDays, 'days')
-      },
-      softDateWindow: {
-        start: currentDate.subtract(1, 'days'),
-        end: currentDate.add(1, 'days')
+      filterRange: [0, 2],
+      extensions: [new DataFilterExtension({ filterSize: 1 })],
+      updateTriggers: {
+        getFilterValue: currentDate
       }
-    };
-  }
+    }),
 
-  renderLayers = () => {
-    let { collabs, dateWindow, currentDate } = this.state;
-
-    // build arc layer from collabs
-    const arcLayer = new ArcLayer({
+    new ArcLayer({
       id: 'arc-layer',
       data: collabs,
-      widthMinPixls: 1,
-      getWidth: 1,
-      dataComparator: (newData, oldData) => isEqual(newData, oldData),
       getSourcePosition: (d) => [
         geoIDs[d['srcIdx']].lng,
         geoIDs[d['srcIdx']].lat
@@ -147,41 +88,18 @@ export default class CollabMap extends Component {
         geoIDs[d['dstIdx']].lng,
         geoIDs[d['dstIdx']].lat
       ],
-      getSourceColor: (d) => [140, 140, 0, 50],
-      getTargetColor: (d) => [211, 11, 124, 50],
-      getTilt: (d) => Utils.randBw(-60, 60),
+      getSourceColor: [140, 140, 0, 50],
+      getTargetColor: [211, 11, 124, 50],
+      getTilt: (d) => Math.random() * 120 - 60,
       getFilterValue: (d) => d.pubDate.valueOf() / 1000,
       filterRange: [dateWindow.start.unix(), dateWindow.end.unix()],
       filterSoftRange: [currentDate.unix(), currentDate.unix()],
       extensions: [new DataFilterExtension({ filterSize: 1 })]
-    });
+    })
+  ];
 
-    return [arcLayer];
-  };
-
-  componentDidUpdate(prevProps) {
-    let { currentDate } = this.props;
-    if (prevProps.currentDate != currentDate) {
-      let newDate = dayjs(currentDate);
-      let dateWindow = {
-        start: newDate.subtract(this.nDays, 'days'),
-        end: newDate.add(this.nDays, 'days')
-      };
-      let softDateWindow = {
-        start: newDate.subtract(1, 'days'),
-        end: newDate.add(1, 'days')
-      };
-
-      this.setState({
-        currentDate: newDate,
-        dateWindow: dateWindow,
-        softDateWindow: softDateWindow
-      });
-    }
-  }
-
-  componentDidMount() {
-    // load all data
+  useEffect(() => {
+    // load collab data
     Papa.parse(
       'https://raw.githubusercontent.com/jeffmacinnes/COVID_vis/master/websiteData/collabsByDate.csv',
       {
@@ -190,6 +108,7 @@ export default class CollabMap extends Component {
         worker: true,
         fastMode: true,
         complete: (results) => {
+          // parse collaboration data
           const collabs = results.data.map((d, i) => {
             return {
               pubDate: parseDateStr(`2020-${d['pubDate']}`),
@@ -197,34 +116,50 @@ export default class CollabMap extends Component {
               dstIdx: +d['dstIdx']
             };
           });
-          console.log('data loaded');
-          this.setState({
-            collabs
+          setCollabs(collabs);
+
+          // determine which geoIDs present on each date.
+          // precompute matrix of geoIDs by Dates for fast lookup later
+          let geoIDsByDate = [];
+          for (let i = 0; i < geoIDs.length; i++) {
+            geoIDsByDate.push(new Array(366).fill(0)); // 366 days for 2020 leap year
+          }
+          groups(collabs, (d) => d.pubDate).forEach((d) => {
+            // group by date, then iterate over each nested date array to get the geoIDs for that date
+            const dayIdx = dayjs(formatDateStr(d[0])).dayOfYear() - 1; // dayOfYear starts at 1
+            const daysCollabs = d[1];
+            const theseGeoIDs = new Set(
+              daysCollabs.flatMap((dd) => [dd.srcIdx, dd.dstIdx])
+            );
+            for (let geoIdx of theseGeoIDs) {
+              geoIDsByDate[geoIdx][dayIdx] = 1;
+            }
           });
-          //this.renderLayers();
+          // geoIDsByDate is 2D array [geoIdx][dayIdx]
+          setGeoIDsByDate(geoIDsByDate);
         }
       }
     );
-  }
+  }, []);
 
-  render() {
-    const { viewState } = this.state;
+  return (
+    <DeckGL
+      initialViewState={{
+        ...VIEW_STATE,
+        //bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 360, 345),
+        pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 10, 45)
+      }}
+      controller={MAP_CONTROLS}
+      layers={layers}
+      style={{ zIndex: -10 }}
+    >
+      <StaticMap
+        reuseMaps
+        mapStyle={MB_STYLE}
+        mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+      />
+    </DeckGL>
+  );
+};
 
-    return (
-      <DeckGL
-        initialViewState={INITIAL_VIEW_STATE}
-        controller={MAP_CONTROLS}
-        layers={this.renderLayers()}
-        //useDevicePixels={false}
-        style={{ zIndex: -10 }}
-        onDrag={() => console.log('dragged')}
-      >
-        <StaticMap
-          mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
-          mapStyle={MB_STYLE}
-          //reuseMaps={true}
-        />
-      </DeckGL>
-    );
-  }
-}
+export default CollabMap;

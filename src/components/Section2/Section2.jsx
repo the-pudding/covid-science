@@ -6,8 +6,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import TimelineScrubber from './TimelineScrubber';
+// import CollabMap from './CollabMap';
 import CollabMap from './CollabMap';
-import TestMap from './TestMap';
 import BigNumber from './BigNumber';
 
 import statsByDayCSV from './assets/statsByDay.csv';
@@ -26,7 +26,7 @@ export default class Section2 extends Component {
 
     this.state = {
       scrubber: null,
-      currentDate: parseDateStr('01-01-2020'),
+      currentDate: parseDateStr('2020-01-01'),
       totalArticles: 0,
       totalCollabs: 0,
       statsByDay: null
@@ -106,8 +106,6 @@ export default class Section2 extends Component {
 
     return (
       <section className={this.props.rootClassName}>
-        <TestMap />
-        {/* 
         <div className="full-text">
           <h1>Section II</h1>
           <p>
@@ -148,9 +146,7 @@ export default class Section2 extends Component {
 
             <CollabMap currentDate={currentDate} />
           </div>
-
-          <div className="content-container"></div>
-        </div> */}
+        </div>
       </section>
     );
   }
