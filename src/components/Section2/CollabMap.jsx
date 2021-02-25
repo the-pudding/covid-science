@@ -147,7 +147,7 @@ const CollabMap = (props) => {
       initialViewState={{
         ...VIEW_STATE,
         //bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 360, 345),
-        pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 10, 45)
+        pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 45, 10)
       }}
       controller={MAP_CONTROLS}
       layers={layers}
