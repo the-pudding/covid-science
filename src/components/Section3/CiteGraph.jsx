@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
 import { timeParse } from 'd3-time-format';
-import { scaleTime } from 'd3-scale';
+import { scaleTime, scalePoint } from 'd3-scale';
 import { cloneDeep, difference } from 'lodash';
-import { getForcesByState } from './forces';
+import { getVisStateProps } from './visStates';
 import { getNodeColorByState } from './colors';
 
+//import citeLinksCSV from './assets/vaxCiteLinks.csv';
+//import citeNodesCSV from './assets/vaxCiteNodes.csv';
 import citeLinksCSV from './assets/citeLinks.csv';
 import citeNodesCSV from './assets/citeNodes.csv';
 
@@ -15,6 +17,11 @@ const parseDateStr = timeParse('%Y-%m-%d'); // fn for parsing datestring in coll
 const xScale = scaleTime()
   .domain([parseDateStr('2020-01-01'), parseDateStr('2021-01-01')])
   .range([0, 500]);
+// const xScale = scalePoint()
+//   .domain([0, 1, 2])
+//   .range([0, 500])
+
+console.log(xScale(1));
 
 // --- Prep the data for the graph
 const dataMaster = {
@@ -58,7 +65,14 @@ const getDataByState = (currentData, visState) => {
       newNodes = dataCopy.nodes.filter((d) => linkNodes.includes(d.id));
       break;
     case 'state3':
+    case 'state4':
+    case 'state5':
       newLinks = dataCopy.links.filter((d) => d.deg == -1 || d.deg == -2);
+      linkNodes = [...new Set(newLinks.flatMap((d) => [d.source, d.target]))];
+      newNodes = dataCopy.nodes.filter((d) => linkNodes.includes(d.id));
+      break;
+    case 'state6':
+      newLinks = dataCopy.links.filter((d) => d.deg == +1);
       linkNodes = [...new Set(newLinks.flatMap((d) => [d.source, d.target]))];
       newNodes = dataCopy.nodes.filter((d) => linkNodes.includes(d.id));
       break;
@@ -128,29 +142,48 @@ const CiteGraph = (props) => {
 
   useEffect(() => {
     // --- update data based on state changes
+    console.log(props.visState);
     const gd = getDataByState(graphData, props.visState);
-    console.log('newData', gd);
     setGraphData(gd);
 
     // --- update forces
     const fg = fgRef.current;
 
-    // deactivate existing forces
-    fg.d3Force('center', null);
+    // get the props for this visState
+    const visStateProps = getVisStateProps(props.visState, xScale);
+    const { forcesArr, centerAt, zoom } = visStateProps;
+
+    // update forces
+    // for (let forceName of ['center', 'charge', 'collide', 'x', 'y', 'center']){
+    //   fg.d3Force(forceName, null)
+    // }//
+    fg.d3Force('center', null); // deactivate existing forces
     fg.d3Force('charge', null);
     fg.d3Force('link', null);
+    fg.d3Force('y', null);
 
-    let forcesArr = getForcesByState('std', xScale);
+    console.log('fg', fg);
+
+    // update forces
     for (let forceObj of forcesArr) {
       fg.d3Force(forceObj.name, forceObj.force);
     }
-    fg.d3ReheatSimulation();
+    //fg.d3ReheatSimulation();
+
+    fg.centerAt(centerAt[0], centerAt[1], 2000);
+    fg.zoom(zoom, 2000);
   }, [props.visState]);
 
-  const nodeColorFn = getNodeColorByState(props.visState);
+  const nodeColorFn = getNodeColorByState(props.visState, graphData);
 
   const handleClick = (node) => {
     console.log(node);
+  };
+  const handleBgClick = () => {
+    console.log(graphData);
+  };
+  const handleLinkClick = (link) => {
+    console.log(link);
   };
 
   return (
@@ -162,14 +195,17 @@ const CiteGraph = (props) => {
         linkColor={() => 'rgba(255, 255, 255, .12)'}
         linkOpacity={0.12}
         linkCurvature={(link) => (link.source.y > link.target.y ? -0.2 : 0.2)}
-        linkDirectionalParticles={2}
+        linkDirectionalParticles={props.visState === 'state6' ? 0 : 2}
         linkDirectionalParticleWidth={2}
+        linkDirectionalParticleSpeed={0.001}
         nodeColor={nodeColorFn}
-        //cooldownTime={Infinity}
+        cooldownTime={Infinity}
         cooldownTicks={100}
-        onEngineStop={() => fgRef.current.zoomToFit(400)}
+        //onEngineStop={() => fgRef.current.zoomToFit(400)}
         enableZoomPanInteraction={false}
         onNodeClick={handleClick}
+        onLinkClick={handleLinkClick}
+        onBackgroundClick={handleBgClick}
       />
     </div>
   );

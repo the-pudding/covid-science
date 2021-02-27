@@ -37,8 +37,8 @@ void main(){
     vec2 sampleCoord = vec2(0.5, 0.5) + scaledFromCenter;
     
     // offset by mouse
-    sampleCoord.y += (u_mouse.y - .5) * .25;
-    sampleCoord.x -= (u_mouse.x-.5) * .25;
+    //sampleCoord.y += (u_mouse.y - .5) * .25;
+    //sampleCoord.x -= (u_mouse.x-.5) * .25;
     
     vec4 texel = texture2D(u_overlay, sampleCoord);
 

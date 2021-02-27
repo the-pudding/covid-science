@@ -18,16 +18,16 @@ export default class Hero {
   initScene() {
     // --- build scene elements
     // cubes
-    const ground = new Mesh(
-      new PlaneGeometry(5, 5, 10, 10),
-      new MeshBasicMaterial({
-        color: new Color('#666'),
-        wireframe: true
-      })
-    );
-    ground.rotateX(Math.PI * 0.5);
-    ground.position.y = -2;
-    this.obj.add(ground);
+    // const ground = new Mesh(
+    //   new PlaneGeometry(5, 5, 10, 10),
+    //   new MeshBasicMaterial({
+    //     color: new Color('#666'),
+    //     wireframe: true
+    //   })
+    // );
+    // ground.rotateX(Math.PI * 0.5);
+    // ground.position.y = -2;
+    // this.obj.add(ground);
   }
 
   update(time) {

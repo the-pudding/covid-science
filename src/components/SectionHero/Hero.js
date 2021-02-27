@@ -22,7 +22,7 @@ const createGeometry = require('three-bmfont-text');
 const MSDFShader = require('three-bmfont-text/shaders/msdf');
 
 import TitleFont from '@bmfonts/Georgia.json';
-import heroDataCSV from './assets/heroData.csv';
+import heroDataCSV from './assets/heroDataFiltered.csv';
 import fragShader from './assets/shaders/frag.glsl';
 import vertShader from './assets/shaders/vert.glsl';
 import covidFrag from './assets/shaders/covidFrag.glsl';
