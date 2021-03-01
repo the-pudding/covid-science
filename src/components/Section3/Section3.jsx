@@ -10,14 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Section3 = (props) => {
   const [currentVisState, setVisState] = useState('state1');
 
-  const visStates = [
-    'state1',
-    'state2',
-    'state3',
-    'state4',
-    'state5',
-    'state6'
-  ];
+  const visStates = ['state1', 'state2', 'state3', 'state4', 'state5'];
   const visStateDivs = visStates.map((d, i) => (
     <div key={i} className={`visState ${d}`}></div>
   ));
