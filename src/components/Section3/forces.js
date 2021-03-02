@@ -14,12 +14,12 @@ export const getForcesByState = (visState, xScale) => {
       return [
         {
           name: 'collide',
-          force: forceCollide().radius(5).strength(1)
+          force: forceCollide().radius(1).strength(0.01)
         },
         {
           name: 'x',
           force: forceX()
-            .x((d) => xScale(d['nodeGroup']))
+            .x((d, i) => xScale(d.nodeGroup))
             .strength(0.3)
         },
         {
@@ -29,8 +29,7 @@ export const getForcesByState = (visState, xScale) => {
       ];
     case 'state2':
     case 'state3':
-    case 'state4':
-    case 'state5': {
+    case 'state4': {
       return [
         {
           name: 'x',
@@ -47,6 +46,9 @@ export const getForcesByState = (visState, xScale) => {
           force: forceCollide().radius(5).strength(0.4)
         }
       ];
+    }
+    case 'state5': {
+      return [];
     }
   }
 };

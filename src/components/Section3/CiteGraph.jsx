@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
-import { timeParse } from 'd3-time-format';
-import { scaleTime, scaleLinear } from 'd3-scale';
+import { scaleLinear } from 'd3-scale';
 import { cloneDeep, difference } from 'lodash';
-import { getVisStateProps } from './visStates';
-import { getNodeColorByState } from './colors';
+import { getVisStateProps } from './visStates.js';
+import { getNodeColorByState } from './colors.js';
+import {
+  getNodeVisibilityByState,
+  getLinkVisibilityByState,
+  fixNodesByState
+} from './graphUtils.js';
 
-import citeLinksCSV from './assets/vaxCiteLinks.csv';
-import citeNodesCSV from './assets/vaxCiteNodes.csv';
+import citeLinksCSV from './assets/citeLinks.csv';
+import citeNodesCSV from './assets/citeNodes.csv';
 
 const xScale = scaleLinear().domain([0, 2]).range([500, 0]);
 
@@ -18,7 +22,8 @@ const dataMaster = {
       id: d[0],
       title: d[1],
       journal: d[2],
-      nodeGroup: d[3]
+      nodeGroup: d[3],
+      isSpikeNode: d[4] == '1'
     };
   }),
   links: citeLinksCSV.slice(1).map((d, i) => {
@@ -26,6 +31,7 @@ const dataMaster = {
       source: d[0],
       target: d[1],
       deg: d[2],
+      isSpikeLink: d[3] == '1',
       idx: i
     };
   })
@@ -65,38 +71,39 @@ const getDataByState = (currentData, visState) => {
 
 const CiteGraph = (props) => {
   const fgRef = useRef();
-  const [graphData, setGraphData] = useState({ nodes: [], links: [] });
+  const visStateRef = useRef();
+  const [graphData, setGraphData] = useState(dataMaster);
+  const [engineIsRunning, setEngineIsRunning] = useState(false);
 
   useEffect(() => {
-    // --- update data based on state changes
-    console.log(props.visState);
-    const gd = getDataByState(graphData, props.visState);
-    console.log('new gd', gd);
-    setGraphData(gd);
-
-    // --- update forces
+    // --- update camera based on new visState
     const fg = fgRef.current;
-
-    // get the props for this visState
     const visStateProps = getVisStateProps(props.visState, xScale);
-    const { forcesArr, centerAt, zoom } = visStateProps;
+    const { centerAt, zoom, forcesArr } = visStateProps;
 
-    // update forces
-    fg.d3Force('center', null); // deactivate existing forces
+    // remove existing forces
+    fg.d3Force('center', null);
     fg.d3Force('charge', null);
     fg.d3Force('link', null);
 
-    // update forces
+    // set new forces
     for (let forceObj of forcesArr) {
       fg.d3Force(forceObj.name, forceObj.force);
     }
-    //fg.d3ReheatSimulation();
 
+    // set which nodes are fixed
+    if (!engineIsRunning) {
+      fixNodesByState(graphData, props.visState, visStateRef.current);
+    }
+    fg.d3ReheatSimulation();
+
+    // move camera for this visState
     fg.centerAt(centerAt[0], centerAt[1], 2000);
     fg.zoom(zoom, 2000);
-  }, [props.visState]);
 
-  const nodeColorFn = getNodeColorByState(props.visState, graphData);
+    // update visStateRef
+    visStateRef.current = props.visState;
+  }, [props.visState]);
 
   const handleClick = (node) => {
     console.log(node);
@@ -114,20 +121,18 @@ const CiteGraph = (props) => {
       <ForceGraph2D
         ref={fgRef}
         graphData={graphData}
-        linkColor={() => 'rgba(255, 255, 255, .12)'}
-        linkOpacity={0.12}
+        linkColor={() => 'rgba(255, 255, 255, .1)'}
+        linkVisibility={getLinkVisibilityByState(props.visState)}
         linkCurvature={(link) => (link.source.y > link.target.y ? -0.2 : 0.2)}
-        linkDirectionalParticles={0}
-        linkDirectionalParticleWidth={2}
-        linkDirectionalParticleSpeed={0.001}
-        nodeColor={nodeColorFn}
-        cooldownTime={Infinity}
-        //cooldownTicks={100}
-        //onEngineStop={() => fgRef.current.zoomToFit(400)}
+        nodeColor={getNodeColorByState(props.visState)}
+        nodeVisibility={getNodeVisibilityByState(props.visState)}
         enableZoomPanInteraction={false}
         onNodeClick={handleClick}
         onLinkClick={handleLinkClick}
         onBackgroundClick={handleBgClick}
+        onEngineTick={() => !engineIsRunning && setEngineIsRunning(true)}
+        onEngineStop={() => setEngineIsRunning(false)}
+        d3AlphaDecay={0.3}
       />
     </div>
   );
