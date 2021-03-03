@@ -1,0 +1,38 @@
+// NON-SCOPED STYLES FOR PAPERS PER YEAR PLOT
+.papers-per-year-plot {
+  font-family: 'Theinhardt-Med';
+
+  .annotation-group {
+    font-family: 'Theinhardt-Med';
+    //font-family: 'Musee-Bold';
+    font-size: 16px;
+    text {
+      fill: white;
+    }
+  }
+
+  .title-group {
+    font-family: 'Theinhardt-Med';
+    fill: white;
+    font-size: 16px;
+  }
+
+  .tick text {
+    fill: grey;
+  }
+
+  .y.axis {
+    font-size: 18px;
+    opacity: 0.6;
+  }
+
+  .tick {
+    transition: font-size 1s;
+    font-size: 16px;
+
+    &.minimized {
+      transition: font-size 1s;
+      font-size: 12px;
+    }
+  }
+}

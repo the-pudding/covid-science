@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin);
 
 import './Section1.scoped.scss';
+import './plot.scss';
 
 export default class Section1 extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ export default class Section1 extends Component {
         toggleActions: 'play reset reset reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
       },
       duration: 1,
+      delay: 0.5,
       text: 'then 2020 happened...'
     });
   }
@@ -94,12 +96,9 @@ export default class Section1 extends Component {
                 Doloribus sequi et, similique molestias placeat officia harum
                 blanditiis in numquam nemo natus perferendis minima dicta
                 incidunt impedit voluptates assumenda cum. Magni? Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit. Doloribus sequi
-                et, similique molestias placeat officia harum blanditiis in
-                numquam nemo natus perferendis minima dicta incidunt impedit
-                voluptates assumenda cum. Magni?
-                <div id="revealed-text" className="centered-text"></div>
+                dolor sit amet, consectetur adipisicing elit.
               </div>
+              <div id="revealed-text"></div>
             </div>
           </div>
         </div>

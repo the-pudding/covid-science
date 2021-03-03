@@ -5,7 +5,8 @@ import { extent } from 'd3-array';
 import { axisRight, axisBottom } from 'd3-axis';
 import { timeParse } from 'd3-time-format';
 import { format } from 'd3-format';
-import { easeExpInOut } from 'd3-ease';
+import { easeExpInOut, easeLinear, easePolyOut } from 'd3-ease';
+import { annotation } from 'd3-svg-annotation';
 
 import papersDataCSV from './assets/papersPerYear.csv';
 
@@ -15,10 +16,10 @@ export default class PapersPerYearPlot {
     this.show2020 = show2020;
 
     // parse data
-    const yearParser = timeParse('%Y');
+    this.yearParser = timeParse('%Y');
     this.data = papersDataCSV.slice(1).map((d) => {
       return {
-        year: yearParser(d[0]),
+        year: this.yearParser(d[0]),
         nPapers: +d[1]
       };
     });
@@ -35,13 +36,14 @@ export default class PapersPerYearPlot {
     // init the fixed parts of the plot
     this.margin = {
       top: 20,
-      bottom: 40,
+      bottom: 70,
       left: 20,
-      right: 90
+      right: 70
     };
 
     this.svg = select(this.container)
       .append('svg')
+      .attr('class', 'papers-per-year-plot')
       .attr(
         'viewBox',
         `0,0,${Math.floor(this.width)},${Math.floor(this.height)}`
@@ -65,6 +67,52 @@ export default class PapersPerYearPlot {
     this.svg.append('g').call((g) => this.draw_xAxis(g));
     this.svg.append('g').call((g) => this.draw_yAxis(g));
 
+    // annotations
+    this.outbreakAnnots = [
+      {
+        note: {
+          label: 'SARS outbreak',
+          align: 'right'
+        },
+        connector: {
+          end: 'dot'
+        },
+        color: 'grey',
+        x: this.xScale(this.yearParser(2002)),
+        y: this.yScale(1500),
+        dx: -40,
+        dy: -30
+      },
+      {
+        note: {
+          label: 'MERS outbreak',
+          align: 'right'
+        },
+        connector: {
+          end: 'dot'
+        },
+        color: 'grey',
+        x: this.xScale(this.yearParser(2012)),
+        y: this.yScale(5000),
+        dx: -50,
+        dy: -20
+      }
+    ];
+    this.svg
+      .append('g')
+      .attr('class', 'annotation-group')
+      .call(annotation().annotations(this.outbreakAnnots));
+
+    // title
+    this.svg
+      .append('g')
+      .attr('class', 'title-group')
+      .append('text')
+      .attr('text-anchor', 'end')
+      .attr('x', this.xScale(this.yearParser(2019)) + 10)
+      .attr('y', this.yScale(0) + 50)
+      .text('# of "coronavirus" publications by year');
+
     // call update plot to init the first draw of everything
     this.updatePlot(false);
   }
@@ -77,6 +125,13 @@ export default class PapersPerYearPlot {
       // update yScale
       this.yScale.domain([0, 100000]); // set upper lim to 100k
       this.yAxis_xPos = this.width - this.margin.right + this.barWidth;
+
+      // hide annotations
+      this.svg
+        .select('.annotation-group')
+        .transition()
+        .duration(250)
+        .attr('opacity', 0);
 
       // show 2020 xtick, minimize other years
       this.svg
@@ -101,9 +156,25 @@ export default class PapersPerYearPlot {
         .duration(this.duration)
         .attr('transform', `translate(0, ${this.yScale(90000)})`)
         .attr('opacity', 1);
+
+      // hide 0 ytick
+      this.svg
+        .select('.yTickLabelIdx-0')
+        .attr('opacity', 1)
+        .transition()
+        .duration(this.duration)
+        .attr('opacity', 0);
     } else {
       this.yScale.domain([0, 6000]); // set upper lim to 6k
       this.yAxis_xPos = this.width - this.margin.right;
+
+      // show annotations
+      this.svg
+        .select('.annotation-group')
+        .attr('opacity', 0)
+        .transition()
+        .duration(this.duration)
+        .attr('opacity', 1);
 
       // hide 2020 x tick
       this.svg
@@ -119,6 +190,14 @@ export default class PapersPerYearPlot {
         .transition()
         .duration(500)
         .attr('opacity', 0);
+
+      // show 0 ytick
+      this.svg
+        .select('.yTickLabelIdx-0')
+        .attr('opacity', 0)
+        .transition()
+        .duration(this.duration)
+        .attr('opacity', 1);
     }
 
     this.drawPlot();
@@ -129,13 +208,18 @@ export default class PapersPerYearPlot {
     const plotData = this.show2020 ? this.data : this.data.slice(0, -1);
 
     // init transition
-    this.duration = 1250;
-    const t = this.svg.transition().duration(this.duration).ease(easeExpInOut);
+    this.duration = 1000;
+    this.delay = 250;
+    const t = this.svg
+      .transition()
+      .duration(this.duration)
+      .ease(easePolyOut.exponent(3));
 
     // update axes
     this.svg
       .select('.yTickLabelIdx-1') // move 5K tick
       .transition(t)
+      .delay(this.delay)
       .attr('transform', `translate(0, ${this.yScale(5000)})`);
 
     this.svg
@@ -166,6 +250,7 @@ export default class PapersPerYearPlot {
           update.call((update) =>
             update
               .transition(t)
+              .delay((d) => (d.year.getFullYear() == 2020 ? 0 : this.delay))
               .attr('y', (d) => this.yScale(d.nPapers))
               .attr('height', (d) => this.yScale(0) - this.yScale(d.nPapers))
           ),
@@ -195,8 +280,6 @@ export default class PapersPerYearPlot {
           .append('text')
           .attr('x', this.width - this.margin.right)
           .attr('y', -4)
-          .attr('font-weight', 'bold')
-          .attr('fill', 'black')
           .attr('text-anchor', 'end')
           .text(this.data.year)
       )

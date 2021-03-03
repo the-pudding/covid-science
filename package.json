@@ -34,6 +34,7 @@
     "axios": "^0.21.1",
     "copy-webpack-plugin": "^7.0.0",
     "d3": "^6.5.0",
+    "d3-svg-annotation": "^2.5.1",
     "dayjs": "^1.10.4",
     "deck.gl": "^8.4.6",
     "drag-mock": "^1.4.0",

@@ -2,6 +2,10 @@
   width: 100%;
   height: 100vh;
   margin: auto;
+
+  * {
+    border: solid 1px red;
+  }
 }
 
 .content-container {
@@ -26,30 +30,17 @@
 
 .plot-text {
   width: 60%;
-  margin-left: 10%;
+  margin-left: 10px;
   font-size: 18px;
   line-height: 1.33;
 }
 
 #revealed-text {
-  margin-top: 20px;
+  text-align: right;
+  margin-right: 15%;
+  margin-top: 60px;
   height: 50px;
-  font-size: 24px;
+  font-size: 28px;
   font-family: 'Musee-Bold';
   color: tomato;
-}
-
-// plot
-.y.axis {
-  font-size: 18px;
-}
-
-.tick {
-  transition: font-size 1s;
-  font-size: 22px;
-
-  &.minimized {
-    transition: font-size 1s;
-    font-size: 12px;
-  }
 }

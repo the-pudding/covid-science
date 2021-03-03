@@ -96,7 +96,7 @@ const CiteGraph = (props) => {
   };
   const handleEngineTick = (tick) => {
     !engineIsRunning && setEngineIsRunning(true);
-    console.log(tick);
+    // console.log(tick);
   };
 
   return (
