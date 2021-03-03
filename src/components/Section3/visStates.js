@@ -29,7 +29,7 @@ export const getVisStateProps = (visState, xScale) => {
     case 'state4':
       return {
         centerAt: [xScale(1), 50],
-        zoom: 1.4,
+        zoom: 0.8,
         forcesArr: getForcesByState('state4', xScale)
       };
 

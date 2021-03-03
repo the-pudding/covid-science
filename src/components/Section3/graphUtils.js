@@ -8,6 +8,7 @@ export const getNodeVisibilityByState = (visState) => {
       fn = (node) => ['0', '1'].includes(node.nodeGroup);
       break;
     case 'state3':
+    case 'state4':
       fn = (node) => ['0', '1', '2'].includes(node.nodeGroup);
       break;
 
@@ -29,6 +30,7 @@ export const getLinkVisibilityByState = (visState) => {
       fn = (link) => link.deg == '1';
       break;
     case 'state3':
+    case 'state4':
       fn = (link) => ['1', '2'].includes(link.deg);
       break;
 
@@ -36,6 +38,29 @@ export const getLinkVisibilityByState = (visState) => {
       fn = (node) => {
         return true;
       };
+  }
+  return fn;
+};
+
+export const getNodeSizeByState = (visState) => {
+  let fn;
+  switch (visState) {
+    case 'state1':
+    case 'state2':
+      console.log('here');
+      fn = (node) => 1;
+      break;
+    case 'state3':
+      console.log('here2');
+      fn = (node) => 5;
+      break;
+    case 'state4':
+      console.log('here3');
+      fn = (node) => node.r;
+      break;
+    default:
+      console.log('here4');
+      fn = (node) => node.r;
   }
   return fn;
 };

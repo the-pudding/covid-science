@@ -7,23 +7,34 @@ import { getNodeColorByState } from './colors.js';
 import {
   getNodeVisibilityByState,
   getLinkVisibilityByState,
+  getNodeSizeByState,
   fixNodesByState
 } from './graphUtils.js';
+import {
+  forceManyBody,
+  forceCenter,
+  forceX,
+  forceY,
+  forceCollide
+} from 'd3-force';
 
-import citeLinksCSV from './assets/citeLinks.csv';
-import citeNodesCSV from './assets/citeNodes.csv';
+import citeLinksCSV from './assets/vaxLinks.csv';
+import citeNodesCSV from './assets/vaxNodes.csv';
 
 const xScale = scaleLinear().domain([0, 2]).range([500, 0]);
+const rScale = scaleLinear().domain([0, 14000]).range([5, 500]);
 
 // --- Prep the data for the graph
-const dataMaster = {
+const graphData = {
   nodes: citeNodesCSV.slice(1).map((d) => {
     return {
       id: d[0],
       title: d[1],
       journal: d[2],
-      nodeGroup: d[3],
-      isSpikeNode: d[4] == '1'
+      pubYear: +d[3],
+      nodeGroup: d[4],
+      nCitedBy: +d[5],
+      r: rScale(+d[5])
     };
   }),
   links: citeLinksCSV.slice(1).map((d, i) => {
@@ -31,48 +42,16 @@ const dataMaster = {
       source: d[0],
       target: d[1],
       deg: d[2],
-      isSpikeLink: d[3] == '1',
       idx: i
     };
   })
 };
 
-console.log('data', dataMaster);
-
-const getDataByState = (currentData, visState) => {
-  // -- Update graphData based on current visState
-  // figure out the set of links and nodes that should be present on this visState
-  let dataCopy = cloneDeep(dataMaster, true);
-  switch (visState) {
-    case 'state1':
-      return {
-        nodes: dataCopy.nodes.filter((n) => n.nodeGroup == 0),
-        links: []
-      };
-    case 'state2':
-      return {
-        nodes: dataCopy.nodes.filter((n) => ['0', '1'].includes(n.nodeGroup)),
-        links: dataCopy.links.filter((l) => l.deg == '1')
-      };
-    case 'state3':
-      return {
-        nodes: dataCopy.nodes.filter((n) =>
-          ['0', '1', '2'].includes(n.nodeGroup)
-        ),
-        links: dataCopy.links.filter((l) => ['1', '2'].includes(l.deg))
-      };
-    default:
-      return {
-        links: [],
-        nodes: []
-      };
-  }
-};
+console.log('data', graphData);
 
 const CiteGraph = (props) => {
   const fgRef = useRef();
   const visStateRef = useRef();
-  const [graphData, setGraphData] = useState(dataMaster);
   const [engineIsRunning, setEngineIsRunning] = useState(false);
 
   useEffect(() => {
@@ -92,14 +71,15 @@ const CiteGraph = (props) => {
     }
 
     // set which nodes are fixed
-    if (!engineIsRunning) {
-      fixNodesByState(graphData, props.visState, visStateRef.current);
-    }
+    // if (!engineIsRunning) {
+    //   fixNodesByState(graphData, props.visState, visStateRef.current);
+    // }
     fg.d3ReheatSimulation();
 
     // move camera for this visState
     fg.centerAt(centerAt[0], centerAt[1], 2000);
     fg.zoom(zoom, 2000);
+    //fg.zoomToFit(400);
 
     // update visStateRef
     visStateRef.current = props.visState;
@@ -114,6 +94,10 @@ const CiteGraph = (props) => {
   const handleLinkClick = (link) => {
     console.log(link);
   };
+  const handleEngineTick = (tick) => {
+    !engineIsRunning && setEngineIsRunning(true);
+    console.log(tick);
+  };
 
   return (
     <div>
@@ -126,13 +110,15 @@ const CiteGraph = (props) => {
         linkCurvature={(link) => (link.source.y > link.target.y ? -0.2 : 0.2)}
         nodeColor={getNodeColorByState(props.visState)}
         nodeVisibility={getNodeVisibilityByState(props.visState)}
+        nodeVal={getNodeSizeByState(props.visState)}
+        nodeRelSize={1}
         enableZoomPanInteraction={false}
         onNodeClick={handleClick}
         onLinkClick={handleLinkClick}
         onBackgroundClick={handleBgClick}
-        onEngineTick={() => !engineIsRunning && setEngineIsRunning(true)}
+        onEngineTick={handleEngineTick}
         onEngineStop={() => setEngineIsRunning(false)}
-        d3AlphaDecay={0.3}
+        d3AlphaDecay={0.4}
       />
     </div>
   );
