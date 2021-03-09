@@ -13,6 +13,14 @@
   font-family: 'Theinhardt-Med';
   src: url('../fonts/TheinhardtMed.otf') format('opentype');
 }
+@font-face {
+  font-family: 'Theinhardt-Reg';
+  src: url('../fonts/TheinhardtReg.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Theinhardt-Thin';
+  src: url('../fonts/TheinhardtThin.otf') format('opentype');
+}
 
 * {
   //border: 1px solid red !important; // <- DEBUG, show all divs

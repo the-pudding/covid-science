@@ -66,7 +66,7 @@ export default class World extends Component {
     // this.scene.add(new AxesHelper(3));
 
     // add fog
-    this.scene.fog = new Fog(0xffffff, 0, 3);
+    //this.scene.fog = new Fog(0xffffff, 0, 3);
 
     // Add all sub-scenes
     this.sceneHero = new Hero({ camera: this.camera, renderer: this.renderer });

@@ -1,0 +1,39 @@
+.annotation-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  height: 100px;
+  width: 100%;
+  transition: opacity 0.5s;
+  transition-delay: 0.7s;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &.baseline-bottom {
+    justify-content: flex-end;
+  }
+
+  .vaccine {
+    text-transform: capitalize;
+    font-family: 'Theinhardt-Med';
+    font-size: 10px;
+  }
+
+  .title {
+    font-family: 'Musee-Bold';
+    font-size: 14px;
+  }
+
+  .journal {
+    font-family: 'Musee-Regular';
+    font-size: 12px;
+  }
+
+  .date {
+    font-family: 'Theinhardt-Thin';
+    font-size: 10px;
+  }
+}

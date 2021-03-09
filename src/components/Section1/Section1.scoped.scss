@@ -4,7 +4,7 @@
   margin: auto;
 
   * {
-    border: solid 1px red;
+    //border: solid 1px red;
   }
 }
 
@@ -43,4 +43,11 @@
   font-size: 28px;
   font-family: 'Musee-Bold';
   color: tomato;
+}
+
+.big-number-container {
+  margin: 50px auto;
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
 }

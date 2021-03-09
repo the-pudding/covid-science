@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CiteGraph from './CiteGraph';
+import GraphNarrative from './GraphNarrative';
+
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -10,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Section3 = (props) => {
   const [currentVisState, setVisState] = useState('state1');
 
-  const visStates = ['state1', 'state2', 'state3', 'state4', 'state5'];
+  const visStates = ['state1', 'state2', 'state3', 'state4'];
   const visStateDivs = visStates.map((d, i) => (
     <div key={i} className={`visState ${d}`}></div>
   ));
@@ -55,6 +57,7 @@ const Section3 = (props) => {
       </div>
       <div className="section3-scroll-container">
         <div className="graph-container">
+          <GraphNarrative visState={currentVisState} />
           <CiteGraph visState={currentVisState} />
         </div>
         {visStateDivs}

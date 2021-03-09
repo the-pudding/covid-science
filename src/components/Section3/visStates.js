@@ -14,37 +14,37 @@ export const getVisStateProps = (visState, xScale) => {
 
     case 'state2':
       return {
-        centerAt: [xScale(0.5), 50],
-        zoom: 2,
+        centerAt: [xScale(0.5), 0],
+        zoom: 1.5,
         forcesArr: getForcesByState('state2', xScale)
       };
 
     case 'state3':
       return {
-        centerAt: [xScale(1), 50],
-        zoom: 1.4,
+        centerAt: [xScale(1), 0],
+        zoom: 0.8,
         forcesArr: getForcesByState('state3', xScale)
       };
 
     case 'state4':
       return {
-        centerAt: [xScale(1), 50],
-        zoom: 0.8,
+        centerAt: [xScale(1), 0],
+        zoom: 0.65,
         forcesArr: getForcesByState('state4', xScale)
       };
 
-    case 'state5':
-      return {
-        centerAt: [xScale(1), 50],
-        zoom: 5,
-        forcesArr: getForcesByState('state5', xScale)
-      };
+    // case 'state5':
+    //   return {
+    //     centerAt: [xScale(1), 50],
+    //     zoom: 5,
+    //     forcesArr: getForcesByState('state5', xScale)
+    //   };
 
     default:
       return {
-        centerAt: [100, 400],
-        zoom: 1,
-        forcesArr: getForcesByState('std', xScale)
+        centerAt: [xScale(1), 0],
+        zoom: 0.65,
+        forcesArr: getForcesByState('state1', xScale)
       };
   }
 };

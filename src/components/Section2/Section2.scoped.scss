@@ -3,9 +3,21 @@
   padding: 0px;
   position: relative;
 
-  // * {
-  //   border: 1px solid red !important; // <- DEBUG, show all divs
-  // }
+  * {
+    //border: 1px solid red !important; // <- DEBUG, show all divs
+  }
+}
+
+.key-container {
+  display: flex;
+  justify-content: center;
+
+  .map-key-image {
+    width: 650px;
+    box-shadow: 24px 24px 20px rgba(0, 0, 0, 0.26);
+    border: solid 1px rgba(255, 255, 255, 0.3);
+    transform: rotate(45deg) rotateX(35deg) rotateY(-48deg);
+  }
 }
 
 .map-container {
@@ -17,20 +29,12 @@
 
 .section2-scroll-container {
   width: 100%;
-  height: 200vh;
+  height: 250vh;
   margin: auto;
 }
 
-// .content-container {
-//   position: sticky;
-//   position: -webkit-sticky;
-//   top: 20px;
-//   width: 100%;
-//   margin: auto;
-// }
-
 .scrubber-container {
-  height: 100px;
+  height: 140px;
   width: 100%;
 
   .scrubber-overlay {

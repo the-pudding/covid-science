@@ -32,6 +32,12 @@ void main()
     vec2 sampleCoord = vec2(0.5, 0.5) + scaledFromCenter;
     vec4 texel = texture2D(u_overlay, sampleCoord);
 
+    if (texel.r > 0.1){
+        alpha = 0.0;
+    } else {
+        alpha = 0.15;
+    }
+
 
     gl_FragColor = vec4(texel.r, 0.0, 0.0, alpha);
 }

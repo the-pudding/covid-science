@@ -28,7 +28,8 @@ const MAP_CONTROLS = {
   dragRotate: true,
   doubleClickZoom: false
 };
-const MB_STYLE = 'mapbox://styles/jeffmacinnes/ckl8iul9a1e3q19o5iromwhzi';
+// const MB_STYLE = 'mapbox://styles/jeffmacinnes/ckl8iul9a1e3q19o5iromwhzi';
+const MB_STYLE = 'mapbox://styles/jeffmacinnes/cklwszium5oap17mghpar2f18';
 
 // --- GEO IDs Data
 const geoIDs = geoIDsCSV.slice(1).map((d) => {
@@ -49,8 +50,8 @@ const CollabMap = (props) => {
   // define current date window
   const currentDate = dayjs(props.currentDate);
   const dateWindow = {
-    start: currentDate.subtract(5, 'days'),
-    end: currentDate.add(5, 'days')
+    start: currentDate.subtract(props.intervalWin / 2, 'days'),
+    end: currentDate.add(props.intervalWin / 2, 'days')
   };
 
   const layers = [
@@ -76,7 +77,6 @@ const CollabMap = (props) => {
         getFilterValue: currentDate
       }
     }),
-
     new ArcLayer({
       id: 'arc-layer',
       data: collabs,
@@ -146,7 +146,7 @@ const CollabMap = (props) => {
     <DeckGL
       initialViewState={{
         ...VIEW_STATE,
-        //bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 360, 345),
+        bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 350, 360),
         pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 45, 10)
       }}
       controller={MAP_CONTROLS}
@@ -157,6 +157,7 @@ const CollabMap = (props) => {
         reuseMaps
         mapStyle={MB_STYLE}
         mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+        attributionControl={false}
       />
     </DeckGL>
   );

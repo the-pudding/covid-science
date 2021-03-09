@@ -48,6 +48,7 @@
     "react-force-graph-2d": "^1.19.0",
     "react-hot-loader": "^4.13.0",
     "react-map-gl": "^6.1.8",
+    "react-transition-group": "^4.4.1",
     "three": "^0.125.1",
     "three-bmfont-text": "^3.0.1",
     "three-mesh-ui": "^4.4.9"

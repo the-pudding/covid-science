@@ -1,0 +1,17 @@
+.scrubber-container {
+  svg {
+    font-family: 'Theinhardt-Med';
+  }
+
+  .year-label {
+    font-size: 12px;
+    font-family: 'Theinhardt-Thin';
+    fill: white;
+  }
+
+  .current-date-label {
+    text-transform: capitalize;
+    font-size: 18px;
+    fill: white;
+  }
+}

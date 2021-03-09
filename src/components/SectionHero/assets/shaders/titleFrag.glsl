@@ -48,7 +48,7 @@ void main(){
     if (texel.r > 0.2){
        color = vec3(0.2824, 0.2824, 0.2824); 
     } else {
-        color = vec3(0.0, 0.0, 0.0);
+      color = vec3(0.0, 0.0, 0.0);
     }
     // color = vec3(0.8157, 0.3216, 0.3216);
     // color.r = texel.r;

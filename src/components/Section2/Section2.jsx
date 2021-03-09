@@ -6,18 +6,21 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import TimelineScrubber from './TimelineScrubber';
-// import CollabMap from './CollabMap';
 import CollabMap from './CollabMap';
 import BigNumber from './BigNumber';
 
 import statsByDayCSV from './assets/statsByDay.csv';
 
+import mapKeyImg from './assets/mapKeySkewed.png';
 import './Section2.scoped.scss';
+import './TimelineScrubber.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const parseDateStr = timeParse('%Y-%m-%d'); // fn for parsing datestring in collaborations data
 const formatDate = timeFormat('%Y-%m-%d');
+
+const intervalWin = 10; // how many days to show on the map at once
 
 export default class Section2 extends Component {
   constructor(props) {
@@ -70,15 +73,31 @@ export default class Section2 extends Component {
     ScrollTrigger.create({
       trigger: '.section2-scroll-container',
       start: 'top top',
-      end: '+=800',
-      // markers: {
-      //   startColor: 'white',
-      //   endColor: 'black'
-      // },
+      end: 'bottom-=500 bottom',
+      // markers: true,
+      scrub: 3,
       onUpdate: (self) => {
         this.handleScrollTrigger(self.progress);
       }
     });
+
+    // gsap.to('.section2-scroll-container', {
+    //   scrollTrigger: {
+    //     trigger: '.section2-scroll-container',
+    //     start: 'bottom-=400 bottom',
+    //     end: 'bottom-=100 bottom',
+    //     // toggleActions: 'play complete reverse reverse',
+    //     scrub: true
+    //   },
+    //   opacity: 0,
+    //   duration: 1
+    // });
+
+    // HACKY SOLUTION TO GET SCROLL TRIGGERS TO UPDATE TO CORRECT POSITION
+    setTimeout(() => {
+      console.log('refresing');
+      ScrollTrigger.refresh();
+    }, 2000);
 
     // parse the statsByDay csv file and add to state
     let statsByDay = statsByDayCSV.slice(1).map((d) => {
@@ -96,7 +115,7 @@ export default class Section2 extends Component {
     let { scrubber } = this.state;
     if (this.containerRef.current && !scrubber) {
       this.setState({
-        scrubber: new TimelineScrubber(this.containerRef.current)
+        scrubber: new TimelineScrubber(this.containerRef.current, intervalWin)
       });
     }
   }
@@ -109,15 +128,25 @@ export default class Section2 extends Component {
         <div className="full-text">
           <h1>Section II</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-            sequi et, similique molestias placeat officia harum blanditiis in
-            numquam nemo natus perferendis minima dicta incidunt impedit
-            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Doloribus sequi et, similique
-            molestias placeat officia harum blanditiis in numquam nemo natus
-            perferendis minima dicta incidunt impedit voluptates assumenda cum.
-            Magni?
+            2020 was a year of shut downs. Nations closed boarders, states
+            closed schools, cities shuttered businesses. Individual households
+            had to close their doors to neighbors, family and friends.
           </p>
+
+          <p>
+            But in that time of retreating inward, the scientific community
+            expanded outward. Individuals worked together in their own labs, but
+            also collaborated across laboratories, across difference cities,
+            across different countries. A given scientific paper almost always
+            has more than one author.Much like the virus itself, scientific
+            collaborations stretched easily across geopolitical boarders. It’s
+            not juts that individuals were working on this. Labs across the
+            world worked together on the same problems. Enter into [EXAMPLE]
+          </p>
+
+          <div className="key-container">
+            <img className="map-key-image" src={mapKeyImg}></img>
+          </div>
 
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi
@@ -144,7 +173,7 @@ export default class Section2 extends Component {
               />
             </div>
 
-            <CollabMap currentDate={currentDate} />
+            <CollabMap currentDate={currentDate} intervalWin={intervalWin} />
           </div>
         </div>
       </section>

@@ -5,6 +5,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 
+import BigNumber from './BigNumber';
+
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin);
 
@@ -67,21 +69,23 @@ export default class Section1 extends Component {
         <div className="full-text">
           <h1>Section I</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-            sequi et, similique molestias placeat officia harum blanditiis in
-            numquam nemo natus perferendis minima dicta incidunt impedit
-            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Doloribus sequi et, similique
-            molestias placeat officia harum blanditiis in numquam nemo natus
-            perferendis minima dicta incidunt impedit voluptates assumenda cum.
-            Magni?
+            In under 12 months, the world went from treating the first patients
+            presenting with a virus no one had ever seen to watching the first
+            shipping trucks full of the vaccine pulling out from loading
+            docks.The previous record for developing a vaccine for a new virus
+            was 4 years. Behind that accomplishment has been a global hive of
+            scientists working to understand the mysteries of COVID-19, how it
+            spreads, and how to fight it. That effort involved hundreds of
+            thousands of individuals, spread across thousands of institutions,
+            in nearly every country around the world, working together, sharing
+            information and resources.
           </p>
 
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi
-            alias assumenda odio libero quia repudiandae debitis omnis labore
-            provident, similique enim, reiciendis voluptatem veniam ducimus
-            quod! Totam possimus rerum maiores.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
+            quia obcaecati optio nihil impedit deleniti repellat dolores facilis
+            amet? Ex et aliquam recusandae pariatur vel dolorum, explicabo ipsa
+            quae dolor.
           </p>
         </div>
         <div className="section1-scroll-container">
@@ -92,11 +96,15 @@ export default class Section1 extends Component {
 
             <div className="text-overlay-container">
               <div className="plot-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Doloribus sequi et, similique molestias placeat officia harum
-                blanditiis in numquam nemo natus perferendis minima dicta
-                incidunt impedit voluptates assumenda cum. Magni? Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit.
+                SARS-COV2 belongs to a class of viruses we have seen
+                before.Coronaviruses were first characterized in the mid-1960s,
+                but did not receive much research attention until the early
+                2000s, following the SARS outbreak (2002), and then later the
+                MERS outbreak (2012).
+                <br></br>
+                <br></br>
+                By 2019, there were ~5000 publications on coronaviruses coming
+                out per year.
               </div>
               <div id="revealed-text"></div>
             </div>
@@ -105,15 +113,21 @@ export default class Section1 extends Component {
 
         <div className="full-text">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus
-            sequi et, similique molestias placeat officia harum blanditiis in
-            numquam nemo natus perferendis minima dicta incidunt impedit
-            voluptates assumenda cum. Magni? Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Doloribus sequi et, similique
-            molestias placeat officia harum blanditiis in numquam nemo natus
-            perferendis minima dicta incidunt impedit voluptates assumenda cum.
-            Magni?
+            During the initial panic and uncertainty of 2020 (before we started
+            hoarding toilet paper) labs shelved ongoing projects and pivoted to
+            full-time individual labs, research programs, funding agencies...
           </p>
+        </div>
+        <div className="big-number-container">
+          <BigNumber align="left" value="96k" units="articles" />
+          <BigNumber align="left" value="6799" units="journals" />
+          <BigNumber align="left" value="203" units="countries" />
+          <BigNumber align="left" value="11.03" units="articles per hour" />
+          {/* <BigNumber
+            align="left"
+            value="5min 33s"
+            units="rate of new articles"
+          /> */}
         </div>
       </section>
     );

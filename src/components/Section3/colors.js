@@ -1,8 +1,12 @@
+import { scaleSqrt } from 'd3-scale';
+
 const modernaPMID = '33378609';
 const pfizerPMID = '33301246';
 const spikePMID = '32075877';
 
-export const getNodeColorByState = (visState) => {
+const colorScale = scaleSqrt().domain([0, 14000]).range(['#ffbb96', '#6d0000']);
+
+export const getNodeColorByState = (visState, hoveredNode) => {
   let fn;
   switch (visState) {
     case 'state1':
@@ -13,7 +17,9 @@ export const getNodeColorByState = (visState) => {
 
     case 'state2':
       fn = (node) => {
-        if ([modernaPMID, pfizerPMID].includes(node.id)) {
+        if (node === hoveredNode) {
+          return 'gray';
+        } else if ([modernaPMID, pfizerPMID].includes(node.id)) {
           return 'tomato';
         } else {
           return 'white';
@@ -23,7 +29,9 @@ export const getNodeColorByState = (visState) => {
 
     case 'state3':
       fn = (node) => {
-        if ([modernaPMID, pfizerPMID].includes(node.id)) {
+        if (node === hoveredNode) {
+          return 'gray';
+        } else if ([modernaPMID, pfizerPMID].includes(node.id)) {
           return 'tomato';
         } else if (node.nodeGroup === '2') {
           return 'white';
@@ -34,15 +42,8 @@ export const getNodeColorByState = (visState) => {
       break;
 
     case 'state4':
-      fn = (node) => {
-        if (node.id === spikePMID) {
-          return 'tomato';
-        } else if (node.isSpikeNode == true) {
-          return 'white';
-        } else {
-          return 'rgba(255, 255, 255, .25)';
-        }
-      };
+      fn = (node) =>
+        node === hoveredNode ? 'white' : colorScale(node.nCitedBy);
       break;
     default:
       fn = (node) => {

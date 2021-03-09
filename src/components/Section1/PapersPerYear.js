@@ -111,7 +111,7 @@ export default class PapersPerYearPlot {
       .attr('text-anchor', 'end')
       .attr('x', this.xScale(this.yearParser(2019)) + 10)
       .attr('y', this.yScale(0) + 50)
-      .text('# of "coronavirus" publications by year');
+      .text('Number of "coronavirus" publications by year');
 
     // call update plot to init the first draw of everything
     this.updatePlot(false);
