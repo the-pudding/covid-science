@@ -10,7 +10,9 @@ const BigNumber = (props) => {
   return (
     <div className={`container ${props.align}`}>
       <div className="value">{formatNumber(props.value)}</div>
-      <div className="units">{props.units}</div>
+      <div className="units">
+        <mark>{props.units}</mark>
+      </div>
     </div>
   );
 };

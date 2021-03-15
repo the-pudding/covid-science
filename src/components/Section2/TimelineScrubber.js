@@ -121,13 +121,13 @@ export default class TimelineScrubber {
       )
       .attr('height', 20)
       .style('fill', _exports.accent1)
-      .style('opacity', 0.35);
+      .style('opacity', 1);
     g.append('line')
       .attr('x1', intervalWidth / 2)
       .attr('y1', 0)
       .attr('x2', intervalWidth / 2)
       .attr('y2', 30)
-      .attr('stroke', 'white')
+      .attr('stroke', _exports.textColor)
       .attr('stroke-width', 1.5);
     g.append('text')
       .attr('class', 'current-date-label')

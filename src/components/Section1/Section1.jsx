@@ -116,7 +116,7 @@ export default class Section1 extends Component {
             collection and analysis from a team of scientists, summarized in a
             set of statistical results and a discussion about how those results
             add to (or challenge) what is currently known.{'  '}
-            <a href="https://www.ncbi.nlm.nih.gov/pmc/">
+            <a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank">
               PubMed Central (PMC)
             </a>{' '}
             is an online repository housing millions of open-access biomedical
@@ -171,7 +171,7 @@ export default class Section1 extends Component {
         <div className="narrative-text middle-section">
           <p>
             By expanding the search to include terms specific to COVID-19, the
-            set of research articles grows to 96,625 new articles in 2020. That
+            set of research articles grows to 93,593 new articles in 2020. That
             means, on average, there were{' '}
             <mark>~11 new articles coming out each hour</mark>, every hour
             throughout the year. Those articles...
@@ -193,7 +193,7 @@ export default class Section1 extends Component {
           />
           <ArticleStat
             align="right"
-            title="had average of"
+            title="had an average of"
             value="5.46"
             units="authors/article"
           />

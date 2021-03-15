@@ -12,6 +12,7 @@ import BigNumber from './BigNumber';
 import statsByDayCSV from './assets/statsByDay.csv';
 
 import mapKeyImg from './assets/mapKeySkewed.png';
+import collabKeyImg from './assets/authorCollabsKey.svg';
 import './Section2.scoped.scss';
 import './TimelineScrubber.scss';
 
@@ -59,6 +60,9 @@ export default class Section2 extends Component {
       const bigNumStats = statsByDay.filter(
         (d) => d.pubDate === currentDateStr
       );
+      if (currentDateStr === '2020-12-31') {
+        bigNumStats[0].nArts = 93593;
+      }
       this.setState({
         totalArticles: bigNumStats[0].nArts,
         totalCollabs: bigNumStats[0].nCollabs
@@ -128,31 +132,76 @@ export default class Section2 extends Component {
         <div className="narrative-text">
           <h1>Section II</h1>
           <p>
-            2020 was a year of shut downs. Nations closed boarders, states
-            closed schools, cities shuttered businesses. Individual households
-            had to close their doors to neighbors, family and friends.
+            This body of literature not only reflects the sheer volume of
+            COVID-19 related research that occurred, but also the manner in
+            which that work took place. While the rest of the world was shutting
+            down — nations closing borders, states closing schools, cities
+            shuttering businesses - the science and medical communities were
+            expanding outward, and forming collaborations that spanned
+            institutions and international borders.
           </p>
 
           <p>
-            But in that time of retreating inward, the scientific community
-            expanded outward. Individuals worked together in their own labs, but
-            also collaborated across laboratories, across difference cities,
-            across different countries. A given scientific paper almost always
-            has more than one author.Much like the virus itself, scientific
-            collaborations stretched easily across geopolitical boarders. It’s
-            not juts that individuals were working on this. Labs across the
-            world worked together on the same problems. Enter into [EXAMPLE]
+            The extent of these collaborations is reflected in the list of
+            authors contributing to each research article. For instance, the
+            article{' '}
+            <a
+              href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7836404/"
+              target="_blank"
+            >
+              <i>
+                Characterizing Wuhan residents' mask-wearing intention at early
+                stages of the COVID-19 pandemic
+              </i>
+            </a>{' '}
+            has 4 authors:
           </p>
 
+          <div className="author-list-container">
+            <ul className="author-list">
+              <li>
+                <mark>Min Zhou</mark> -{' '}
+                <span>
+                  Hunan University of Technology and Business, Changsha, China
+                </span>
+              </li>
+              <li>
+                <mark>Piao Long</mark> -{' '}
+                <span>
+                  Hunan University of Technology and Business, Changsha, China
+                </span>
+              </li>
+              <li>
+                <mark>Nan Kong</mark> -{' '}
+                <span>Purdue University, Indiana, USA</span>
+              </li>
+              <li>
+                <mark>Kathryn S. Campy</mark> -{' '}
+                <span>University of Pennsylvania, Pennsylvania, USA</span>
+              </li>
+            </ul>
+          </div>
+
+          <p className="short-text">
+            Which represents <mark>6</mark> collaborations between pairs of
+            researchers.
+          </p>
+          <div className="key-container">
+            <img className="collab-key-image" src={collabKeyImg}></img>
+          </div>
+
+          <p className="short-text">
+            These collaborations link institutions spanning <mark>3</mark>{' '}
+            cities around the world.
+          </p>
           <div className="key-container">
             <img className="map-key-image" src={mapKeyImg}></img>
           </div>
 
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi
-            alias assumenda odio libero quia repudiandae debitis omnis labore
-            provident, similique enim, reiciendis voluptatem veniam ducimus
-            quod! Totam possimus rerum maiores.
+            Using this same approach on the entire collection of articles, we
+            can look at how these collaborations unfolded throughout the year
+            around the globe.
           </p>
         </div>
         <div className="section2-scroll-container">
