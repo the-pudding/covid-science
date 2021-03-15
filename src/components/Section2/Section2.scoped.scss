@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .section-2 {
   width: 100vw;
   padding: 0px;
@@ -43,9 +45,9 @@
     width: 100%;
     background-image: linear-gradient(
       90deg,
-      rgba($bg-color, 1) 0 5%,
-      rgba($bg-color, 0) 15% 85%,
-      rgba($bg-color, 1) 95% 100%
+      rgba($bgColor, 1) 0 5%,
+      rgba($bgColor, 0) 15% 85%,
+      rgba($bgColor, 1) 95% 100%
     );
   }
 }

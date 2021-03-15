@@ -1,3 +1,5 @@
+@import 'colors.scss';
+
 // --- Fonts
 @font-face {
   font-family: 'Musee-Bold';
@@ -8,6 +10,10 @@
 @font-face {
   font-family: 'Musee-Regular';
   src: url('../fonts/Musee-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Theinhardt-Black';
+  src: url('../fonts/TheinhardtBlack.otf') format('opentype');
 }
 @font-face {
   font-family: 'Theinhardt-Med';
@@ -27,20 +33,41 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
+mark {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.5rem 0.1rem 0.1rem;
+  background-color: $accent2;
+  color: $textColor;
+}
+
 body {
   margin: 0px;
-  background-color: $bg-color;
-  //background-image: linear-gradient($bg-color, #e3e0e0);
-  color: $text-color;
+  background-color: $bgColor;
+  background-image: linear-gradient($bgColor, $bgColor2);
+  color: $textColor;
   font-family: 'Musee-Regular';
   line-height: 1.33;
 }
 
 h1 {
   font-family: 'Musee-Bold';
-  font-size: 42px;
+  font-size: 4.2rem;
   color: $headline-color;
   line-height: 1.1;
+}
+
+a {
+  text-decoration: none;
+  color: $accent1;
+
+  &:hover {
+    color: lighten($color: $accent1, $amount: 10);
+  }
 }
 
 section {
@@ -51,18 +78,19 @@ section {
   margin: 100px auto;
 }
 
-.full-text {
-  width: 80%;
-  // height: 100vh;
-  margin: 250px auto;
-  font-size: 22px;
+.narrative-text {
+  width: 75%;
+  margin: 0px auto 3rem;
+  font-size: 1.9rem;
+  line-height: 1.55;
 
   p {
-    line-height: 1.5;
+    text-indent: 50px;
+    margin-bottom: 1rem;
   }
 
-  h1 {
-    margin-bottom: 100px;
+  span {
+    color: $accent2;
   }
 }
 

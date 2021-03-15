@@ -23,7 +23,7 @@ void main(){
     // set opacity of "letter" part of the geometry
     vec3 sample = texture2D(map, vUv).rgb;
     float sigDist = median(sample.r, sample.g, sample.b) - 0.5;
-    float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);
+    float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, .9);
 
 
     // sample the covid silhouette
@@ -37,7 +37,7 @@ void main(){
     vec2 sampleCoord = vec2(0.5, 0.5) + scaledFromCenter;
     
     // offset by mouse
-    //sampleCoord.y += (u_mouse.y - .5) * .25;
+    sampleCoord.y += (u_mouse.y) * .5;
     //sampleCoord.x -= (u_mouse.x-.5) * .25;
     
     vec4 texel = texture2D(u_overlay, sampleCoord);
@@ -46,12 +46,11 @@ void main(){
     //float alpha = 1.0;
     // set color based on texel location
     if (texel.r > 0.2){
-       color = vec3(0.2824, 0.2824, 0.2824); 
+      color = vec3(0.17, 0.21, 0.29);
     } else {
-      color = vec3(0.0, 0.0, 0.0);
+      color = vec3(0.0431, 0.051, 0.0706);
     }
-    // color = vec3(0.8157, 0.3216, 0.3216);
-    // color.r = texel.r;
+
 
     gl_FragColor = vec4(color, alpha);
     if (gl_FragColor.a < 0.0001) discard;

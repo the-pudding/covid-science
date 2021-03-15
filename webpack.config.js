@@ -17,7 +17,7 @@ module.exports = (env, opts) => {
           options: { presets: ['@babel/env'] }
         },
         {
-          test: /\.(scss|css)$/i,
+          test: /\.(scss|css)$/,
           use: [
             'style-loader',
             'css-loader',
@@ -25,13 +25,13 @@ module.exports = (env, opts) => {
               loader: 'scoped-css-loader'
             },
             {
-              loader: 'sass-loader',
-              options: {
-                additionalData: `@import "${path.resolve(
-                  __dirname,
-                  'src/styles/colors.scss'
-                )}";`
-              }
+              loader: 'sass-loader'
+              // options: {
+              //   additionalData: `@import "${path.resolve(
+              //     __dirname,
+              //     'src/styles/colors.scss'
+              //   )}";`
+              // }
             }
           ]
         },

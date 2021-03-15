@@ -1,9 +1,25 @@
-// --- Colors
-$ltGray: rgb(189, 204, 212);
-$warmGray: rgb(161, 163, 154);
-$dkBlue: rgb(0, 91, 141);
-$turquoise: rgb(10, 145, 151);
+// Colors
+@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
+  @if $b-hsb == 0 {
+    @return hsla(0, 0%, 0%, $a);
+  } @else {
+    $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100));
+    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
+    @return hsla($h-hsb, $s-hsl + 0%, $l-hsl + 0%, $a);
+  }
+}
 
-$text-color: white;
-$headline-color: tomato;
-$bg-color: #1e1f1c;
+// -- brown/orange
+// $textColor: white;
+// $accent1: tomato;
+// $bgColor: #1e1f1c;
+
+// -- navy/peach
+$textColor: #fffde8;
+$bgColor: rgb(29, 37, 59);
+$bgColor2: rgb(43, 54, 74);
+$accent1: #ff7f47;
+$accent2: rgb(3, 124, 129);
+$accent3: rgb(247, 245, 115);
+
+$headline-color: $accent1;

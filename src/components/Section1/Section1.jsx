@@ -5,7 +5,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 
-import BigNumber from './BigNumber';
+import ArticleStat from './ArticleStat';
+import ArticleGenerator from './ArticleGenerator';
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin);
@@ -37,21 +38,38 @@ export default class Section1 extends Component {
 
   componentDidMount() {
     gsap.to('#revealed-text', {
+      duration: 1,
+      delay: 0.5,
+      text: 'then 2020 happened...',
       scrollTrigger: {
         trigger: '.section1-scroll-container',
         name: 'revealed-text',
-        start: '10% top',
+        start: '5% top',
         onToggle: this.handleScrollTrigger,
         // markers: {
         //   startColor: 'white',
         //   endColor: 'black'
         // },
         toggleActions: 'play reset reset reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
-      },
-      duration: 1,
-      delay: 0.5,
-      text: 'then 2020 happened...'
+      }
     });
+    gsap.fromTo(
+      '.text-2',
+      {
+        opacity: 0
+      },
+      {
+        duration: 1,
+        delay: 1,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: '.section1-scroll-container',
+          name: 'revealed-text',
+          start: '10% top',
+          toggleActions: 'play complete reverse reset' // onEnter, onLeave, onEnterBack, onLeaveBack,
+        }
+      }
+    );
   }
 
   componentDidUpdate() {
@@ -66,26 +84,55 @@ export default class Section1 extends Component {
   render() {
     return (
       <section className={this.props.rootClassName}>
-        <div className="full-text">
+        <div className="narrative-text">
           <h1>Section I</h1>
           <p>
-            In under 12 months, the world went from treating the first patients
-            presenting with a virus no one had ever seen to watching the first
-            shipping trucks full of the vaccine pulling out from loading
-            docks.The previous record for developing a vaccine for a new virus
-            was 4 years. Behind that accomplishment has been a global hive of
-            scientists working to understand the mysteries of COVID-19, how it
-            spreads, and how to fight it. That effort involved hundreds of
-            thousands of individuals, spread across thousands of institutions,
-            in nearly every country around the world, working together, sharing
-            information and resources.
+            <mark>On Jan 1st 2020</mark>, a virus that no one had ever seen
+            before was just beginning to reveal itself to an unsuspecting and
+            unprepared world. 12 months — and 80+ million cases — later, the
+            first batches of vaccine made their way off loading docks and into
+            the first set of arms as the race to inoculate the globe officially
+            kicked off. That kind of achievement doesn't happen in a vacuum.
           </p>
 
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-            quia obcaecati optio nihil impedit deleniti repellat dolores facilis
-            amet? Ex et aliquam recusandae pariatur vel dolorum, explicabo ipsa
-            quae dolor.
+            Amidst the crumminess of 2020, a hive of scientists and medical
+            researchers mobilized in an historic way. For a year filled with so
+            many terrible, horrible, no good, very bad things, this is something
+            worth celebrating. Hundreds of thousands of individuals, spread
+            across thousands of institutions, in nearly every country around the
+            world, worked collaboratively to deconstruct the virus, to learn how
+            it attacks the body and how it spreads, and to engineer solutions
+            for how to fight it. And while the major breakthroughs made
+            headlines, much of that work has proceeded steadily but silently
+            behind the scenes, unacknowledged.
+          </p>
+
+          <p>
+            One way to grasp the scale of that effort is to look at 2020 through
+            the lens of published research articles, one of the primary ways
+            scientists and researchers can formally communicate new insights to
+            one another. A typical research article might reflect months of data
+            collection and analysis from a team of scientists, summarized in a
+            set of statistical results and a discussion about how those results
+            add to (or challenge) what is currently known.{'  '}
+            <a href="https://www.ncbi.nlm.nih.gov/pmc/">
+              PubMed Central (PMC)
+            </a>{' '}
+            is an online repository housing millions of open-access biomedical
+            and life sciences research articles. By searching this database, you
+            can get a sense of the breadth of existing research on any given
+            topic.
+          </p>
+
+          <p>
+            COVID-19, or rather the virus SARS-CoV-2, belongs to a larger class
+            of viruses known as coronaviruses (<mark>COVID-19</mark>:{' '}
+            <mark>CO</mark>rona<mark>VI</mark>rus <mark>D</mark>isease 20
+            <mark>19</mark>) that were first characterized in the mid-1960's.
+            However, it wasn't until the SARS outbreak in 2002, and later the
+            MERS outbreak in 2012, that coronaviruses became the focus of
+            increasing research attention.
           </p>
         </div>
         <div className="section1-scroll-container">
@@ -96,38 +143,60 @@ export default class Section1 extends Component {
 
             <div className="text-overlay-container">
               <div className="plot-text">
-                SARS-COV2 belongs to a class of viruses we have seen
-                before.Coronaviruses were first characterized in the mid-1960s,
-                but did not receive much research attention until the early
-                2000s, following the SARS outbreak (2002), and then later the
-                MERS outbreak (2012).
-                <br></br>
-                <br></br>
                 By 2019, there were ~5000 publications on coronaviruses coming
                 out per year.
               </div>
               <div id="revealed-text"></div>
+              <div className="plot-text text-2">
+                There were ~80,000 coronavirus-related articles added to PMC in
+                2020, a <mark>1600%</mark> increase over 2019.
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="full-text">
+        <div className="narrative-text middle-section">
           <p>
-            During the initial panic and uncertainty of 2020 (before we started
-            hoarding toilet paper) labs shelved ongoing projects and pivoted to
-            full-time individual labs, research programs, funding agencies...
+            Out of all the articles added in 2020, across all science and
+            medical fields, approximately <mark>1 out of every 10</mark> was
+            related to coronaviruses. (compare that to 2019, where that rate was
+            closer to 1 out of every 130 articles.)
           </p>
         </div>
-        <div className="big-number-container">
-          <BigNumber align="left" value="96k" units="articles" />
-          <BigNumber align="left" value="6799" units="journals" />
-          <BigNumber align="left" value="203" units="countries" />
-          <BigNumber align="left" value="11.03" units="articles per hour" />
-          {/* <BigNumber
+        <div className="article-generators-container">
+          <ArticleGenerator year="2019" covidRate={0.007} />
+          <ArticleGenerator year="2020" covidRate={0.1} />
+        </div>
+
+        <div className="narrative-text middle-section">
+          <p>
+            By expanding the search to include terms specific to COVID-19, the
+            set of research articles grows to 96,625 new articles in 2020. That
+            means, on average, there were{' '}
+            <mark>~11 new articles coming out each hour</mark>, every hour
+            throughout the year. Those articles...
+          </p>
+        </div>
+
+        <div className="stats-container">
+          <ArticleStat
             align="left"
-            value="5min 33s"
-            units="rate of new articles"
-          /> */}
+            title="were published in"
+            value="6799"
+            units="different journals"
+          />
+          <ArticleStat
+            align="center"
+            title="had authors from"
+            value="203"
+            units="countries"
+          />
+          <ArticleStat
+            align="right"
+            title="had average of"
+            value="5.46"
+            units="authors/article"
+          />
         </div>
       </section>
     );

@@ -125,7 +125,7 @@ export default class Section2 extends Component {
 
     return (
       <section className={this.props.rootClassName}>
-        <div className="full-text">
+        <div className="narrative-text">
           <h1>Section II</h1>
           <p>
             2020 was a year of shut downs. Nations closed boarders, states

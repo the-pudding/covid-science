@@ -46,7 +46,7 @@ const Section3 = (props) => {
 
   return (
     <section className={props.rootClassName}>
-      <div className="full-text">
+      <div className="narrative-text">
         <h1>Section III</h1>
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam

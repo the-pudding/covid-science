@@ -8,6 +8,8 @@ import { format } from 'd3-format';
 import { easeExpInOut, easeLinear, easePolyOut } from 'd3-ease';
 import { annotation } from 'd3-svg-annotation';
 
+import _exports from '../../styles/_exports.module.scss';
+
 import papersDataCSV from './assets/papersPerYear.csv';
 
 export default class PapersPerYearPlot {
@@ -27,7 +29,7 @@ export default class PapersPerYearPlot {
     this.containerRect = container.getBoundingClientRect();
     this.height = this.containerRect.height;
     this.width = this.containerRect.width;
-    this.color = 'tomato';
+    this.color = _exports.accent1;
 
     this.setupPlot();
   }
@@ -54,7 +56,7 @@ export default class PapersPerYearPlot {
 
     // scales
     this.yScale = scaleLinear()
-      .domain([0, 10000])
+      .domain([0, 6000])
       .range([this.height - this.margin.bottom, this.margin.top]);
     this.xScale = scaleTime()
       .domain(extent(this.data, (d) => d.year))
@@ -79,7 +81,7 @@ export default class PapersPerYearPlot {
         },
         color: 'grey',
         x: this.xScale(this.yearParser(2002)),
-        y: this.yScale(1500),
+        y: this.yScale(1000),
         dx: -40,
         dy: -30
       },
@@ -93,9 +95,9 @@ export default class PapersPerYearPlot {
         },
         color: 'grey',
         x: this.xScale(this.yearParser(2012)),
-        y: this.yScale(5000),
-        dx: -50,
-        dy: -20
+        y: this.yScale(3000),
+        dx: -40,
+        dy: -25
       }
     ];
     this.svg
@@ -154,7 +156,7 @@ export default class PapersPerYearPlot {
         .attr('opacity', 0)
         .transition()
         .duration(this.duration)
-        .attr('transform', `translate(0, ${this.yScale(90000)})`)
+        .attr('transform', `translate(0, ${this.yScale(80000)})`)
         .attr('opacity', 1);
 
       // hide 0 ytick
@@ -184,7 +186,7 @@ export default class PapersPerYearPlot {
           g.selectAll('.tick:not(:last-of-type)').classed('minimized', false)
         );
 
-      // fade the 90k ytick label out
+      // fade the 80k ytick label out
       this.svg
         .select('.yTickLabelIdx-2')
         .transition()
@@ -293,7 +295,7 @@ export default class PapersPerYearPlot {
       .attr('class', 'y axis')
       .call(
         axisRight(this.yScale)
-          .tickValues([0, 5000, 90000])
+          .tickValues([0, 5000, 80000])
           .tickFormat(format('.1s'))
       )
       .call((g) =>

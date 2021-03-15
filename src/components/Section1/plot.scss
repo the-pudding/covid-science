@@ -1,4 +1,6 @@
 // NON-SCOPED STYLES FOR PAPERS PER YEAR PLOT
+@import '../../styles/colors.scss';
+
 .papers-per-year-plot {
   font-family: 'Theinhardt-Med';
 
@@ -7,13 +9,13 @@
     //font-family: 'Musee-Bold';
     font-size: 16px;
     text {
-      fill: white;
+      fill: $textColor;
     }
   }
 
   .title-group {
     font-family: 'Theinhardt-Med';
-    fill: white;
+    fill: $textColor;
     font-size: 16px;
   }
 

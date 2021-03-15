@@ -11,6 +11,9 @@ import { timeParse, timeFormat } from 'd3-time-format';
 import { groups } from 'd3-array';
 import { Utils } from '../../js/Utils.js';
 import * as Papa from 'papaparse';
+import chroma from 'chroma-js';
+
+import _exports from '../../styles/_exports.module.scss';
 
 import geoIDsCSV from './assets/geoIDs.csv';
 
@@ -61,7 +64,7 @@ const CollabMap = (props) => {
       // radiusScale: 10000,
       getPosition: (d) => [d.lng, d.lat],
       getRadius: 60000,
-      getFillColor: [255, 255, 255, 150],
+      getFillColor: [...chroma(_exports.textColor).rgb(), 250],
       getFilterValue: (d) => {
         if (geoIDsByDate) {
           return geoIDsByDate[d.idx][currentDate.dayOfYear() - 1] === 1
@@ -88,8 +91,8 @@ const CollabMap = (props) => {
         geoIDs[d['dstIdx']].lng,
         geoIDs[d['dstIdx']].lat
       ],
-      getSourceColor: [140, 140, 0, 50],
-      getTargetColor: [211, 11, 124, 50],
+      getSourceColor: [...chroma(_exports.accent3).rgb(), 30],
+      getTargetColor: [...chroma(_exports.accent3).rgb(), 30],
       getTilt: (d) => Math.random() * 120 - 60,
       getFilterValue: (d) => d.pubDate.valueOf() / 1000,
       filterRange: [dateWindow.start.unix(), dateWindow.end.unix()],

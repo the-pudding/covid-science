@@ -76,12 +76,9 @@ export default class Hero {
     // this.showDebugStatic = true;
     // this.addDebugStatic();
 
-    // window.addEventListener('mousemove', (e) => {
-    //   this.mouse = new Vector2(
-    //     e.clientX / window.innerWidth,
-    //     e.clientY / window.innerHeight
-    //   );
-    // });
+    window.addEventListener('scroll', (e) => {
+      this.mouse = new Vector2(0, window.scrollY / window.innerHeight);
+    });
 
     this.initScene();
   }
@@ -299,9 +296,9 @@ export default class Hero {
       title.obj.position.x -= this.rowSpeeds[title.rowIdx];
 
       // update shader uniforms
-      // title.obj.material.uniforms.u_time.value += time;
-      // title.obj.material.uniforms.u_mouse.value = this.mouse.clone();
-      // title.obj.material.uniformsNeedUpdate = true;
+      title.obj.material.uniforms.u_time.value += time;
+      title.obj.material.uniforms.u_mouse.value = this.mouse.clone();
+      title.obj.material.uniformsNeedUpdate = true;
 
       // check if any titles moved offscreen and should be flagged for removal
       if (title.obj.position.x + title.width < this.vWidth * -0.5) {

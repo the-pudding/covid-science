@@ -1,4 +1,5 @@
 import { scaleSqrt } from 'd3-scale';
+import _exports from '../../styles/_exports.module.scss';
 
 const modernaPMID = '33378609';
 const pfizerPMID = '33301246';
@@ -11,7 +12,7 @@ export const getNodeColorByState = (visState, hoveredNode) => {
   switch (visState) {
     case 'state1':
       fn = (node) => {
-        return `tomato`;
+        return _exports.accent1;
       };
       break;
 
@@ -20,7 +21,7 @@ export const getNodeColorByState = (visState, hoveredNode) => {
         if (node === hoveredNode) {
           return 'gray';
         } else if ([modernaPMID, pfizerPMID].includes(node.id)) {
-          return 'tomato';
+          return _exports.accent1;
         } else {
           return 'white';
         }
@@ -32,7 +33,7 @@ export const getNodeColorByState = (visState, hoveredNode) => {
         if (node === hoveredNode) {
           return 'gray';
         } else if ([modernaPMID, pfizerPMID].includes(node.id)) {
-          return 'tomato';
+          return _exports.accent1;
         } else if (node.nodeGroup === '2') {
           return 'white';
         } else {

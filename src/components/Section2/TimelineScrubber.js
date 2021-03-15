@@ -4,6 +4,8 @@ import { scaleLinear, scalePow, scaleTime } from 'd3-scale';
 import { timeFormat } from 'd3-time-format';
 import { timeMonth, timeDay, timeWeek } from 'd3-time';
 
+import _exports from '../../styles/_exports.module.scss';
+
 const formatMonth = timeFormat('%b');
 const formatDay = timeFormat('%d');
 
@@ -118,7 +120,7 @@ export default class TimelineScrubber {
         } ${intervalHeight} L 0 0`
       )
       .attr('height', 20)
-      .style('fill', 'tomato')
+      .style('fill', _exports.accent1)
       .style('opacity', 0.35);
     g.append('line')
       .attr('x1', intervalWidth / 2)

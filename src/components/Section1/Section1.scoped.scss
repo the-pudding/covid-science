@@ -1,11 +1,13 @@
-.section1-scroll-container {
-  width: 100%;
-  height: 100vh;
-  margin: auto;
+@import '../../styles/colors.scss';
 
-  * {
-    //border: solid 1px red;
-  }
+* {
+  //border: solid 1px red;
+}
+
+.section1-scroll-container {
+  width: 90%;
+  height: 120vh;
+  margin: auto;
 }
 
 .content-container {
@@ -14,40 +16,57 @@
   top: 200px;
   width: 100%;
   // height: 100%;
-  margin: auto;
+  margin: 2rem auto;
 }
 
 .plot-container {
   // background: rgba(255, 123, 14, 100);
   height: 500px;
   width: 100%;
+  margin-bottom: 4rem;
 }
 
 .text-overlay-container {
   position: absolute;
   top: 0;
+  margin-top: 4rem;
+  width: 90%;
 }
 
 .plot-text {
-  width: 60%;
-  margin-left: 10px;
-  font-size: 18px;
-  line-height: 1.33;
+  text-indent: 50px;
+  width: 70%;
+  margin-left: 4rem;
+  font-size: 1.9rem;
+  line-height: 1.55;
 }
 
 #revealed-text {
   text-align: right;
-  margin-right: 15%;
+  margin-right: 5%;
   margin-top: 60px;
+  margin-bottom: 60px;
   height: 50px;
   font-size: 28px;
   font-family: 'Musee-Bold';
-  color: tomato;
+  color: $accent3;
 }
 
-.big-number-container {
-  margin: 50px auto;
+.middle-section {
+  margin-top: 13rem;
+  margin-bottom: 10rem;
+}
+
+.article-generators-container {
+  width: 90%;
+  margin: 2rem auto;
   display: flex;
-  width: 70%;
+  justify-content: space-between;
+}
+
+.stats-container {
+  width: 90%;
+  margin: 4rem auto;
+  display: flex;
   justify-content: space-between;
 }
