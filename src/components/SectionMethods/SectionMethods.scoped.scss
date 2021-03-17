@@ -1,0 +1,23 @@
+@import '../../styles/colors.scss';
+
+.section-methods {
+  min-height: 100%;
+  font-family: 'Musee-Regular';
+  font-size: 1.4rem;
+}
+
+* {
+  //border: solid 1px red;
+}
+
+.methods-container {
+  background-color: $accent2;
+  padding: 5rem;
+  display: flex;
+  justify-content: space-between;
+
+  .col {
+    width: 100%;
+    margin: 5px;
+  }
+}

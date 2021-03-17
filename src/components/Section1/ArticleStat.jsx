@@ -21,20 +21,25 @@ const ArticleStat = (props) => {
       }
     });
 
-    tl.to(displayValue, 1.5, {
-      val: props.value,
-      ease: Linear.easeNone,
-      onUpdate: () => {
-        if (props.units === 'authors/article') {
-          setValue(format('.3s')(displayValue.val));
-        } else {
-          setValue(Math.round(displayValue.val));
+    tl.to(
+      displayValue,
+      1,
+      {
+        val: props.value,
+        ease: Linear.easeNone,
+        onUpdate: () => {
+          if (props.units === 'authors/article') {
+            setValue(format('.3s')(displayValue.val));
+          } else {
+            setValue(Math.round(displayValue.val));
+          }
+        },
+        onComplete: () => {
+          setValue(props.value);
         }
       },
-      onComplete: () => {
-        setValue(props.value);
-      }
-    });
+      { val: 0 }
+    );
   }, []);
 
   return (

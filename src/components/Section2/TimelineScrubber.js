@@ -38,7 +38,7 @@ export default class TimelineScrubber {
     this.fontSizeScale = new scalePow()
       .exponent(1.25)
       .domain([0, maxDist])
-      .range([14, 8])
+      .range([16, 12])
       .clamp(true);
     this.fontOpacityScale = new scalePow()
       .exponent(1.25)
@@ -138,7 +138,7 @@ export default class TimelineScrubber {
     g.append('text')
       .attr('class', 'year-label')
       .attr('x', intervalWidth / 2)
-      .attr('y', intervalHeight + 45)
+      .attr('y', intervalHeight + 47)
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'baseline')
       .text('2020');

@@ -9,7 +9,9 @@ const ArticleAnnotation = (props) => {
       }`}
       style={{ left: props.coords.x, top: props.coords.y }}
     >
-      <div className="vaccine">{props.content.vaccine}</div>
+      <div className="vaccine">
+        <mark>{props.content.vaccine}</mark>
+      </div>
       <div className="title">{props.content.title}</div>
       <div className="journal">{props.content.journal}</div>
       <div className="date">{props.content.date}</div>

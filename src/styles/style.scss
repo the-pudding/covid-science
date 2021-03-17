@@ -48,7 +48,7 @@ mark {
 body {
   margin: 0px;
   background-color: $bgColor;
-  background-image: linear-gradient($bgColor, $bgColor2);
+  // background-image: linear-gradient($bgColor, $bgColor2);
   color: $textColor;
   font-family: 'Musee-Regular';
   line-height: 1.33;
@@ -62,7 +62,6 @@ h1 {
 }
 
 a {
-  text-decoration: none;
   color: $accent1;
 
   &:hover {
@@ -74,20 +73,19 @@ section {
   min-height: 120vh;
   width: 90vw;
   max-width: 1000px;
-  padding: 10px 10px;
+  //padding: 10px 10px;
   margin: 100px auto;
 }
 
 .narrative-text {
   width: 75%;
-  max-width: 750px;
-  margin: 0px auto 3rem;
+  max-width: 720px;
+  margin: 0px auto 4rem;
   font-size: 1.9rem;
-  line-height: 1.55;
+  line-height: 1.65;
 
   p {
-    text-indent: 50px;
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
   }
 
   span {

@@ -173,11 +173,13 @@ export default class Section2 extends Component {
               </li>
               <li>
                 <mark>Nan Kong</mark> -{' '}
-                <span>Purdue University, Indiana, USA</span>
+                <span>Purdue University, West Lafayette, Indiana, USA</span>
               </li>
               <li>
                 <mark>Kathryn S. Campy</mark> -{' '}
-                <span>University of Pennsylvania, Pennsylvania, USA</span>
+                <span>
+                  University of Pennsylvania, Philadelpha, Pennsylvania, USA
+                </span>
               </li>
             </ul>
           </div>
@@ -187,7 +189,11 @@ export default class Section2 extends Component {
             researchers.
           </p>
           <div className="key-container">
-            <img className="collab-key-image" src={collabKeyImg}></img>
+            <img
+              alt="Illustration depicting 4 authors with links connecting each pair of authors"
+              className="collab-key-image"
+              src={collabKeyImg}
+            ></img>
           </div>
 
           <p className="short-text">
@@ -195,7 +201,11 @@ export default class Section2 extends Component {
             cities around the world.
           </p>
           <div className="key-container">
-            <img className="map-key-image" src={mapKeyImg}></img>
+            <img
+              alt="World map with arcs connecting West Lafayette, Philadelphia, and Changsha"
+              className="map-key-image"
+              src={mapKeyImg}
+            ></img>
           </div>
 
           <p>

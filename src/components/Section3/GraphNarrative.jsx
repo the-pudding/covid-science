@@ -5,13 +5,13 @@ import './GraphNarrative.scoped.scss';
 
 const narrative = {
   state1:
-    'State 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'For instance, in December 2020, both Pfizer and Moderna published articles reporting the success of their phase 3 vaccine clinical trials, officially paving the way for approval and wide scale distribution.',
   state2:
-    'State 2: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+    'Each of these articles cited some of the key prior work supporting the vaccine development and the current phase 3 results (including earlier phase 1 & 2 trials, and non-human animal results).',
   state3:
-    'State 3: Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
+    'And each of those supporting articles, in turn, cited collections of prior work that made the supporting work possible, including articles on the structural biology of SARS-CoV-2 virus, early candidate mRNA vaccines, and key insights from the previous SARS and MERS outbreaks. ',
   state4:
-    'State 4: Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? '
+    'But these previous articles were not only relevant to the development of vaccines. Most of these articles went on to be cited by tens (or hundreds, or thousands) of subsequent articles, and collectively make up just a portion of the web of research surrounding these topics.  '
 };
 
 const GraphNarrative = (props) => {

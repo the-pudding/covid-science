@@ -15,8 +15,8 @@ const ArticleGenerator = (props) => {
   useEffect(() => {
     let newColumns = [];
     let x = 2;
-    let colWidth = 10;
-    while (x < w) {
+    let colWidth = 13;
+    while (x + colWidth < w) {
       newColumns.push(
         new Column(x, Utils.randBw(0.5, 1.5), colWidth, props.covidRate)
       );
@@ -88,7 +88,7 @@ class Column {
 
     // figure out if we need to add a new pill
     const minDistFromStart = min(this.pills.map((pill) => pill.y));
-    if (minDistFromStart > 5) {
+    if (minDistFromStart > 8) {
       this.pills.push(
         new Article(
           this.x,
@@ -112,12 +112,13 @@ class Article {
     this.w = pillWidth;
     this.alphaScale = alphaScale;
     this.isCovidArticle = Math.random() <= covidRate;
-    this.h = 20;
-    this.cornerR = 3;
+    this.h = 16;
+    this.cornerR = 1;
     this.y = -this.h;
     this.isAlive = true;
     this.alpha = 1;
     this.baseColor = this.isCovidArticle ? _exports.accent1 : '#ffffff00';
+    this.textLineColor = _exports.textColor;
   }
 
   update() {
@@ -135,9 +136,30 @@ class Article {
     this.color = p5.color(this.baseColor);
     if (this.isCovidArticle) {
       this.color.setAlpha(this.alpha);
+      this.textColor = p5.color(this.textLineColor);
+    } else {
+      this.textColor = p5.color(120);
     }
+    this.textColor.setAlpha(this.alpha);
+
+    // article shape
     p5.stroke(120, this.alpha);
     p5.fill(this.color);
     p5.rect(this.x, this.y, this.w, this.h, this.cornerR);
+
+    // text line icons
+    p5.stroke(this.textColor);
+    let lineRange = [this.w * 0.2, this.w * 0.8];
+    for (let r = 1; r < 5; r++) {
+      if (r === 4) {
+        lineRange[1] = this.w * 0.6; // make last line shorter
+      }
+      p5.line(
+        this.x + lineRange[0],
+        this.y + 3 * r,
+        this.x + lineRange[1],
+        this.y + 3 * r
+      );
+    }
   }
 }

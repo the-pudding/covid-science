@@ -27,8 +27,8 @@ const VIEW_STATE = {
 };
 const MAP_CONTROLS = {
   scrollZoom: false,
-  dragPan: true,
-  dragRotate: true,
+  dragPan: false,
+  dragRotate: false,
   doubleClickZoom: false
 };
 // const MB_STYLE = 'mapbox://styles/jeffmacinnes/ckl8iul9a1e3q19o5iromwhzi';
@@ -152,7 +152,7 @@ const CollabMap = (props) => {
         bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 350, 360),
         pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 45, 10)
       }}
-      controller={MAP_CONTROLS}
+      controller={false}
       layers={layers}
       style={{ zIndex: -10 }}
     >

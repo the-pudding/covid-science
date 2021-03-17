@@ -14,12 +14,21 @@
 // $accent1: tomato;
 // $bgColor: #1e1f1c;
 
-// -- navy/peach
+// -- AAA compliant, lighter
 $textColor: #fffde8;
 $bgColor: rgb(29, 37, 59);
 $bgColor2: rgb(43, 54, 74);
-$accent1: #ff7f47;
+$accent1: #ff9466;
 $accent2: rgb(3, 124, 129);
+$accent2: #036063;
 $accent3: rgb(247, 245, 115);
+
+// -- AAA compliant, darker
+// $textColor: #fffdf0;
+// $bgColor2: rgb(43, 54, 74);
+// $bgColor: #131925;
+// $accent1: #ff7f47;
+// $accent2: #016265;
+// $accent3: rgb(247, 245, 115);
 
 $headline-color: $accent1;

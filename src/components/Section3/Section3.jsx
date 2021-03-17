@@ -48,12 +48,16 @@ const Section3 = (props) => {
     <section className={props.rootClassName}>
       <div className="narrative-text">
         <h1>Section III</h1>
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-          praesentium, deleniti voluptatum quis laborum ea enim assumenda error
-          natus iusto magnam harum veritatis officiis asperiores. Quia,
-          praesentium! Maxime, quia! Saepe!
-        </div>
+        <p>
+          Science is incremental, and often times the major headline-grabbing
+          results are just the peak of a mountain of research that came before.
+          Each new published result contributes to the shared body of knowledge,
+          but also prompts new questions and enables future research to branch
+          off along new lines of inquiry. Within an article, relevant prior work
+          is acknowledged via citations, and by tracing the lineage of cited
+          articles, the contours of the mountain of previous research begins to
+          appear.
+        </p>
       </div>
       <div className="section3-scroll-container">
         <div className="graph-container">
