@@ -6,26 +6,32 @@
   font-weight: 700;
   font-style: bold;
   src: url('../fonts/Musee-Bold.otf') format('opentype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Musee-Regular';
   src: url('../fonts/Musee-Regular.otf') format('opentype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Theinhardt-Black';
   src: url('../fonts/TheinhardtBlack.otf') format('opentype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Theinhardt-Med';
   src: url('../fonts/TheinhardtMed.otf') format('opentype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Theinhardt-Reg';
   src: url('../fonts/TheinhardtReg.otf') format('opentype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Theinhardt-Thin';
   src: url('../fonts/TheinhardtThin.otf') format('opentype');
+  font-display: swap;
 }
 
 * {
@@ -83,6 +89,13 @@ section {
   margin: 0px auto 4rem;
   font-size: 1.9rem;
   line-height: 1.65;
+
+  .section-break {
+    width: 50%;
+    height: 5px;
+    margin: 0 auto 4rem;
+    border-bottom: solid 1px $textColor;
+  }
 
   p {
     margin-bottom: 4rem;

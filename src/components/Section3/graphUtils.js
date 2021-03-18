@@ -1,5 +1,6 @@
 import { format } from 'd3-format';
 import { scaleLinear } from 'd3-scale';
+import _exports from '../../styles/_exports.module.scss';
 
 export const getNodeVisibilityByState = (visState) => {
   let fn;
@@ -59,7 +60,7 @@ export const getNodeSizeByState = (visState) => {
       fn = (node) => 25;
       break;
     case 'state4':
-      fn = (node) => Math.pow(node.r, 2);
+      fn = (node) => Math.PI * node.r ** 2;
       break;
     default:
       fn = (node) => node.r;
@@ -68,7 +69,7 @@ export const getNodeSizeByState = (visState) => {
 };
 
 // ----
-const fontScale = scaleLinear().domain([1000, 14000]).range([8, 16]);
+const fontScale = scaleLinear().domain([1000, 14000]).range([10, 20]);
 export const getNodeObjByState = (visState, hoveredNode) => {
   let fn;
   switch (visState) {
@@ -83,7 +84,8 @@ export const getNodeObjByState = (visState, hoveredNode) => {
         ctx.font = `${fontSize}px Theinhardt-Med`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillStyle = node === hoveredNode ? 'gray' : 'white';
+        ctx.fillStyle =
+          node === hoveredNode ? _exports.bgColor : _exports.textColor;
 
         // set label
         const label = nCitedBy < 1000 ? nCitedBy : format('.2s')(nCitedBy); // format SI
@@ -97,12 +99,42 @@ export const getNodeObjByState = (visState, hoveredNode) => {
 };
 
 // ----
+const generateToolTip = (node, includeCitedBy = false) => {
+  if (includeCitedBy) {
+    return `
+    <div class="cite-graph-tooltip-container ${
+      node.nodeGroup === '0' ? 'left' : ''
+    }">
+      <div class="title">${node.title}</div>
+      <div class="journal">${node.journal} <span>(${node.pubYear})</span></div>
+      <div class="break"></div>
+      <div class="cited-by">cited by <span>${node.nCitedBy.toLocaleString()}</span> articles</div>
+    </div>`;
+  } else {
+    return `
+        <div class="cite-graph-tooltip-container ${
+          node.nodeGroup === '0' ? 'left' : ''
+        }">
+          <div class="title">${node.title}</div>
+          <div class="journal">${node.journal} <span>(${
+      node.pubYear
+    })</span></div>
+        </div>`;
+  }
+};
 export const getNodeTooltipByState = (visState) => {
   let fn;
   switch (visState) {
+    case 'state1':
+    case 'state2':
+    case 'state3':
+      fn = (node) => {
+        return generateToolTip(node, false);
+      };
+      break;
     case 'state4':
       fn = (node) => {
-        return node.nCitedBy;
+        return generateToolTip(node, true);
       };
       break;
     default:
@@ -116,7 +148,6 @@ export const fixNodesByState = (graphData, visState, prevState) => {
   // fix the position of nodes based on what the current, and previous,
   // vis state is/was
   const scrollDir = prevState > visState ? 'up' : 'down';
-  console.log('dir', scrollDir);
   // easiest to start by resetting everything
   graphData.nodes.forEach((node) => {
     node.fx = undefined;

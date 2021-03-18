@@ -5,6 +5,7 @@ import {
   forceY,
   forceCollide
 } from 'd3-force';
+import { forceManyBodyReuse } from 'd3-force-reuse';
 import { timeParse } from 'd3-time-format';
 import { Utils } from '../../js/Utils.js';
 
@@ -17,7 +18,7 @@ export const getForcesByState = (visState, xScale) => {
       return [
         {
           name: 'charge',
-          force: forceManyBody().strength(-25).distanceMax(500)
+          force: forceManyBody().strength(-15).distanceMax(500)
         },
         {
           name: 'collide',
@@ -49,7 +50,7 @@ export const getForcesByState = (visState, xScale) => {
       return [
         {
           name: 'charge',
-          force: forceManyBody().strength(-25).distanceMax(500)
+          force: forceManyBodyReuse().strength(-10).distanceMax(500)
         },
         {
           name: 'collide',
@@ -68,11 +69,13 @@ export const getForcesByState = (visState, xScale) => {
       ];
 
     case 'state4': {
-      console.log('here');
       return [
         {
           name: 'charge',
-          force: forceManyBody().strength(-6).distanceMax(500)
+          force: forceManyBodyReuse()
+            .strength(-5)
+            .distanceMax(500)
+            .distanceMin(5)
         },
         // {
         //   name: 'charge',
@@ -86,13 +89,13 @@ export const getForcesByState = (visState, xScale) => {
         },
         {
           name: 'y',
-          force: forceY().y(0).strength(0.05)
+          force: forceY().y(0).strength(0.15)
         },
         {
           name: 'collide',
           force: forceCollide()
-            .radius((d) => 1.2 * d.r)
-            .strength(0.5)
+            .radius((d) => 2 * d.r)
+            .strength(0.4)
         }
       ];
     }

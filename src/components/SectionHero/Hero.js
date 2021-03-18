@@ -76,9 +76,13 @@ export default class Hero {
     // this.showDebugStatic = true;
     // this.addDebugStatic();
 
-    window.addEventListener('scroll', (e) => {
-      this.mouse = new Vector2(0, window.scrollY / window.innerHeight);
-    });
+    window.addEventListener(
+      'scroll',
+      (e) => {
+        this.mouse = new Vector2(0, window.scrollY / window.innerHeight);
+      },
+      { passive: true }
+    );
 
     this.initScene();
   }

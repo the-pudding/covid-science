@@ -47,7 +47,7 @@ class App extends Component {
     sections.map((section, idx) => {
       ScrollTrigger.create({
         trigger: `.${section}`, // trigger on class named `section`
-        start: 'top 66%',
+        start: `top ${section === 'section-1' ? '90%' : '66%'}`,
         onEnter: () => this.handleSectionUpdate(idx),
         onLeaveBack: () => this.handleSectionUpdate(idx - 1)
       });

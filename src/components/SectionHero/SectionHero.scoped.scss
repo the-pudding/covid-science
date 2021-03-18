@@ -1,21 +1,52 @@
+@import '../../styles/colors.scss';
+
+.section-hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .title-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50vw;
+  width: 40vw;
+  max-width: 720px;
   margin: auto;
   flex-direction: column;
   margin-top: 20%;
+
+  * {
+    margin: 2rem auto;
+  }
 }
 
 .title {
-  width: 80%;
+  width: 100%;
   text-align: center;
   display: block;
-  font-size: 72px;
+  font-size: 7.2rem;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 24px;
+  font-size: 2.4rem;
+  line-height: 1.5;
+}
+
+.byline {
+  padding: 0.9rem;
+  font-family: 'Theinhardt-Med';
+  font-size: 1.9rem;
+
+  a {
+    background-color: $accent2;
+    padding: 0.7rem 0.7rem 0.2rem;
+    color: $textColor;
+
+    &:hover {
+      color: $accent3;
+    }
+  }
 }

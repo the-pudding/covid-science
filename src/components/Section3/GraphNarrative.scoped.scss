@@ -1,17 +1,22 @@
-.narrative-container {
+* {
+  //border: solid 1px red;
+}
+
+.graph-narrative-container {
+  width: 100%;
   position: absolute;
-  transform: translate(50%, 0%);
   min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 4rem auto;
   z-index: 1;
 
-  .narrative-text {
-    width: 50vw;
-    font-size: 1.6rem;
-    line-height: 1.5;
+  .graph-narrative-text {
+    width: 75%;
+    max-width: 720px;
+    font-size: 1.9rem;
+    line-height: 1.65;
     text-align: left;
   }
 }

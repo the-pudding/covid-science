@@ -7,7 +7,7 @@ export const getVisStateProps = (visState, xScale) => {
   switch (visState) {
     case 'state1':
       return {
-        centerAt: [xScale(0), 0],
+        centerAt: [xScale(-0.1), 0],
         zoom: 5,
         forcesArr: getForcesByState(visState, xScale)
       };

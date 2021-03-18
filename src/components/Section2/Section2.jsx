@@ -99,7 +99,6 @@ export default class Section2 extends Component {
 
     // HACKY SOLUTION TO GET SCROLL TRIGGERS TO UPDATE TO CORRECT POSITION
     setTimeout(() => {
-      console.log('refresing');
       ScrollTrigger.refresh();
     }, 2000);
 
@@ -130,7 +129,7 @@ export default class Section2 extends Component {
     return (
       <section className={this.props.rootClassName}>
         <div className="narrative-text">
-          <h1>Section II</h1>
+          <div className="section-break"></div>
           <p>
             This body of literature not only reflects the sheer volume of
             COVID-19 related research that occurred, but also the manner in
@@ -178,7 +177,7 @@ export default class Section2 extends Component {
               <li>
                 <mark>Kathryn S. Campy</mark> -{' '}
                 <span>
-                  University of Pennsylvania, Philadelpha, Pennsylvania, USA
+                  University of Pennsylvania, Philadelphia, Pennsylvania, USA
                 </span>
               </li>
             </ul>

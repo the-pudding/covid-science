@@ -7,11 +7,11 @@ const narrative = {
   state1:
     'For instance, in December 2020, both Pfizer and Moderna published articles reporting the success of their phase 3 vaccine clinical trials, officially paving the way for approval and wide scale distribution.',
   state2:
-    'Each of these articles cited some of the key prior work supporting the vaccine development and the current phase 3 results (including earlier phase 1 & 2 trials, and non-human animal results).',
+    'Each of these articles cited some of the key prior work supporting the vaccine development (including earlier phase 1 & 2 trials, and non-human animal results).',
   state3:
-    'And each of those supporting articles, in turn, cited collections of prior work that made the supporting work possible, including articles on the structural biology of SARS-CoV-2 virus, early candidate mRNA vaccines, and key insights from the previous SARS and MERS outbreaks. ',
+    'And each of those supporting articles, in turn, cited prior work, including articles on the structural biology of SARS-CoV-2 virus, early candidate mRNA vaccines, and key insights from the previous SARS and MERS outbreaks. ',
   state4:
-    'But these previous articles were not only relevant to the development of vaccines. Most of these articles went on to be cited by tens (or hundreds, or thousands) of subsequent articles, and collectively make up just a portion of the web of research surrounding these topics.  '
+    'But these previous articles were not just important to the development of vaccines. Most of these articles went on to be cited by tens (or hundreds, or thousands) of subsequent articles, and collectively make up a tiny portion of the web of research surrounding coronaviruses and COVID-19.'
 };
 
 const GraphNarrative = (props) => {
@@ -25,7 +25,7 @@ const GraphNarrative = (props) => {
   }, [props.visState]);
 
   return (
-    <div className="narrative-container">
+    <div className="graph-narrative-container">
       <SwitchTransition mode="out-in">
         <CSSTransition
           classNames="fade"
@@ -34,7 +34,9 @@ const GraphNarrative = (props) => {
           }}
           key={text}
         >
-          <div className="narrative-text">{text}</div>
+          <div className="graph-narrative-text">
+            <p>{text}</p>
+          </div>
         </CSSTransition>
       </SwitchTransition>
     </div>

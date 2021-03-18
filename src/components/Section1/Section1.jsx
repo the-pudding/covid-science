@@ -85,7 +85,6 @@ export default class Section1 extends Component {
     return (
       <section className={this.props.rootClassName}>
         <div className="narrative-text">
-          <h1>Section I</h1>
           <p>
             <mark>On Jan 1st 2020</mark>, a virus that no one had ever seen
             before was just beginning to reveal itself to an unsuspecting and

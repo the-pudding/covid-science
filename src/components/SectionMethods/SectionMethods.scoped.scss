@@ -2,8 +2,9 @@
 
 .section-methods {
   min-height: 100%;
-  font-family: 'Musee-Regular';
-  font-size: 1.4rem;
+  // font-family: 'Musee-Regular';
+  font-family: 'Theinhardt-Reg';
+  font-size: 1.5rem;
 }
 
 * {
@@ -11,13 +12,28 @@
 }
 
 .methods-container {
-  background-color: $accent2;
-  padding: 5rem;
-  display: flex;
-  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+
+  h1 {
+    color: $accent1;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: solid 1px $textColor;
+  }
+
+  .col-container {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .col {
-    width: 100%;
-    margin: 5px;
+    width: 45%;
+    line-height: 1.65;
+  }
+
+  p {
+    margin-top: 0px;
   }
 }

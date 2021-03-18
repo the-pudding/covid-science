@@ -1,1 +1,55 @@
+@import '../../styles/colors.scss';
 
+// override default graph tooltip container
+.force-graph-container {
+  .graph-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+    visibility: hidden; /* by default */
+  }
+}
+
+.cite-graph-tooltip-container {
+  position: absolute;
+  width: 300px;
+  transform: translate(0%, -00%);
+  background-color: transparentize($textColor, 0.05);
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.2);
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: solid 1px $bgColor;
+  font-family: 'Musee-Bold';
+  color: $bgColor;
+
+  &.left {
+    transform: translate(-100%, 0px);
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .journal {
+    font-size: 1.3rem;
+  }
+
+  .break {
+    width: 100%;
+    height: 5px;
+    border-bottom: solid 1px $bgColor;
+  }
+
+  .cited-by {
+    color: $accent2;
+    font-family: 'Theinhardt-Reg';
+    font-size: 1.3rem;
+    margin-top: 0.3rem;
+
+    span {
+      font-family: 'Theinhardt-Black';
+      font-size: 1.5rem;
+      color: $accent2;
+    }
+  }
+}

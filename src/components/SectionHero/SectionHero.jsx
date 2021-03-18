@@ -5,16 +5,20 @@ const SectionHero = (props) => {
   return (
     <section className={props.rootClassName}>
       <div className="title-container">
-        <h1 className="title">
-          Section
-          <br />
-          Hero
-        </h1>
+        <h1 className="title">Following the Science</h1>
         <div className="subtitle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-          praesentium, deleniti voluptatum quis laborum ea enim assumenda error
-          natus iusto magnam harum veritatis officiis asperiores. Quia,
-          praesentium! Maxime, quia! Saepe!
+          The unprecedented response of the global science and medical research
+          community to the COVID-19 pandemic
+        </div>
+        <div className="byline">
+          By{' '}
+          <a href="https://jeffmacinnes.com" target="_blank">
+            Jeff MacInnes
+          </a>
+          ,{' '}
+          <a href="http://iliablinderman.com/" target="_blank">
+            Ilia Blinderman
+          </a>
         </div>
       </div>
     </section>

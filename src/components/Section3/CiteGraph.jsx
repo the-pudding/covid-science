@@ -19,7 +19,7 @@ import citeNodesCSV from './assets/vaxNodes.csv';
 import './CiteGraph.scss';
 
 const xScale = scaleLinear().domain([0, 2]).range([1000, 0]);
-const rScale = scaleSqrt().domain([0, 14000]).range([5, 50]);
+const rScale = scaleSqrt().domain([0, 14000]).range([1, 40]);
 
 // --- Prep the data for the graph
 const graphData = {
@@ -90,7 +90,7 @@ const CiteGraph = (props) => {
     const { centerAt, zoom, forcesArr } = visStateProps;
 
     // reset existing forces
-    console.log('resetting forces');
+    // console.log('resetting forces');
     fg.d3Force('center', null);
     fg.d3Force('charge', null);
     fg.d3Force('link', null);
@@ -188,8 +188,8 @@ const CiteGraph = (props) => {
         onEngineTick={handleEngineTick}
         onEngineStop={() => console.log('stopped')}
         d3AlphaDecay={0.06}
-        d3VelocityDecay={0.1} // .3
-        cooldownTime={3000}
+        d3VelocityDecay={0.15} // .3
+        // cooldownTime={3000}
       />
     </div>
   );
