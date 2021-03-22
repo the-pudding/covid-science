@@ -75,6 +75,21 @@ a {
   }
 }
 
+.logo-container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  margin: 1rem auto 2rem;
+  text-align: center;
+
+  .logo-full {
+    position: relative;
+    width: 144px;
+    max-height: 38px;
+    height: auto;
+  }
+}
+
 section {
   min-height: 120vh;
   width: 90vw;

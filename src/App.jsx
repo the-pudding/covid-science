@@ -7,6 +7,8 @@ import Section2 from './components/Section2/Section2';
 import Section3 from './components/Section3/Section3';
 import SectionMethods from './components/SectionMethods/SectionMethods';
 
+import logo from './assets/puddingLogo.svg';
+
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -58,6 +60,12 @@ class App extends Component {
     const { currentSection } = this.state;
     return (
       <div className="App">
+        <div className="logo-container">
+          <a href="https://pudding.cool" target="_blank">
+            <img src={logo} alt="The Pudding" className="logo-full"></img>
+          </a>
+        </div>
+
         <div className="narrative-sections">
           <SectionHero
             rootClassName="section-hero"

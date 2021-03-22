@@ -12,7 +12,7 @@ import BigNumber from './BigNumber';
 import statsByDayCSV from './assets/statsByDay.csv';
 
 import mapKeyImg from './assets/mapKeySkewed.png';
-import collabKeyImg from './assets/authorCollabsKey.svg';
+import collabKeyImg from './assets/authorCollabsKey.png';
 import './Section2.scoped.scss';
 import './TimelineScrubber.scss';
 

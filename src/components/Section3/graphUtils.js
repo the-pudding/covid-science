@@ -185,18 +185,3 @@ export const fixNodesByState = (graphData, visState, prevState) => {
     });
   }
 };
-
-// if ((visStateRef.current === 'state3') & (props.visState === 'state2')) {
-//   console.log('3 to 2');
-//   graphData.nodes.forEach((node) => {
-//     if (node.nodeGroup === '1') {
-//       node.fx = node.x;
-//       node.fy = node.y;
-//     }
-//   });
-// } else {
-//   graphData.nodes.forEach((node) => {
-//     node.fx = undefined;
-//     node.fy = undefined;
-//   });
-// }

@@ -16,7 +16,7 @@ const ArticleStat = (props) => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.container',
-        start: 'top center',
+        start: 'top 85%',
         toggleActions: 'play complete reset reset'
       }
     });

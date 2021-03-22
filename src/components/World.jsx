@@ -126,8 +126,6 @@ export default class World extends Component {
   componentDidUpdate(prevProps) {
     const { currentSection } = this.props;
     if (currentSection !== prevProps.currentSection) {
-      console.log('new section:', currentSection);
-
       const nextScene = this.sceneMapping[currentSection];
       if (nextScene !== this.currentScene) {
         gsap.to(this.currentScene.obj.position, { duration: 3, x: -30 });

@@ -15,10 +15,6 @@ const SectionHero = (props) => {
           <a href="https://jeffmacinnes.com" target="_blank">
             Jeff MacInnes
           </a>
-          ,{' '}
-          <a href="http://iliablinderman.com/" target="_blank">
-            Ilia Blinderman
-          </a>
         </div>
       </div>
     </section>

@@ -57,7 +57,7 @@ const graphData = {
 //   });
 // });
 
-console.log('data', graphData);
+// console.log('data', graphData);
 
 const modernaPMID = '33378609';
 const pfizerPMID = '33301246';
@@ -90,7 +90,6 @@ const CiteGraph = (props) => {
     const { centerAt, zoom, forcesArr } = visStateProps;
 
     // reset existing forces
-    // console.log('resetting forces');
     fg.d3Force('center', null);
     fg.d3Force('charge', null);
     fg.d3Force('link', null);
@@ -116,7 +115,7 @@ const CiteGraph = (props) => {
 
   // -- Interaction handlers
   const handleNodeClick = (node) => {
-    console.log(node);
+    // console.log(node);
     window.open(`https://pubmed.ncbi.nlm.nih.gov/${node.id}`, '_blank');
   };
   const handleNodeHover = (node) => {
@@ -127,9 +126,6 @@ const CiteGraph = (props) => {
       setIsHovered(false);
       setHoveredNode(null);
     }
-  };
-  const handleBgClick = () => {
-    console.log(graphData);
   };
   const handleLinkClick = (link) => {
     console.log(link);
@@ -184,12 +180,9 @@ const CiteGraph = (props) => {
         enablePointerInteraction={true}
         onNodeClick={handleNodeClick}
         onLinkClick={handleLinkClick}
-        onBackgroundClick={handleBgClick}
         onEngineTick={handleEngineTick}
-        onEngineStop={() => console.log('stopped')}
         d3AlphaDecay={0.06}
         d3VelocityDecay={0.15} // .3
-        // cooldownTime={3000}
       />
     </div>
   );

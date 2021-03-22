@@ -26,12 +26,6 @@ module.exports = (env, opts) => {
             },
             {
               loader: 'sass-loader'
-              // options: {
-              //   additionalData: `@import "${path.resolve(
-              //     __dirname,
-              //     'src/styles/colors.scss'
-              //   )}";`
-              // }
             }
           ]
         },
@@ -83,7 +77,8 @@ module.exports = (env, opts) => {
       }),
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        title: 'Covid Science Tmp'
+        title: 'Following the Science',
+        favicon: './src/favicon.svg'
       }),
       new webpack.ProvidePlugin({
         THREE: 'three'

@@ -46,14 +46,17 @@
   margin-bottom: 6rem;
 
   .collab-key-image {
-    width: 450px;
+    max-width: 450px;
+    max-height: 220px;
+    width: auto;
+    height: auto;
   }
 
   .map-key-image {
-    width: 700px;
-    // box-shadow: 24px 24px 20px rgba(0, 0, 0, 0.26);
-    // border: solid 1px rgba(255, 255, 255, 0.3);
-    // transform: rotate(45deg) rotateX(35deg) rotateY(-48deg);
+    max-width: 720px;
+    max-height: 383px;
+    width: auto;
+    height: auto;
   }
 }
 
