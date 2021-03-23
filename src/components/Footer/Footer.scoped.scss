@@ -1,0 +1,90 @@
+@import '../../styles/colors.scss';
+
+$gray: #949494;
+$sans-display: 'National 2 Narrow Web', Helvetica, Arial, sans-serif;
+
+.pudding-footer {
+  padding: 6rem 1rem;
+  border-top: 4px solid $accent2;
+  font-family: 'National 2 Web', Helvetica, Arial, sans-serif;
+  margin-top: 6rem;
+  background-color: $textColor;
+
+  .footer-recirc {
+    margin: 0 auto;
+    padding: 0px 6rem;
+
+    .story-links-container {
+      display: flex;
+
+      .story-link {
+        width: 25%;
+        padding: 0 1em;
+
+        a {
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1.8rem;
+          color: $bgColor;
+          display: block;
+        }
+
+        .story-link-image {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .footer-company {
+    margin: 0 auto;
+    margin-top: 3rem;
+    max-width: 65rem;
+
+    .about-container {
+      display: flex;
+      flex-direction: column;
+      font-family: $sans-display;
+      justify-content: center;
+      text-align: center;
+
+      p {
+        font-size: 1.8rem;
+        margin: 1rem 0;
+        color: $bgColor;
+      }
+
+      a {
+        font-weight: bold;
+      }
+
+      .pudding-logo {
+        max-width: 180px;
+        max-height: 47px;
+        width: auto;
+        height: auto;
+        margin: 2rem auto;
+      }
+    }
+  }
+
+  .links-container {
+    .link-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 1.8rem;
+
+      li {
+        display: flex;
+        padding: 0.5em 1em;
+
+        a {
+          text-decoration: none;
+          color: $bgColor;
+        }
+      }
+    }
+  }
+}

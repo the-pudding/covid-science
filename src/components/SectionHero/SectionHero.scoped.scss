@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+// @import '../../styles/colors.scss';
 
 .section-hero {
   height: 100vh;
@@ -27,6 +27,10 @@
   text-align: center;
   display: block;
   font-size: 7.2rem;
+
+  @include tablet {
+    font-size: 4rem;
+  }
 }
 
 .subtitle {
@@ -39,14 +43,15 @@
   padding: 0.9rem;
   font-family: 'Theinhardt-Med';
   font-size: 1.9rem;
+  background-color: $accent2;
+  color: $textColor;
+  padding: 0.7rem 0.7rem 0.2rem;
 
   a {
-    background-color: $accent2;
-    padding: 0.7rem 0.7rem 0.2rem;
     color: $textColor;
 
     &:hover {
-      color: $accent3;
+      // color: darken($textColor, 80%);
     }
   }
 }

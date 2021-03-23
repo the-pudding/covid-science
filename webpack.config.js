@@ -25,7 +25,13 @@ module.exports = (env, opts) => {
               loader: 'scoped-css-loader'
             },
             {
-              loader: 'sass-loader'
+              loader: 'sass-loader',
+              options: {
+                additionalData: `@import "${path.resolve(
+                  __dirname,
+                  'src/styles/colors.scss'
+                )}";`
+              }
             }
           ]
         },

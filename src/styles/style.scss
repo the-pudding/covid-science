@@ -33,7 +33,56 @@
   src: url('../fonts/TheinhardtThin.otf') format('opentype');
   font-display: swap;
 }
+@font-face {
+  font-family: 'National 2 Web';
+  src: url('https://pudding.cool/assets/fonts/national/National2Web-Regular.woff2')
+      format('woff2'),
+    url('https://pudding.cool/assets/fonts/national/National2Web-Regular.woff')
+      format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'National 2 Web';
+  src: url('https://pudding.cool/assets/fonts/national/National2Web-Bold.woff2')
+      format('woff2'),
+    url('https://pudding.cool/assets/fonts/national/National2Web-Bold.woff')
+      format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'National 2 Narrow Web';
+  src: url('https://pudding.cool/assets/fonts/national/National2NarrowWeb-Regular.woff2')
+      format('woff2'),
+    url('https://pudding.cool/assets/fonts/national/National2NarrowWeb-Regular.woff')
+      format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'National 2 Narrow Web';
+  src: url('https://pudding.cool/assets/fonts/national/National2NarrowWeb-Bold.woff2')
+      format('woff2'),
+    url('https://pudding.cool/assets/fonts/national/National2NarrowWeb-Bold.woff')
+      format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
 
+// font var names
+$sans: 'National 2 Web', Helvetica, Arial, sans-serif;
+$sans-display: 'National 2 Narrow Web', Helvetica, Arial, sans-serif;
+
+// ----------------------------------------------------------
 * {
   //border: 1px solid red !important; // <- DEBUG, show all divs
   box-sizing: border-box;
@@ -63,8 +112,8 @@ body {
 h1 {
   font-family: 'Musee-Bold';
   font-size: 4.2rem;
-  color: $headline-color;
   line-height: 1.1;
+  color: $accent1;
 }
 
 a {

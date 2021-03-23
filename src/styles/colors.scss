@@ -1,14 +1,4 @@
-// Colors
-@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
-  @if $b-hsb == 0 {
-    @return hsla(0, 0%, 0%, $a);
-  } @else {
-    $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100));
-    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
-    @return hsla($h-hsb, $s-hsl + 0%, $l-hsl + 0%, $a);
-  }
-}
-
+// --- Colors -----------------------------------------------
 // -- brown/orange
 // $textColor: white;
 // $accent1: tomato;
@@ -30,4 +20,44 @@ $accent3: rgb(247, 245, 115);
 // $accent2: #016265;
 // $accent3: rgb(247, 245, 115);
 
-$headline-color: $accent1;
+/* ----------------------------------------------------------
+  Mixins for media queries
+  Usage: 
+  @include tablet {
+    // Put your tablet related CSS here
+  }
+*/
+$mobile-width: 415px;
+$tablet-width: 768px;
+$laptop-width: 1024px;
+$desktop-width: 1200px;
+
+@mixin mobile {
+  @media (max-width: #{$mobile-width}) {
+    @content;
+  }
+}
+
+@mixin tabletSml {
+  @media (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$laptop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
