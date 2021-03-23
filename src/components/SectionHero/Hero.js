@@ -173,7 +173,7 @@ export default class Hero {
       // Add the first set of active titles to fill the screen
       let filled = false;
       let yPos = this.vHeight * 0.5; // start with top left of visible space
-      let xPos = this.vWidth * -0.5;
+      let xPos = this.vWidth * -1;
       let rowIdx = 0;
       this.rowSpeeds[rowIdx] = Utils.randBw(0.012, 0.003);
       while (!filled) {
@@ -183,8 +183,8 @@ export default class Hero {
 
         // update the positions for the next title
         xPos += thisTitle.width + this.padding.x;
-        if (xPos > this.vWidth * 0.5) {
-          xPos = this.vWidth * -0.5;
+        if (xPos > this.vWidth) {
+          xPos = this.vWidth * -1;
           thisTitle.isLastInRow = true;
           yPos -= thisTitle.height + this.padding.y; // new row
           rowIdx++;

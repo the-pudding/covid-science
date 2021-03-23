@@ -27,37 +27,24 @@ $accent3: rgb(247, 245, 115);
     // Put your tablet related CSS here
   }
 */
-$mobile-width: 415px;
-$tablet-width: 768px;
-$laptop-width: 1024px;
-$desktop-width: 1200px;
+$mobile-width: 320px;
+$tablet-width: 480px;
+$desktop-width: 960px;
 
 @mixin mobile {
-  @media (max-width: #{$mobile-width}) {
-    @content;
-  }
-}
-
-@mixin tabletSml {
-  @media (max-width: #{$tablet-width - 1px}) {
+  @media (min-width: $mobile-width) and (max-width: #{$tablet-width - 1px}) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (max-width: #{$laptop-width - 1px}) {
-    @content;
-  }
-}
-
-@mixin laptop {
-  @media (max-width: #{$desktop-width - 1px}) {
+  @media (min-width: $tablet-width) and (max-width: #{$desktop-width - 1px}) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: #{$desktop-width}) {
+  @media (min-width: $desktop-width) {
     @content;
   }
 }

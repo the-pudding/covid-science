@@ -29,7 +29,7 @@ module.exports = (env, opts) => {
               options: {
                 additionalData: `@import "${path.resolve(
                   __dirname,
-                  'src/styles/colors.scss'
+                  'src/styles/variables.scss'
                 )}";`
               }
             }

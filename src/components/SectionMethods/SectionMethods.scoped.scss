@@ -1,5 +1,3 @@
-@import '../../styles/colors.scss';
-
 .section-methods {
   min-height: 100%;
   // font-family: 'Musee-Regular';
@@ -26,6 +24,7 @@
   .col-container {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .col {
@@ -35,5 +34,19 @@
 
   p {
     margin-top: 0px;
+  }
+}
+
+@include mobile {
+  .methods-container {
+    width: 100%;
+
+    .col-container {
+      flex-direction: column;
+
+      .col {
+        width: 100%;
+      }
+    }
   }
 }

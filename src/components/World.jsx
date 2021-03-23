@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { gsap } from 'gsap';
 import {
-  AxesHelper,
   Clock,
   Mesh,
   PlaneGeometry,
@@ -9,8 +8,7 @@ import {
   PerspectiveCamera,
   Scene,
   WebGL1Renderer,
-  Color,
-  Fog
+  Color
 } from 'three';
 
 import Hero from './SectionHero/Hero.js';

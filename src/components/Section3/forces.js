@@ -3,7 +3,8 @@ import {
   forceCenter,
   forceX,
   forceY,
-  forceCollide
+  forceCollide,
+  forceLink
 } from 'd3-force';
 import { forceManyBodyReuse } from 'd3-force-reuse';
 import { timeParse } from 'd3-time-format';

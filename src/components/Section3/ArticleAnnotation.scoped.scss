@@ -19,21 +19,27 @@
   .vaccine {
     text-transform: capitalize;
     font-family: 'Theinhardt-Med';
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 
   .title {
     font-family: 'Musee-Bold';
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   .journal {
     font-family: 'Musee-Regular';
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 
   .date {
     font-family: 'Theinhardt-Thin';
-    font-size: 12px;
+    font-size: 1.2rem;
+  }
+}
+
+@include mobile {
+  .annotation-container {
+    width: 250px;
   }
 }

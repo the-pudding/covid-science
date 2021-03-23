@@ -1,5 +1,3 @@
-@import '../../styles/colors.scss';
-
 .section-2 {
   width: 100vw;
   padding: 0px;
@@ -46,15 +44,15 @@
   margin-bottom: 6rem;
 
   .collab-key-image {
-    max-width: 450px;
-    max-height: 220px;
+    max-width: 45rem;
+    max-height: 22rem;
     width: auto;
     height: auto;
   }
 
   .map-key-image {
-    max-width: 720px;
-    max-height: 383px;
+    max-width: 72rem;
+    max-height: 38rem;
     width: auto;
     height: auto;
   }
@@ -63,7 +61,7 @@
 .map-container {
   position: sticky;
   z-index: 0;
-  top: 100px;
+  top: 10rem;
   height: 100vh;
 }
 
@@ -81,12 +79,6 @@
     position: absolute;
     height: 100px;
     width: 100%;
-    // background-image: linear-gradient(
-    //   90deg,
-    //   rgba($bgColor, 1) 0 5%,
-    //   rgba($bgColor, 0) 15% 85%,
-    //   rgba($bgColor, 1) 95% 100%
-    // );
   }
 }
 
@@ -95,4 +87,32 @@
   display: flex;
   width: 70%;
   justify-content: space-between;
+}
+
+@include tablet {
+  .short-text {
+    margin: 7rem auto;
+  }
+}
+
+@include mobile {
+  .key-container {
+    .collab-key-image {
+      max-width: 100%;
+    }
+
+    .map-key-image {
+      max-width: 100%;
+    }
+  }
+
+  .big-number-container {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .map-container {
+    top: 0;
+    width: 100vw;
+  }
 }

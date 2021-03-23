@@ -1,7 +1,12 @@
-// @import '../../styles/colors.scss';
+* {
+  //border: solid 1px red;
+}
 
 .section-hero {
+  box-sizing: content-box;
   height: 100vh;
+  margin: 0 auto;
+  padding-bottom: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +20,6 @@
   max-width: 720px;
   margin: auto;
   flex-direction: column;
-  margin-top: 20%;
 
   * {
     margin: 2rem auto;
@@ -27,10 +31,6 @@
   text-align: center;
   display: block;
   font-size: 7.2rem;
-
-  @include tablet {
-    font-size: 4rem;
-  }
 }
 
 .subtitle {
@@ -53,5 +53,25 @@
     &:hover {
       // color: darken($textColor, 80%);
     }
+  }
+}
+
+@include mobile {
+  .title-container {
+    width: 80vw;
+  }
+
+  .title {
+    width: 90%;
+    font-size: 5rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .byline {
+    padding: 0.5rem 0.5rem 0.3rem;
+    font-size: 1.6rem;
   }
 }

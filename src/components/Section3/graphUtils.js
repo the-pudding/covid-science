@@ -70,13 +70,18 @@ export const getNodeSizeByState = (visState) => {
 
 // ----
 const fontScale = scaleLinear().domain([1000, 14000]).range([10, 20]);
+if (window.innerWidth < 768) {
+  fontScale.range([8, 16]);
+}
+const labelThresh = window.innerWidth >= 768 ? 1000 : 3000;
+
 export const getNodeObjByState = (visState, hoveredNode) => {
   let fn;
   switch (visState) {
     case 'state4':
       fn = (node, ctx, globalScale) => {
         const { nCitedBy, x, y } = node;
-        if (nCitedBy < 1000) {
+        if (nCitedBy < labelThresh) {
           // <- set threshold for printing values or not
           return null;
         }

@@ -27,7 +27,7 @@ const VIEW_STATE = {
 };
 const MAP_CONTROLS = {
   scrollZoom: false,
-  dragPan: false,
+  dragPan: window.innerWidth < 480 ? true : false,
   dragRotate: false,
   doubleClickZoom: false
 };
@@ -152,7 +152,7 @@ const CollabMap = (props) => {
         bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 350, 360),
         pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 45, 10)
       }}
-      controller={false}
+      controller={MAP_CONTROLS}
       layers={layers}
       style={{ zIndex: -10 }}
     >

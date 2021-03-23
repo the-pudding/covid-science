@@ -27,7 +27,10 @@ export default class PapersPerYearPlot {
     });
 
     this.containerRect = container.getBoundingClientRect();
-    this.height = this.containerRect.height;
+    this.height =
+      window.innerWidth < 480
+        ? this.containerRect.width * 0.8
+        : this.containerRect.width * 0.57;
     this.width = this.containerRect.width;
     this.color = _exports.accent1;
 

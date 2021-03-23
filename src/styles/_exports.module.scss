@@ -1,5 +1,5 @@
 // Export vars to js can import scss vars
-@import 'colors.scss';
+@import 'variables.scss';
 
 :export {
   textColor: $textColor;
