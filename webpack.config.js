@@ -78,9 +78,9 @@ module.exports = (env, opts) => {
       new Dotenv(),
       new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new webpack.HotModuleReplacementPlugin(),
-      new CopyWebpackPlugin({
-        patterns: [{ from: './static' }]
-      }),
+      // new CopyWebpackPlugin({
+      //   patterns: [{ from: './static' }]   // copy assets folder if there are any files not using a loader
+      // }),
       new HtmlWebpackPlugin({
         template: './src/index.html',
         title: 'Following the Science',
