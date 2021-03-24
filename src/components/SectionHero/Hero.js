@@ -1,22 +1,17 @@
 import {
   Group,
   Mesh,
-  Vector3,
   TextureLoader,
   RawShaderMaterial,
   Vector2,
   Box3,
-  BoxGeometry,
-  PlaneGeometry,
-  MeshBasicMaterial,
-  Color
+  PlaneGeometry
 } from 'three';
 import { Utils } from '../../js/Utils.js';
 import {
   visibleHeightAtZDepth,
   visibleWidthAtZDepth
 } from '../../js/THREE_Utils';
-import { shuffle, descending } from 'd3-array';
 
 const createGeometry = require('three-bmfont-text');
 const MSDFShader = require('three-bmfont-text/shaders/msdf');
@@ -28,6 +23,8 @@ import vertShader from './assets/shaders/vert.glsl';
 import covidFrag from './assets/shaders/covidFrag.glsl';
 import covidVert from './assets/shaders/covidVert.glsl';
 import titleFrag from './assets/shaders/titleFrag.glsl';
+import covidOutline from './assets/textures/covid_outline.jpg';
+import GeorgiaFont from './assets/bmfonts/Georgia.png';
 
 export default class Hero {
   constructor(config) {
@@ -90,7 +87,7 @@ export default class Hero {
   addDebugMoving() {
     // load textures
     const textureLoader = new TextureLoader();
-    const overlayTexture = textureLoader.load('/textures/covid_outline.jpg');
+    const overlayTexture = textureLoader.load(covidOutline);
 
     //const geo = new PlaneGeometry(9, 7, 10, 10);
     const geo = new PlaneGeometry(2, 2, 10, 10);
@@ -142,10 +139,10 @@ export default class Hero {
 
     // textures
     const textureLoader = new TextureLoader();
-    const overlayTexture = textureLoader.load('/textures/covid_outline.jpg');
+    const overlayTexture = textureLoader.load(covidOutline);
 
     // load the font texture and use it to instantiate the text objects
-    textureLoader.load('/bmfonts/Georgia.png', (fontTex) => {
+    textureLoader.load(GeorgiaFont, (fontTex) => {
       this.titleTexture = fontTex;
 
       // create the shader for the font material, set necessary uniforms
