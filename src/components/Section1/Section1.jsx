@@ -86,25 +86,26 @@ export default class Section1 extends Component {
       <section className={this.props.rootClassName}>
         <div className="narrative-text">
           <p>
-            <mark>On Jan 1st 2020</mark>, a virus that no one had ever seen
-            before was just beginning to reveal itself to an unsuspecting and
-            unprepared world. 12 months — and 80+ million cases — later, the
-            first batches of vaccine made their way off loading docks and into
-            the first set of arms as the race to inoculate the globe officially
-            kicked off. That kind of achievement doesn't happen in a vacuum.
+            <mark>On Jan 1st 2020</mark>, a novel virus was beginning to reveal
+            itself to an unprepared world. The next 12 months brought 80+
+            million cases, but also the first clinically approved vaccines,
+            developed in record-setting time, and whose efficacy exceeded even
+            the most optimistic projections. That type of achievement doesn't
+            happen in a vacuum.
           </p>
 
           <p>
             Amidst the crumminess of 2020, a hive of scientists and medical
             researchers mobilized in an historic way. For a year filled with so
-            many terrible, horrible, no good, very bad things, this is something
-            worth celebrating. Hundreds of thousands of individuals, spread
-            across thousands of institutions, in nearly every country around the
-            world, worked collaboratively to deconstruct the virus, to learn how
-            it attacks the body and how it spreads, and to engineer solutions
-            for how to fight it. And while the major breakthroughs made
-            headlines, much of that work has proceeded steadily but silently
-            behind the scenes, unacknowledged.
+            many terrible, horrible, no good, very bad things, the dedicated
+            effort of the international science community to understand and get
+            us out of the pandemic is something worth celebrating. Hundreds of
+            thousands of individuals, spread across thousands of institutions,
+            in nearly every country around the world, worked together to
+            deconstruct the virus, to learn how it attacks the body and how it
+            spreads, and to engineer solutions for how to fight it. And while
+            the major breakthroughs made headlines, much of the work that they
+            relied on occurred behind the scenes, unacknowledged.
           </p>
 
           <p>
@@ -114,14 +115,13 @@ export default class Section1 extends Component {
             one another. A typical research article might reflect months of data
             collection and analysis from a team of scientists, summarized in a
             set of statistical results and a discussion about how those results
-            add to (or challenge) what is currently known.{'  '}
+            add to (or challenge) current understanding on a topic. {'  '}
             <a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank">
               PubMed Central (PMC)
             </a>{' '}
-            is an online repository housing millions of open-access biomedical
-            and life sciences research articles. By searching this database, you
-            can get a sense of the breadth of existing research on any given
-            topic.
+            is an online repository housing millions of such biomedical and life
+            sciences research articles. By searching this database, you can get
+            a sense of the breadth of existing research on any given topic.
           </p>
 
           <p>
@@ -129,8 +129,8 @@ export default class Section1 extends Component {
             of viruses known as coronaviruses (<mark>COVID-19</mark>:{' '}
             <mark>CO</mark>rona<mark>VI</mark>rus <mark>D</mark>isease 20
             <mark>19</mark>) that were first characterized in the mid-1960's.
-            However, it wasn't until the SARS outbreak in 2002, and later the
-            MERS outbreak in 2012, that coronaviruses became the focus of
+            However, it wasn't until the SARS outbreak in 2002, and subsequent
+            MERS outbreak of 2012, that coronaviruses became the focus of
             increasing research attention.
           </p>
         </div>
@@ -156,10 +156,10 @@ export default class Section1 extends Component {
 
         <div className="narrative-text middle-section">
           <p>
-            Out of all the articles added in 2020, across all science and
-            medical fields, approximately <mark>1 out of every 10</mark> was
-            related to coronaviruses. (compare that to 2019, where that rate was
-            closer to 1 out of every 130 articles.)
+            Of all the articles added in 2020, across all science and medical
+            fields, approximately <mark>1 out of every 10</mark> was related to
+            coronaviruses (compare that to 2019, where that rate was closer to 1
+            out of every 130 articles.)
           </p>
         </div>
         <div className="article-generators-container">
@@ -169,9 +169,9 @@ export default class Section1 extends Component {
 
         <div className="narrative-text middle-section">
           <p>
-            By expanding the search to include terms specific to COVID-19, the
-            set of research articles grows to 93,593 new articles in 2020. That
-            means, on average, there were{' '}
+            By expanding the search to include terms specific to the current
+            pandemic (like "COVID-19"), the set of research articles grows to
+            93,593 new articles in 2020. That means, on average, there were{' '}
             <mark>~11 new articles coming out each hour</mark>, every hour
             throughout the year. Those articles...
           </p>

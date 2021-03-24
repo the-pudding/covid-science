@@ -80,7 +80,7 @@ export const getVisStateProps = (visState, xScale) => {
 
     case 'state4':
       return {
-        centerAt: window.innerWidth >= 960 ? [xScale(1), 0] : [xScale(1.3), 0],
+        centerAt: [xScale(1.3), 0],
         zoom: getZoom(visState),
         forcesArr: getForcesByState('state4', xScale)
       };

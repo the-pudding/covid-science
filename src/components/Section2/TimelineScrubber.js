@@ -132,15 +132,15 @@ export default class TimelineScrubber {
     g.append('text')
       .attr('class', 'current-date-label')
       .attr('x', intervalWidth / 2)
-      .attr('y', intervalHeight + 20)
+      .attr('y', intervalHeight * 2)
       .attr('text-anchor', 'middle')
-      .attr('alignment-baseline', 'hanging');
+      .attr('dominant-baseline', 'hanging');
     g.append('text')
       .attr('class', 'year-label')
       .attr('x', intervalWidth / 2)
       .attr('y', intervalHeight + 47)
       .attr('text-anchor', 'middle')
-      .attr('alignment-baseline', 'baseline')
+      .attr('dominant-baseline', 'baseline')
       .text('2020');
   }
 

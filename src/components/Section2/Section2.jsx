@@ -71,8 +71,6 @@ export default class Section2 extends Component {
   };
 
   componentDidMount() {
-    let { scrubber } = this.state;
-
     // set up scroll trigger to update based on progress
     ScrollTrigger.create({
       trigger: '.section2-scroll-container',
@@ -85,24 +83,12 @@ export default class Section2 extends Component {
       }
     });
 
-    // gsap.to('.section2-scroll-container', {
-    //   scrollTrigger: {
-    //     trigger: '.section2-scroll-container',
-    //     start: 'bottom-=400 bottom',
-    //     end: 'bottom-=100 bottom',
-    //     // toggleActions: 'play complete reverse reverse',
-    //     scrub: true
-    //   },
-    //   opacity: 0,
-    //   duration: 1
-    // });
-
     // HACKY SOLUTION TO GET SCROLL TRIGGERS TO UPDATE TO CORRECT POSITION
     setTimeout(() => {
       ScrollTrigger.refresh();
     }, 2000);
 
-    // parse the statsByDay csv file and add to state
+    // --- parse the statsByDay csv file and add to state
     let statsByDay = statsByDayCSV.slice(1).map((d) => {
       return {
         pubDate: `2020-${d[0]}`,
@@ -112,20 +98,18 @@ export default class Section2 extends Component {
       };
     });
     this.setState({ statsByDay });
-  }
 
-  componentDidUpdate() {
-    let { scrubber } = this.state;
-    if (this.containerRef.current && !scrubber) {
-      this.setState({
-        scrubber: new TimelineScrubber(this.containerRef.current, intervalWin)
-      });
-    }
+    // --- create the time scrubber
+    let { currentDate } = this.state;
+    let scrubber = new TimelineScrubber(this.containerRef.current, intervalWin);
+    scrubber.updatePlot(currentDate);
+    this.setState({
+      scrubber: scrubber
+    });
   }
 
   render() {
     let { currentDate, totalArticles, totalCollabs } = this.state;
-
     return (
       <section className={this.props.rootClassName}>
         <div className="narrative-text">
@@ -135,9 +119,9 @@ export default class Section2 extends Component {
             COVID-19 related research that occurred, but also the manner in
             which that work took place. While the rest of the world was shutting
             down — nations closing borders, states closing schools, cities
-            shuttering businesses - the science and medical communities were
+            shuttering businesses — the science and medical communities were
             expanding outward, and forming collaborations that spanned
-            institutions and international borders.
+            institutions and borders.
           </p>
 
           <p>

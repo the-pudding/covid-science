@@ -81,18 +81,19 @@ const Section3 = (props) => {
       <div className="narrative-text">
         <div className="section-break"></div>
         <p>
-          The extraordinary challenges of 2020 called for extraordinary
-          responses. 2020 caught everyone off guard, except of course the cadre
-          of scientists and global health experts who had been warning this type
-          of pandemic could come, and whose research gave us a leg up when it
-          finally did. The work done ahead of time, coupled with the pivoting of
-          resources to focus on a singular goal, have collectively enabled us to
-          begin imagining a time beyond COVID-19. Confronted with the challenges
-          of fighting an unknown virus, the science and medical communities dug
-          in and armed themselves with the only tool that's saved us from
-          similar challenges in the past: empirical research. Research is
-          getting us out of the pandemic, and will better prepare us for
-          whatever comes next.
+          Confronted with the challenges of fighting an unknown virus, the
+          scientific and medical communities dug in and armed themselves with
+          the tool that's gotten us through similar challenges in the past:
+          empirical research. New viruses prompt new questions, and the only way
+          to answer these questions is by collecting the data, analyzing
+          results, sharing findings, and debating the implications. The process
+          is demanding, laborious, and meticulously methodical (read: slow). The
+          volumes of information learned about COVID-19 in such a short time
+          span are a testament to the scale of the research effort throughout
+          2020 and continuing today. The foundational research on earlier
+          coronaviruses, coupled with the shift in resources and focus at the
+          start of 2020, has enabled us to begin imagining a time beyond
+          COVID-19. And will better prepare us for whatever comes next.
         </p>
       </div>
     </section>
