@@ -27,10 +27,9 @@ MAPBOX_TOKEN=asdfjassdjasfdjkldsfajasfjdsffdja
 Open browser to `localhost:8080`
 
 ### Deploy
-The site is hosted via github-pages in the repositories `docs` folder. To deploy and update to the site, run:
+
+The site is hosted via github-pages in the repository's `docs` folder. To deploy and update to the site, run:
 
 `sh deploy.sh`
 
-This script will bundle the site using webpack, copy the resulting built site from the `dist` directory to the `docs` directory, and push a new update to github on the `dev` branch. 
-
-## Project Info
+This script will bundle the site using webpack, copy the resulting built site from the `dist` directory to the `docs` directory, and push a new update to github on the `dev` branch.
