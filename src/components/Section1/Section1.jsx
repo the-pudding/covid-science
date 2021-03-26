@@ -155,6 +155,10 @@ export default class Section1 extends Component {
         </div>
 
         <div className="narrative-text middle-section">
+          <div className="mobile-text">
+            There were ~80,000 coronavirus-related articles added to PMC in
+            2020, a <mark>1600%</mark> increase over 2019.
+          </div>
           <p>
             Of all the articles added in 2020, across all science and medical
             fields, approximately <mark>1 out of every 10</mark> was related to

@@ -1,6 +1,6 @@
-// * {
-//   border: solid 1px red;
-// }
+* {
+  //border: solid 1px red;
+}
 
 .section-1 {
   width: 90vw;
@@ -47,6 +47,10 @@
   line-height: 1.55;
 }
 
+.mobile-text {
+  display: none;
+}
+
 #revealed-text {
   align-self: flex-end;
   margin-right: 5%;
@@ -87,11 +91,11 @@
 
 @include mobile {
   .content-container {
-    margin-bottom: 6rem;
+    margin-bottom: 1rem;
   }
 
   .middle-section {
-    margin-top: 6rem;
+    margin-top: 2rem;
     margin-bottom: 3rem;
   }
 
@@ -113,9 +117,12 @@
     }
 
     .text-2 {
-      margin-top: 22rem;
-      margin-bottom: 4rem;
+      display: none;
     }
+  }
+
+  .mobile-text {
+    display: block;
   }
 
   #revealed-text {
