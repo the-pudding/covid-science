@@ -156,7 +156,11 @@ const CollabMap = (props) => {
       layers={layers}
       style={{ zIndex: -10 }}
       width="100vw"
-      height={window.innerWidth < 480 ? '500px' : '100vh'}
+      height={
+        window.innerWidth < 480
+          ? '500px'
+          : `${Math.min(window.innerHeight, 1000)}px`
+      }
     >
       <StaticMap
         reuseMaps
