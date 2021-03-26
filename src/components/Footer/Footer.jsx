@@ -51,20 +51,20 @@ const Footer = () => {
     const html = stories
       .filter((d) => !url.includes(d.url))
       .slice(0, 4)
-      .map((d) => {
+      .map((d, i) => {
         return (
-          <div className="story-link">
+          <div key={i} className="story-link">
             <a
               href={`https://pudding.cool/${d.url}`}
               target="_blank"
               rel="noopener"
             >
               <img
-                class="story-link-image"
+                className="story-link-image"
                 src={`https://pudding.cool/common/assets/thumbnails/640/${d.image}.jpg`}
                 alt={`${d.hed}`}
               ></img>
-              <p class="story-link-headline">{`${d.hed}`}</p>
+              <p className="story-link-headline">{`${d.hed}`}</p>
             </a>
           </div>
         );
@@ -74,66 +74,72 @@ const Footer = () => {
 
   return (
     <footer className="pudding-footer">
-      <div className="footer-recirc">
-        <div className="story-links-container">{storyLinks}</div>
-      </div>
-
-      <div className="footer-company">
-        <div className="about-container">
-          <img className="pudding-logo" src={logo}></img>
-          <p className="footer-company description">
-            <a href="https://pudding.cool">The Pudding</a> is a digital
-            publication that explains ideas debated in culture with visual
-            essays.
-          </p>
+      <div className="footer-content">
+        <div className="footer-recirc">
+          <div className="story-links-container">{storyLinks}</div>
         </div>
-      </div>
 
-      <div className="links-container">
-        <ul className="link-list">
-          <li>
-            <a href="https://facebook.com/pudding.viz/">
-              <p>FACEBOOK</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/puddingviz/">
-              <p>TWITTER</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/the.pudding">
-              <p>INSTAGRAM</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://patreon.com/thepudding/">
-              <p>PATREON</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://pudding.cool/about">
-              <p>ABOUT</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://pudding.cool/privacy/">
-              <p>PRIVACY</p>
-            </a>
-          </li>
+        <div className="footer-company">
+          <div className="about-container">
+            <img
+              className="pudding-logo"
+              alt="The Puddding Logo"
+              src={logo}
+            ></img>
+            <p className="footer-company description">
+              <a href="https://pudding.cool">The Pudding</a> is a digital
+              publication that explains ideas debated in culture with visual
+              essays.
+            </p>
+          </div>
+        </div>
 
-          <li>
-            <a href="http://eepurl.com/czym6f">
-              <p>NEWSLETTER</p>
-            </a>
-          </li>
+        <div className="links-container">
+          <ul className="link-list">
+            <li>
+              <a href="https://facebook.com/pudding.viz/">
+                <p>FACEBOOK</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/puddingviz/">
+                <p>TWITTER</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/the.pudding">
+                <p>INSTAGRAM</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://patreon.com/thepudding/">
+                <p>PATREON</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://pudding.cool/about">
+                <p>ABOUT</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://pudding.cool/privacy/">
+                <p>PRIVACY</p>
+              </a>
+            </li>
 
-          <li>
-            <a href="https://pudding.cool/feed/index.xml">
-              <p>RSS</p>
-            </a>
-          </li>
-        </ul>
+            <li>
+              <a href="http://eepurl.com/czym6f">
+                <p>NEWSLETTER</p>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://pudding.cool/feed/index.xml">
+                <p>RSS</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
   );

@@ -8,7 +8,7 @@ const COVID19Search =
 
 const SectionMethods = (props) => {
   return (
-    <section className={props.rootClassName}>
+    <div className={props.rootClassName}>
       <div className="methods-container">
         <h1>Methodology</h1>
         <div className="col-container">
@@ -69,7 +69,7 @@ const SectionMethods = (props) => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -27,11 +27,10 @@ const VIEW_STATE = {
 };
 const MAP_CONTROLS = {
   scrollZoom: false,
-  dragPan: window.innerWidth < 480 ? true : false,
+  dragPan: false, //window.innerWidth < 480 ? true : false,
   dragRotate: false,
   doubleClickZoom: false
 };
-// const MB_STYLE = 'mapbox://styles/jeffmacinnes/ckl8iul9a1e3q19o5iromwhzi';
 const MB_STYLE = 'mapbox://styles/jeffmacinnes/cklwszium5oap17mghpar2f18';
 
 // --- GEO IDs Data
@@ -150,11 +149,14 @@ const CollabMap = (props) => {
       initialViewState={{
         ...VIEW_STATE,
         bearing: Utils.map(currentDate.dayOfYear(), 0, 366, 350, 360),
-        pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 45, 10)
+        pitch: Utils.map(currentDate.dayOfYear(), 0, 366, 45, 10),
+        zoom: window.innerWidth < 480 ? 0 : 1
       }}
       controller={MAP_CONTROLS}
       layers={layers}
       style={{ zIndex: -10 }}
+      width="100vw"
+      height={window.innerWidth < 480 ? '500px' : '100vh'}
     >
       <StaticMap
         reuseMaps

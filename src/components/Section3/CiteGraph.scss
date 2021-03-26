@@ -5,6 +5,10 @@
     background: rgba(0, 0, 0, 0);
     visibility: hidden; /* by default */
   }
+
+  @include mobile {
+    pointer-events: none;
+  }
 }
 
 .cite-graph-tooltip-container {

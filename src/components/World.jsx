@@ -71,23 +71,24 @@ export default class World extends Component {
     this.sceneHero.obj.position.set(0, 0, 0);
     this.scene.add(this.sceneHero.obj);
 
-    this.scene1 = new Scene1();
-    this.scene1.obj.position.set(0, -50, 0);
-    this.scene.add(this.scene1.obj);
+    // this.scene1 = new Scene1();
+    // this.scene1.obj.position.set(0, -50, 0);
+    // this.scene.add(this.scene1.obj);
 
-    // create a mapping between section names and scenes
-    this.sceneMapping = {
-      'section-hero': this.sceneHero,
-      'section-1': this.scene1,
-      'section-2': this.scene1,
-      'section-3': this.scene1,
-      'section-methods': this.scene1
-    };
+    // // create a mapping between section names and scenes
+    // this.sceneMapping = {
+    //   'section-hero': this.sceneHero,
+    //   'section-1': this.scene1,
+    //   'section-2': this.scene1,
+    //   'section-3': this.scene1,
+    //   'section-methods': this.scene1
+    // };
 
     // set the current scene
     this.currentScene = this.sceneHero;
 
     // start animation
+    this.shouldAnimate = true;
     this.tick();
   };
 
@@ -105,15 +106,24 @@ export default class World extends Component {
   };
 
   tick = () => {
-    // --- main animation loop
-    const delta = this.clock.getDelta(); // seconds
+    if (this.shouldAnimate) {
+      // --- main animation loop
+      const delta = this.clock.getDelta(); // seconds
 
-    // update everything
-    this.currentScene.update(delta);
-    this.renderer.render(this.scene, this.camera);
+      // update everything
+      this.currentScene.update(delta);
+      this.renderer.render(this.scene, this.camera);
+    }
 
     // call it again on next frame
     requestAnimationFrame(this.tick);
+  };
+
+  stopAnimation = () => {
+    this.shouldAnimate = false;
+  };
+  startAnimation = () => {
+    this.shouldAnimate = true;
   };
 
   componentDidMount() {
@@ -124,13 +134,38 @@ export default class World extends Component {
   componentDidUpdate(prevProps) {
     const { currentSection } = this.props;
     if (currentSection !== prevProps.currentSection) {
-      const nextScene = this.sceneMapping[currentSection];
-      if (nextScene !== this.currentScene) {
-        gsap.to(this.currentScene.obj.position, { duration: 3, x: -30 });
-        gsap.to(nextScene.obj.position, { duration: 3, y: 0, x: 0, z: 0 });
+      if (currentSection === 'section-hero') {
+        this.startAnimation();
+        gsap.killTweensOf(this.currentScene.obj.position);
+        gsap.to(this.currentScene.obj.position, {
+          duration: 3,
+          x: 0,
+          y: 0,
+          z: 0,
+          ease: 'power2.out'
+        });
+      } else {
+        gsap.to(this.currentScene.obj.position, {
+          duration: 3.5,
+          x: -30,
+          y: 15,
+          z: 0,
+          ease: 'power1.in',
+          onComplete: () => {
+            this.currentScene.obj.position.set(30, 15, 0);
+            this.stopAnimation();
+          }
+        });
       }
 
-      this.currentScene = nextScene;
+      // --- generic tools for cycling through scenes
+      // const nextScene = this.sceneMapping[currentSection];
+      // if (nextScene !== this.currentScene) {
+      //   gsap.to(this.currentScene.obj.position, { duration: 3, x: -30 });
+      //   gsap.to(nextScene.obj.position, { duration: 3, y: 0, x: 0, z: 0 });
+      // }
+
+      //this.currentScene = nextScene;
     }
   }
 

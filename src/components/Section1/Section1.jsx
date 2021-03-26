@@ -83,7 +83,7 @@ export default class Section1 extends Component {
 
   render() {
     return (
-      <section className={this.props.rootClassName}>
+      <div className={this.props.rootClassName}>
         <div className="narrative-text">
           <p>
             <mark>On Jan 1st 2020</mark>, a novel virus was beginning to reveal
@@ -197,7 +197,7 @@ export default class Section1 extends Component {
             units="authors/article"
           />
         </div>
-      </section>
+      </div>
     );
   }
 }

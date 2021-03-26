@@ -38,7 +38,7 @@ export default class TimelineScrubber {
     this.fontSizeScale = new scalePow()
       .exponent(1.25)
       .domain([0, maxDist])
-      .range([16, 12])
+      .range(window.innerWidth < 480 ? [13, 8] : [16, 12])
       .clamp(true);
     this.fontOpacityScale = new scalePow()
       .exponent(1.25)

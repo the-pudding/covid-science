@@ -56,6 +56,7 @@ const getZoom = (state) => {
 };
 
 export const getVisStateProps = (visState, xScale) => {
+  const centerY = window.innerWidth < 480 ? -100 : 0;
   switch (visState) {
     case 'state1':
       return {
@@ -66,21 +67,21 @@ export const getVisStateProps = (visState, xScale) => {
 
     case 'state2':
       return {
-        centerAt: [xScale(0.5), 0],
+        centerAt: [xScale(0.5), centerY],
         zoom: getZoom(visState),
         forcesArr: getForcesByState('state2', xScale)
       };
 
     case 'state3':
       return {
-        centerAt: [xScale(1), 0],
+        centerAt: [xScale(1), centerY],
         zoom: getZoom(visState),
         forcesArr: getForcesByState('state3', xScale)
       };
 
     case 'state4':
       return {
-        centerAt: [xScale(1.3), 0],
+        centerAt: [xScale(1.3), centerY],
         zoom: getZoom(visState),
         forcesArr: getForcesByState('state4', xScale)
       };
@@ -94,7 +95,7 @@ export const getVisStateProps = (visState, xScale) => {
 
     default:
       return {
-        centerAt: [xScale(1), 0],
+        centerAt: [xScale(1), centerY],
         zoom: 0.65,
         forcesArr: getForcesByState('state1', xScale)
       };

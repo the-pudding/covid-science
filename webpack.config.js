@@ -55,7 +55,17 @@ module.exports = (env, opts) => {
       ]
     },
     optimization: {
-      usedExports: true
+      usedExports: true,
+      splitChunks: {
+        cacheGroups: {
+          default: false,
+          vendors: false,
+          vendor: {
+            chunks: 'all',
+            test: /node_modules/
+          }
+        }
+      }
     },
     resolve: {
       extensions: ['*', '.js', '.jsx'],
@@ -65,7 +75,7 @@ module.exports = (env, opts) => {
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js'
+      filename: '[name].js'
     },
     devServer: {
       contentBase: './static',

@@ -111,7 +111,7 @@ export default class Section2 extends Component {
   render() {
     let { currentDate, totalArticles, totalCollabs } = this.state;
     return (
-      <section className={this.props.rootClassName}>
+      <div className={this.props.rootClassName}>
         <div className="narrative-text">
           <div className="section-break"></div>
           <p>
@@ -214,11 +214,12 @@ export default class Section2 extends Component {
                 units="total collaborations"
               />
             </div>
-
-            <CollabMap currentDate={currentDate} intervalWin={intervalWin} />
+            <div className="deckgl-container">
+              <CollabMap currentDate={currentDate} intervalWin={intervalWin} />
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     );
   }
 }

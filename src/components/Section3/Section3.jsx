@@ -48,7 +48,7 @@ const Section3 = (props) => {
   };
 
   return (
-    <section className={props.rootClassName}>
+    <div className={props.rootClassName}>
       <div className="narrative-text">
         <div className="section-break"></div>
         <p>
@@ -96,7 +96,7 @@ const Section3 = (props) => {
           COVID-19. And will better prepare us for whatever comes next.
         </p>
       </div>
-    </section>
+    </div>
   );
 };
 

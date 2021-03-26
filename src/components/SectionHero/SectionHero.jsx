@@ -3,7 +3,7 @@ import './SectionHero.scoped.scss';
 
 const SectionHero = (props) => {
   return (
-    <section className={props.rootClassName}>
+    <div className={props.rootClassName}>
       <div className="title-container">
         <h1 className="title">Following the Science</h1>
         <div className="subtitle">
@@ -16,7 +16,7 @@ const SectionHero = (props) => {
           </a>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

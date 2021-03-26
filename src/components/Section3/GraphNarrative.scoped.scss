@@ -19,6 +19,14 @@
     line-height: 1.65;
     text-align: left;
   }
+  @include mobile {
+    margin: 1rem auto 4rem;
+
+    .graph-narrative-text {
+      font-size: 1.6rem;
+      line-height: 1.55;
+    }
+  }
 }
 
 .fade-enter {
