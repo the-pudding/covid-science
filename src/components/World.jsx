@@ -138,7 +138,7 @@ export default class World extends Component {
         this.startAnimation();
         gsap.killTweensOf(this.currentScene.obj.position);
         gsap.to(this.currentScene.obj.position, {
-          duration: 3.5,
+          duration: 4,
           x: 0,
           y: 0,
           z: 0,
@@ -146,7 +146,7 @@ export default class World extends Component {
         });
       } else {
         gsap.to(this.currentScene.obj.position, {
-          duration: 4.5,
+          duration: 5,
           x: -30,
           y: 15,
           z: 0,
