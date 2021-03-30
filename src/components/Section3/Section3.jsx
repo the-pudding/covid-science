@@ -59,7 +59,10 @@ const Section3 = (props) => {
           start afforded by decades of prior research on other coronaviruses. By
           mid-March 2020, before most US cities had even announced their first
           lock downs, the first vaccine candidate was already{' '}
-          <a href="https://www.nih.gov/news-events/news-releases/nih-clinical-trial-investigational-vaccine-covid-19-begins">
+          <a
+            href="https://www.nih.gov/news-events/news-releases/nih-clinical-trial-investigational-vaccine-covid-19-begins"
+            target="_blank"
+          >
             entering clinical trial.{' '}
           </a>
         </p>

@@ -19,7 +19,7 @@ const SectionMethods = (props) => {
               <a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank">
                 PubMed Central (PMC)
               </a>
-              . The Coronavirus related articles per year were obtained by
+              . The coronavirus related articles per year were obtained by
               returning articles matching{' '}
               <a href={coronavirusSearch} target="_blank">
                 these search terms

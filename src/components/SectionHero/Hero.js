@@ -35,7 +35,6 @@ export default class Hero {
         journal: d[1]
       };
     });
-    //this.article = shuffle(this.articles);
 
     // passed in config (optional)
     this.cam = config.camera || null;
@@ -45,7 +44,7 @@ export default class Hero {
     this.titleTexture = null;
     this.titleMat = null;
     this.activeTitles = [];
-    this.currentArtIdx = 0; // index to keep track of articles from full list
+    this.currentArtIdx = Utils.randIntBw(0, 500); // index to keep track of articles from full list, start randomly
     this.nRows = 0;
     this.rowSpeeds = {};
     this.titleScale = 0.005;
@@ -152,8 +151,8 @@ export default class Hero {
           fragmentShader: titleFrag,
           map: this.titleTexture,
           side: THREE.DoubleSide,
-          transparent: false,
-          negate: false
+          transparent: true,
+          negate: true
         })
       );
       this.titleMat.uniforms.u_time = { value: 0.0 };
@@ -172,7 +171,8 @@ export default class Hero {
       let yPos = this.vHeight * 0.5; // start with top left of visible space
       let xPos = this.vWidth * -1;
       let rowIdx = 0;
-      this.rowSpeeds[rowIdx] = Utils.randBw(0.012, 0.003);
+      let speedRange = [0.005, 0.0012];
+      this.rowSpeeds[rowIdx] = Utils.randBw(speedRange[0], speedRange[1]);
       while (!filled) {
         const thisTitle = this.createArtTitle();
         thisTitle.obj.position.set(xPos, yPos, 0);
@@ -185,7 +185,7 @@ export default class Hero {
           thisTitle.isLastInRow = true;
           yPos -= thisTitle.height + this.padding.y; // new row
           rowIdx++;
-          this.rowSpeeds[rowIdx] = Utils.randBw(0.012, 0.003);
+          this.rowSpeeds[rowIdx] = Utils.randBw(speedRange[0], speedRange[1]);
         }
 
         // check if full height filled

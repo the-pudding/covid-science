@@ -42,14 +42,20 @@ void main(){
     
     vec4 texel = texture2D(u_overlay, sampleCoord);
 
-
-    //float alpha = 1.0;
     // set color based on texel location
     if (texel.r > 0.2){
-      color = vec3(0.17, 0.21, 0.29);
+      //color = vec3(0.17, 0.21, 0.29);
+      color = vec3(0.1922, 0.2392, 0.3333);
+
     } else {
-      color = vec3(0.0431, 0.051, 0.0706);
+      //color = vec3(0.051, 0.0588, 0.0824);
+      color = vec3(0.0706, 0.0824, 0.1137);
     }
+
+    // set transparency
+    // if (alpha > .2) {
+    //   alpha = 0.2;
+    // }
 
 
     gl_FragColor = vec4(color, alpha);
