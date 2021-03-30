@@ -76,7 +76,7 @@ export default class Section2 extends Component {
       trigger: '.section2-scroll-container',
       start: 'top top',
       end: 'bottom-=500 bottom',
-      // markers: true,
+      //markers: true,
       scrub: 3,
       onUpdate: (self) => {
         this.handleScrollTrigger(self.progress);
@@ -86,7 +86,7 @@ export default class Section2 extends Component {
     // HACKY SOLUTION TO GET SCROLL TRIGGERS TO UPDATE TO CORRECT POSITION
     setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 2000);
+    }, 2500);
 
     // --- parse the statsByDay csv file and add to state
     let statsByDay = statsByDayCSV.slice(1).map((d) => {
