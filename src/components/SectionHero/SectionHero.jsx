@@ -7,7 +7,7 @@ const SectionHero = (props) => {
             <div className="title-container">
                 <h1 className="title">Following the Science</h1>
                 <div className="subtitle">
-                    A look at the global research effort to know and defeat COVID-19
+                A look at the global research effort to combat the coronavirus pandemic
         </div>
                 <div className="byline">
                     By{' '}
